@@ -9,7 +9,7 @@ class OsfOauth2AdapterConfig(AppConfig):
     # staging by default so people don't have to run OSF to use this.
     api_url = 'https://staging-api.osf.io'
     accounts_url = 'https://staging-accounts.osf.io'
-    if (os.environ.get('BACKEND', 'stage') == 'prod'):
+    if (os.environ.get('BACKEND') == 'prod'):
         api_url = 'https://api.osf.io'
         accounts_url = 'https://accounts.osf.io'
 
