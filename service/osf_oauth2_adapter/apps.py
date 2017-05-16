@@ -6,8 +6,8 @@ from django.apps import AppConfig
 class OsfOauth2AdapterConfig(AppConfig):
     name = 'osf_oauth2_adapter'
 
-    api_url = 'https://localhost:5000'
-    accounts_url = 'https://localhost:5000'
+    api_url = 'https://localhost:8000'
+    accounts_url = 'https://localhost:8080'
 
     if os.environ.get('BACKEND') == 'stage':
         api_url = 'https://staging-api.osf.io'
