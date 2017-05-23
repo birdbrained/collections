@@ -97,8 +97,8 @@ export default Ember.Controller.extend({
 
     create_widget_signature: ['widget_component', 'description',
                                         'section', 'output_parameter', 'action_id'],
-    // `this` must be lexically bound for `create_widget`, as
-    // `create_widget` requires access to the controller.
+    // `this` must be bound to the controller for `create_widget`, as
+    // `create_widget` requires access to the controller, and does so through `this`.
     create_widget: function(widget_component, description, section, output_parameter, action_id) {
         let action;
         if (typeof action_id === "string") {
