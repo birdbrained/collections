@@ -63,7 +63,7 @@ export default Ember.Controller.extend({
             // Action may fire if execution has reached this point.
             // Call the action and set its result and any
             // changes to its state on `controller.parameters`.
-            console.log('Firing action: ' + action.type);
+            console.log('stop here');
             action.output_parameter['value'] = action.action.apply(this, action.arg_arr);
             action.output_parameter['state'] = ['defined'];
         });
@@ -86,8 +86,7 @@ export default Ember.Controller.extend({
             conditions: action.conditions,
             parameters: action.parameters,
             args: action.args,
-            output_parameter: parameters[action.output_parameter],
-            then: action.then
+            output_parameter: parameters[action.output_parameter]
         };
         hydrated_action['arg_arr'] = cons_arg_arr.call(this, hydrated_action);
         return hydrated_action;
@@ -101,28 +100,18 @@ export default Ember.Controller.extend({
     // `create_widget` requires access to the controller, and does so through `this`.
     create_widget: function(widget_component, description, section, output_parameter, action_id) {
         let action;
+        if (typeof action_id === "string") {
+            action = async (context) => {
+                let action_obj = this.get('formActions')
+                    // If a user uses the same id for multiple actions,
+                    // fire the first that matches.
+                    .find(action => action.id == action_id)
 
-        let actions = this.get('formActions');
-
-        async function fire_actions(action_id) {
-            debugger;
-            if (typeof action_id === "string") {
-
-                let action_obj = actions.find(action => action.id == action_id);
-                if (typeof action_obj.action === 'function') {
-                    let result = await action_obj.action.apply(this, action_obj.arg_arr);
-                    if (typeof action_obj.then === 'string') {
-                        fire_actions.call(this, action_obj.then);
-                    }
-                    return result;
-                }
-            } else {
-                return;
+                return await action_obj.action.apply(context, action_obj.arg_arr);
             }
+        } else {
+            action = () => {};
         }
-
-        action = (context) => fire_actions.call(context, action_id);
-        
         const widget = {
             widget_component,
             description,
@@ -180,7 +169,7 @@ export default Ember.Controller.extend({
     //refresh() {
 
     //},
-    saveParameter_signature: ['parameter', 'updated_parameter'],
+    saveParameter_signature = ['parameter', 'updated_parameter'],
     saveParameter(parameter, updated_parameter) {
         if (typeof updated_parameter.value !== undefined) {
             parameter.value = updated_parameter.value;
