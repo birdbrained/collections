@@ -127,6 +127,15 @@ export default Ember.Controller.extend({
     },
 
 
+    // Delete widget from widgets object, leaves object in parameters.
+    delete_widget_signature: ['widget_object'],
+    delete_widget: function(widget_object) {
+        console.log('DELETING WIDGET');
+        this.get('widgets').removeObject(widget_object.value);
+        debugger;
+    },
+
+
     upload_file_signature: ['file_name', 'file_data', 'node'],
     upload_file: async function(file_name, file_data, node) {
         if (typeof file_name.value === 'undefined') return;

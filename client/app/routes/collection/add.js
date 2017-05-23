@@ -169,7 +169,7 @@ export default Ember.Route.extend({
                         state: 'defined'
                     }],
                 }]
-            },{
+            }, {
                 type: 'create_widget',
                 args: {
                     widget_component: 'preprint-basics',
@@ -189,7 +189,20 @@ export default Ember.Route.extend({
                         state: 'defined'
                     }],
                 }]
+            }, {
+                type: 'delete_widget',
+                parameters: {
+                    widget_object: 'save_upload_section_widget'
+                },
+                output_parameter: 'null',
+                conditions: [{
+                    all: [{
+                        parameter: 'preprint_file_url',
+                        state: 'defined'
+                    }]
+                }]
             }]
+
         };
     },
 
