@@ -120,8 +120,6 @@ export default Ember.Controller.extend({
             output_parameter,
             action
         };
-        console.log("\n *** CREATING WIDGET *** \n");
-        console.log(widget);
         this.get('widgets').pushObject(widget);
         return widget;
     },
@@ -130,9 +128,7 @@ export default Ember.Controller.extend({
     // Delete widget from widgets object, leaves object in parameters.
     delete_widget_signature: ['widget_object'],
     delete_widget: function(widget_object) {
-        console.log('DELETING WIDGET');
         this.get('widgets').removeObject(widget_object.value);
-        debugger;
     },
 
 
