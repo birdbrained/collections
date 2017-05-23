@@ -125,10 +125,12 @@ export default Ember.Controller.extend({
     },
 
 
-    // Delete widget from widgets object, leaves object in parameters.
+    // Delete widget and resets state
     delete_widget_signature: ['widget_object'],
     delete_widget: function(widget_object) {
         this.get('widgets').removeObject(widget_object.value);
+        widget_object.value = undefined;
+        widget_object.state = ['undefined'];
     },
 
 
@@ -168,11 +170,14 @@ export default Ember.Controller.extend({
     //refresh() {
 
     //},
-
-
+    saveParameter_signature = ['parameter', 'updated_parameter'];
     saveParameter(parameter, updated_parameter) {
-        parameter.value = updated_parameter.value;
-        parameter.state = updated_parameter.state
+        if (typeof updated_parameter.value !== undefined) {
+            parameter.value = updated_parameter.value;
+        }
+        if (typeof updated_parameter.state !== undefined) {
+            parameter.state = updated_parameter.state
+        }
         this.get('updateState').call(this, this.get('formActions'));
     },
 
