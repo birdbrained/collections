@@ -54,7 +54,6 @@ export default Ember.Controller.extend({
     widgets: [],
     formActions: [],
 
-
     // Fire enabled actions.
     updateState: function(actions) {
         actions.forEach((action) => {
@@ -138,7 +137,7 @@ export default Ember.Controller.extend({
     upload_file: async function(file_name, file_data, node) {
         if (typeof file_name.value === 'undefined') return;
         if (typeof file_data.value === 'undefined') return;
-        if (typeof node.value === 'undefined') node.value = 'h8d72';
+        if (typeof node.value === 'undefined') node.value = ENV.node_guid;
         const uri = ENV.OSF.waterbutlerUrl + "v1/resources/" + node.value +
             "/providers/osfstorage/?kind=file&name=" + file_name.value;
         const xhr = new XMLHttpRequest();
@@ -199,6 +198,7 @@ export default Ember.Controller.extend({
         transition(name, id) {
             this.transitionToRoute(name, id);
         },
+
 
     }
 

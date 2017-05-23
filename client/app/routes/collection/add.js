@@ -67,6 +67,10 @@ export default Ember.Route.extend({
                 basic_info_widget: {
                     state: ['undefined'],
                     value: undefined
+                },
+                authors_widget: {
+                    state: ['undefined'],
+                    value: undefined
                 }
             },
             initial_widgets: [],
@@ -238,6 +242,28 @@ export default Ember.Route.extend({
                         parameter: 'preprint_file_url',
                         state: 'defined'
                     }]
+                }]
+            }, {
+                type: 'create_widget',
+                args: {
+                    widget_component: 'preprint-form-authors',
+                    description: 'Add and manage authors',
+                    section: 'authors'
+                },
+                parameters: {
+                    output_parameter: 'authors_list'
+                },
+                output_parameter: 'authors_widget',
+                conditions: [{
+                    all: [{
+                        parameter: 'authors_widget',
+                        state: 'undefined',
+                    },
+                    {
+                        parameter: 'basic_info',
+                        state: 'defined'
+                    }
+                    ],
                 }]
             }]
 
