@@ -54,6 +54,14 @@ export default Ember.Controller.extend({
     widgets: [],
     formActions: [],
 
+    init: function () {
+        this._super();
+        this.set('content', Em.Object.create({
+            info: null
+        }));
+        this.saveParameter = this.saveParameter.bind(this);
+    },
+
     // Fire enabled actions.
     updateState: function(actions) {
         actions.forEach((action) => {
@@ -105,7 +113,6 @@ export default Ember.Controller.extend({
         let actions = this.get('formActions');
 
         async function fire_actions(action_id) {
-            debugger;
             if (typeof action_id === "string") {
 
                 let action_obj = actions.find(action => action.id == action_id);
@@ -181,7 +188,7 @@ export default Ember.Controller.extend({
 
     //},
     saveParameter_signature: ['parameter', 'updated_parameter'],
-    saveParameter(parameter, updated_parameter) {
+    saveParameter: function(parameter, updated_parameter) {
         if (typeof updated_parameter.value !== undefined) {
             parameter.value = updated_parameter.value;
         }
@@ -301,7 +308,7 @@ function cons_arg_arr(action) {
         }
         // If an arg is defined, it takes priority.
         if (typeof action.args === 'object' &&
-            typeof action.args[key] === 'string'
+            action.args[key] !== undefined
         ) {
             value = action.args[key];
         }

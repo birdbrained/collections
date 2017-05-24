@@ -71,6 +71,10 @@ export default Ember.Route.extend({
                 authors_widget: {
                     state: ['undefined'],
                     value: undefined
+                },
+                edit_upload_section_widget: {
+                    state: ['undefined'],
+                    value: undefined
                 }
             },
             initial_widgets: [],
@@ -126,12 +130,12 @@ export default Ember.Route.extend({
                     action_id: '28fe8c59-fab7-4a0c-8e7e-38a5176ae34d'
                 },
                 parameters: {
-                    output_parameter: 'preprint_file_url',
+                    output_parameter: 'upload_section',
                 },
                 output_parameter: 'edit_upload_section_widget',
                 conditions: [{
                     all: [{
-                        parameter: 'save_upload_section_widget',
+                        parameter: 'edit_upload_section_widget',
                         state: 'undefined',
                     }, {
                         parameter: 'preprint_file_data',
@@ -203,6 +207,18 @@ export default Ember.Route.extend({
                 parameters: {
                     parameter: 'upload_section'
                 }
+            }, {
+                type: 'delete_widget',
+                parameters: {
+                    widget_object: 'save_upload_section_widget'
+                },
+                output_parameter: 'null',
+                conitions: [{
+                    all: [{
+                        parameter: 'upload_section',
+                        state: 'saved',
+                    }]
+                }]
             }, {
                 type: 'create_widget',
                 args: {
