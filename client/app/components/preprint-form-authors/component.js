@@ -39,7 +39,11 @@ export default Ember.Component.extend(NodeActionsMixin, {
     }),
 
 
-    valid: Ember.computed.alias('newContributorId'),
+    valid: Ember.computed('newContributorId', function() {
+        let newContributorId = this.get('newContributorId');
+        this.set('isSectionValid', newContributorId);
+        return newContributorId;
+    }),
     authorModification: false,
     currentPage: 1,
     // Permissions labels for dropdown

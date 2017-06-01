@@ -52,10 +52,17 @@ export default Ember.Component.extend(BASICS_VALIDATIONS, {
     uploadValid: Ember.computed.alias('nodeLocked'), // Once the node has been locked (happens in step one of upload section), users are free to navigate through form unrestricted
     abstractValid: Ember.computed.alias('validations.attrs.basicsAbstract.isValid'),
     doiValid: Ember.computed.alias('validations.attrs.basicsDOI.isValid'),
-    licenseValid: false,     // Must have year and copyrightHolders filled if those are required by the licenseType selected
-    basicsValid: Ember.computed.and('abstractValid', 'doiValid', 'licenseValid'),
 
     /* Initial values */
+    // Must have year and copyrightHolders filled if those are required by the licenseType selected
+    licenseValid: false,
+
+    // Basics fields that are being validated are abstract, license and doi (title validated in upload section). If validation added for other fields, expand basicsValid definition.
+    basicsValid: Ember.computed('abstractValid', 'doiValid', 'licenseValid', function() {
+        let isValid = this.get('abstractValid') && this.get('doiValid') && this.get('licenseValid');
+        this.set('isSectionValid', isValid);
+        return isValid;
+    }),
     basicsAbstract:  Ember.computed('node.description', function() {
         let node = this.get('node');
         return node ? node.get('description') : null;
