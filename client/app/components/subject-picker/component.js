@@ -110,7 +110,9 @@ export default Ember.Component.extend({
     }),
 
     disciplineChanged: Ember.computed('subjects.@each.subject', 'selected.@each.subject', 'disciplineModifiedToggle',  function() {
-        return !(disciplineArraysEqual(subjectIdMap(this.get('subjects')), subjectIdMap(this.get('selected'))));
+        let changed = !(disciplineArraysEqual(subjectIdMap(this.get('subjects')), subjectIdMap(this.get('selected'))));
+        this.set('isSectionValid', !changed);
+        return changed;
     }),
 
     editMode: false,
@@ -230,7 +232,6 @@ export default Ember.Component.extend({
                 this.set('editMode', false);
                 this.attrs.closeSection(this.get('name'));
             });
-            // Update subjects with selected subjects
         }
     }
 });
