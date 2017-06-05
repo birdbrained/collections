@@ -3,10 +3,6 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
-    init() {
-        this._super(...arguments);
-    },
-
     didReceiveAttrs() {
         this.set('widgetClasses', this.attrs.widget.value.css_classes)
     },
