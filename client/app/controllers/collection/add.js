@@ -210,8 +210,8 @@ export default Ember.Controller.extend({
     },
 
 
-    toggleleWidget_signature: ['widget_object'],
-    toggleleWidget: function(widget_object, parameters) {
+    toggleWidget_signature: ['widget_object'],
+    toggleWidget: function(widget_object, parameters) {
         if (widget_object.value.disabled === false) {
             Ember.set(widget_object, 'value.disabled', true);
         } else {
