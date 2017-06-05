@@ -261,11 +261,6 @@ export default Ember.Controller.extend({
     //},
     saveParameter_signature: ['parameter', 'updated_parameter'],
     saveParameter: function(parameter, updated_parameter, parameters) {
-        if (typeof updated_parameter === 'undefined' ||
-            typeof parameter === 'undefined' ||
-            typeof parameters === 'undefined'
-        ) {
-        }
         if (typeof updated_parameter.value !== 'undefined') {
             Ember.set(parameter, 'value', updated_parameter.value);
         }
