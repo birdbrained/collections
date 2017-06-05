@@ -411,14 +411,14 @@ function cons_arg_arr(action) {
         ) {
 
             let exists = false;
-            let pkeys = Object.keys(parameters);
+            let parameterKeys = Object.keys(parameters);
 
 
             // There was a bug here where the parameters weren't matching up right;
             // this check ensures parameters aren't duplicated and the like.
-            pkeys.forEach((pkey) => {
-                if (parameters[pkey] === action.parameters[key]) {
-                    value = parameters[pkey];
+            parameterKeys.forEach((parameterKey) => {
+                if (parameters[parameterKey] === action.parameters[key]) {
+                    value = parameters[parameterKey];
                     exists = true;
                 }
             });
