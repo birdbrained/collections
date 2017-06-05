@@ -353,9 +353,6 @@ export default Ember.Route.extend({
                     all: [{
                         parameter: 'authors_widget',
                         state: 'undefined',
-                    //}, {
-                    //    parameter: 'basic_info',
-                    //    state: 'defined'
                     }],
                 }]
             }, {
