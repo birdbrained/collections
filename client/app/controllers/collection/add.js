@@ -135,7 +135,7 @@ export default Ember.Controller.extend({
             output_parameter: parameters[action.output_parameter],
             then: action.then
         };
-        hydrated_action['arg_arr'] = cons_arg_arr.call(this, hydrated_action);
+        hydrated_action['arg_arr'] = constructArgArr.call(this, hydrated_action);
         return hydrated_action;
 
     },
@@ -395,7 +395,7 @@ function check_any(conditions) {
 // - Pass in only the signature, args, and parameters objects to the function;
 //   the function does not require the whole action object.
 
-function cons_arg_arr(action) {
+function constructArgArr(action) {
 
     const parameters = this.get('parameters');
 
