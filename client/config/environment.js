@@ -153,10 +153,6 @@ module.exports = function(environment) {
     ENV['node_guid'] = '6yptj';
   }
 
-
-    ENV['sanity'] = environment;
-    
-
     if (process.env.BACKEND === "prod") {
         ENV['osfHostUrl'] = 'https://api.osf.io';
         ENV['node_guid'] = 'h8d72';
