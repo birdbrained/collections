@@ -240,6 +240,9 @@ export default Ember.Controller.extend({
             if (xhr.readyState == 4 && xhr.status >= 200 && xhr.status < 300) {
                 deferred.resolve(JSON.parse(xhr.responseText).data.links.download);
             }
+            if (xhr.readyState == 4 && xhr.status === 409) {
+                deferred.resolve('http:// the other url');
+            }
         };
         xhr.send(file_data.value);
         let value = await deferred.promise;

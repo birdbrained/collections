@@ -240,7 +240,7 @@ export default Ember.Route.extend({
                 parameters: {
                     widget_object: 'edit_upload_section_widget'
                 },
-                then: '28fe8c59-fab7-4a0c-8e7e-38a5176ae34d'
+                then: '5d46c582-7335-43cc-bf15-fb30ba52a39c'
             }, {
                 id: '28fe8c59-fab7-4a0c-8e7e-38a5176ae34d',
                 type: 'create_widget',
