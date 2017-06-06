@@ -142,46 +142,6 @@ export default Ember.Route.extend({
                     }],
                 }]
             }, {
-                id: '99e941be-3fae-41d7-b481-89764a1561b6',
-                type: 'create_widget',
-                args: {
-                    widget_component: 'button-widget',
-                    description: 'Edit this section',
-                    section: 'upload',
-                    css_classes: ['section-submit-button'],
-                    action_id: '28fe8c59-fab7-4a0c-8e7e-38a5176ae34d'
-                },
-                parameters: {
-                    output_parameter: 'upload_section',
-                },
-                output_parameter: 'edit_upload_section_widget',
-                conditions: [{
-                    all: [{
-                        parameter: 'edit_upload_section_widget',
-                        state: 'undefined',
-                    }, {
-                        parameter: 'preprint_file_data',
-                        state: 'defined',
-                    }, {
-                        parameter: 'preprint_file_name',
-                        state: 'defined'
-                    }, {
-                        parameter: 'upload_section',
-                        state: 'closed',
-                    }],
-                }]
-            }, {
-                id: '28fe8c59-fab7-4a0c-8e7e-38a5176ae34d',
-                type: 'saveParameter',
-                args: {
-                    updated_parameter: {
-                        state: ['editing', 'saved']
-                    }
-                },
-                parameters: {
-                    parameter: 'upload_section'
-                }
-            }, {
                 id: '5d46c582-7335-43cc-bf15-fb30ba52a39c',
                 type: 'create_widget',
                 args: {
@@ -241,7 +201,7 @@ export default Ember.Route.extend({
                 then: '7fb38183-d1f2-41a2-aef5-1bc99743762e'
             }, {
                 id: '7fb38183-d1f2-41a2-aef5-1bc99743762e',
-                type: 'disableWidget',
+                type: 'delete_widget',
                 parameters: {
                     widget_object: 'save_upload_section_widget'
                 },
@@ -251,9 +211,38 @@ export default Ember.Route.extend({
                 type: 'openSection',
                 args: {
                     sectionName: 'disciplines'
-                }
+                },
+                then: '4da8f6b3-5dbb-438e-aca2-fd078c040873'
             }, {
-                id: '2726a848-6240-4e24-8492-6aab673f1f6d',
+                id: '4da8f6b3-5dbb-438e-aca2-fd078c040873',
+                type: 'create_widget',
+                args: {
+                    widget_component: 'button-widget',
+                    description: 'Edit this section',
+                    css_classes: ['section-submit-button'],
+                    section: 'upload',
+                    action_id: 'b6901674-a1e4-49aa-ae9b-eea102397eac'
+                },
+                parameters: {
+                    parameter: 'upload_section',
+                },
+                output_parameter: 'edit_upload_section_widget',
+            }, {
+                id: 'b6901674-a1e4-49aa-ae9b-eea102397eac',
+                type: 'openSection',
+                args: {
+                    sectionName: 'upload'
+                },
+                then: '4ad4484b-9a32-4ae5-bef3-55dc4cd9f51d'
+            }, {
+                id: '4ad4484b-9a32-4ae5-bef3-55dc4cd9f51d',
+                type: 'delete_widget',
+                parameters: {
+                    widget_object: 'edit_upload_section_widget'
+                },
+                then: '28fe8c59-fab7-4a0c-8e7e-38a5176ae34d'
+            }, {
+                id: '28fe8c59-fab7-4a0c-8e7e-38a5176ae34d',
                 type: 'create_widget',
                 args: {
                     widget_component: 'subject-picker',
@@ -275,7 +264,7 @@ export default Ember.Route.extend({
                 id: 'a11388e0-c3b2-488a-a100-60de46172adf',
                 type: 'openSection',
                 args: {
-                    sectionName: 'basic info'
+                    sectionName: 'basic_info'
                 },
                 then: '39cb9157-617e-404a-ac1d-77e9d273b478'
             }, {
