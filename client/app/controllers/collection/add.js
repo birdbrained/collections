@@ -73,35 +73,46 @@ export default Ember.Controller.extend({
     },
 
     // Fire enabled actions.
-    updateState: function(actions) {
-        let controller = this;
-        actions.forEach((action) => {
-            // Check if the action can fire.
-            const may_fire = check_all.call(this, action.conditions);
-            if (!may_fire) return;
-            // Action may fire if execution has reached this point.
-            // Call the action and set its result and any
-            // changes to its state on `controller.parameters`.
-            //
-            async function fire_actions(action_id) {
-                if (typeof action_id === "string") {
+    updateState: (function() {
+        let isUpdating = false;
+        return function(actions) {
+            if (!isUpdating) {
+                isUpdating = true
+                let controller = this;
+                actions.forEach((action) => {
+                    // Check if the action can fire.
+                    const may_fire = check_all.call(this, action.conditions);
+                    if (!may_fire) return;
+                    // Action may fire if execution has reached this point.
+                    // Call the action and set its result and any
+                    // changes to its state on `controller.parameters`.
+                    //
+                    async function fire_actions(action_id) {
+                        if (typeof action_id === "string") {
 
-                    let action_obj = actions.find(action => action.id == action_id);
-                    if (typeof action_obj.action === 'function') {
-                        let result = await action_obj.action.apply(this, action_obj.arg_arr);
-                        if (typeof action_obj.then === 'string') {
-                            fire_actions.call(this, action_obj.then);
+                            let action_obj = actions.find(action => action.id == action_id);
+                            if (typeof action_obj.action === 'function') {
+                                let result = await action_obj.action.apply(this, action_obj.arg_arr);
+                                if (typeof action_obj.then === 'string') {
+                                    fire_actions.call(this, action_obj.then);
+                                }
+                                action_obj.output_parameter.value = result;
+                                action_obj.output_parameter.state = ['defined'];
+                                controller.notifyPropertyChange('parameters');
+                            }
                         }
-                        action_obj.output_parameter.value = result;
-                        action_obj.output_parameter.state = ['defined'];
-                        controller.notifyPropertyChange('parameters');
                     }
-                }
-            }
 
-            fire_actions.call(this, action.id);
-        });
-    },
+                    fire_actions.call(this, action.id);
+                });
+                isUpdating = false;
+            } else {
+                Ember.run.next(this, function() {
+                    this.get('updateState').call(this, this.get('formActions'));
+                });
+            }
+        };
+    })(),
 
 
     // Take the description of an action and set its properties to be the vaious literal
