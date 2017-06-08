@@ -15,7 +15,7 @@ import ENV from '../../config/environment';
  * that are not allowed are disabled (for example, you cannot remove the sole bibliographic author).
  * @class preprint-form-authors
  */
-export default Ember.Component.extend( NodeActionsMixin, {
+export default Ember.Component.extend(NodeActionsMixin, {
     i18n: Ember.inject.service(),
 
     // Variables that used to pass in from Controller
@@ -31,7 +31,7 @@ export default Ember.Component.extend( NodeActionsMixin, {
     node: null,
     contributors: Ember.computed('node', function(){
         let contribs = this.get('node.contributors');
-        this.attrs.saveParameter(this.attrs.widget.value.parameters.authors_list, {
+        this.attrs.saveParameter(this.attrs.widget.value.parameters.authorsList, {
             value: contribs,
             state: ['defined']
         })
@@ -85,7 +85,7 @@ export default Ember.Component.extend( NodeActionsMixin, {
     }),
     init(){
         this._super(...arguments);
-        this.get('store').findRecord('node', ENV.node_guid).then((result)=>{
+        this.get('store').findRecord('node', ENV.nodeGuid).then((result)=>{
             this.set('node', result);
         });
     },
@@ -125,11 +125,11 @@ export default Ember.Component.extend( NodeActionsMixin, {
     * @param {string} status "success" or "error"
     */
     highlightSuccessOrFailure(elementId, context, status) {
-        const highlightClass = `${status === 'success' ? 'success' : 'error'}Highlight`;
+        const HIGHLIGHT_CLASS = `${status === 'success' ? 'success' : 'error'}Highlight`;
 
-        context.$('#' + elementId).addClass(highlightClass);
+        context.$('#' + elementId).addClass(HIGHLIGHT_CLASS);
 
-        Ember.run.later(() => context.$('#' + elementId).removeClass(highlightClass), 2000);
+        Ember.run.later(() => context.$('#' + elementId).removeClass(HIGHLIGHT_CLASS), 2000);
     },
     actions: {
         // Adds contributor then redraws view - addition of contributor may change which update/remove contributor requests are permitted

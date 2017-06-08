@@ -3,7 +3,7 @@ import fixSpecialChar from 'ember-osf/utils/fix-special-char';
 import { validator, buildValidations } from 'ember-cp-validations';
 
 // Form data and validations
-const BasicsValidations = buildValidations({
+const BASICS_VALIDATIONS = buildValidations({
     basicsAbstract: {
         description: 'Abstract',
         validators: [
@@ -31,9 +31,9 @@ const BasicsValidations = buildValidations({
 function doiRegexExec(doi) {
     //Strips url out of inputted doi, if any.  For example, user input this DOI: https://dx.doi.org/10.12345/hello. Returns 10.12345/hello.
     // If doi invalid, returns doi.
-    const doiRegex = /\b(10\.\d{4,}(?:\.\d+)*\/\S+(?:(?!["&\'<>])\S))\b/;
+    const DOI_REGEX = /\b(10\.\d{4,}(?:\.\d+)*\/\S+(?:(?!["&\'<>])\S))\b/;
     if (doi) {
-        const doiOnly = doiRegex.exec(doi);
+        const doiOnly = DOI_REGEX.exec(doi);
         return doiOnly !== null ? doiOnly[0] : doi;
     }
     return doi;
@@ -41,7 +41,7 @@ function doiRegexExec(doi) {
 }
 
 /* Does not support editing */
-export default Ember.Component.extend(BasicsValidations, {
+export default Ember.Component.extend(BASICS_VALIDATIONS, {
     editMode: true,
     uploadValid: Ember.computed.alias('nodeLocked'), // Once the node has been locked (happens in step one of upload section), users are free to navigate through form unrestricted
     abstractValid: Ember.computed.alias('validations.attrs.basicsAbstract.isValid'),
@@ -57,8 +57,8 @@ export default Ember.Component.extend(BasicsValidations, {
     }),
     // Pending tags
     basicsTags: Ember.computed('node', function() {
-        const node = this.get('node');
-        return node ? node.get('tags').map(fixSpecialChar) : Ember.A();
+        const NODE = this.get('node');
+        return NODE ? NODE.get('tags').map(fixSpecialChar) : Ember.A();
     }),
     basicsDOI: null,
     basicsLicense: null,
