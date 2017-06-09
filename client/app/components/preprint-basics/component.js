@@ -29,10 +29,11 @@ const BASICS_VALIDATIONS = buildValidations({
     }
 });
 
+const DOI_REGEX = /\b(10\.\d{4,}(?:\.\d+)*\/\S+(?:(?!["&\'<>])\S))\b/;
+
 function doiRegexExec(doi) {
     //Strips url out of inputted doi, if any.  For example, user input this DOI: https://dx.doi.org/10.12345/hello. Returns 10.12345/hello.
     // If doi invalid, returns doi.
-    const DOI_REGEX = /\b(10\.\d{4,}(?:\.\d+)*\/\S+(?:(?!["&\'<>])\S))\b/;
     if (doi) {
         const doiOnly = DOI_REGEX.exec(doi);
         return doiOnly !== null ? doiOnly[0] : doi;
@@ -60,8 +61,8 @@ export default Ember.Component.extend(BASICS_VALIDATIONS, {
         return node ? node.get('description') : null;
     }),
     basicsTags: Ember.computed('node', function() {
-        const NODE = this.get('node');
-        return NODE ? NODE.get('tags').map(fixSpecialChar) : Ember.A();
+        const node = this.get('node');
+        return node ? node.get('tags').map(fixSpecialChar) : Ember.A();
     }),
     basicsDOI: null,
     basicsLicense: null,
