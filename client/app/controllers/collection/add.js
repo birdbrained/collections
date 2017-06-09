@@ -392,7 +392,7 @@ function checkAny(conditions) {
 function constructArgArr(action) {
 
     const parameters = this.get('parameters');
-    const arguments = action.signature.map((key) => {
+    const args = action.signature.map((key) => {
 
         // Default to undefined.
         var value = undefined;
@@ -442,8 +442,8 @@ function constructArgArr(action) {
 
     });
 
-    arguments.push(action.parameters);
-    return arguments;
+    args.push(action.parameters);
+    return args;
 
 }
 
