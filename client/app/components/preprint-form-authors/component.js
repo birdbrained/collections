@@ -125,11 +125,11 @@ export default Ember.Component.extend(NodeActionsMixin, {
     * @param {string} status "success" or "error"
     */
     highlightSuccessOrFailure(elementId, context, status) {
-        const HIGHLIGHT_CLASS = `${status === 'success' ? 'success' : 'error'}Highlight`;
+        const highlightClass = `${status === 'success' ? 'success' : 'error'}Highlight`;
 
-        context.$('#' + elementId).addClass(HIGHLIGHT_CLASS);
+        context.$('#' + elementId).addClass(highlightClass);
 
-        Ember.run.later(() => context.$('#' + elementId).removeClass(HIGHLIGHT_CLASS), 2000);
+        Ember.run.later(() => context.$('#' + elementId).removeClass(highlightClass), 2000);
     },
     actions: {
         // Adds contributor then redraws view - addition of contributor may change which update/remove contributor requests are permitted
