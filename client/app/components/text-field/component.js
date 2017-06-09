@@ -10,9 +10,9 @@ export default Ember.Component.extend({
     },
 
     textFieldValueObserver: Ember.observer('textFieldValue', function() {
-        const SAVE_PARAMETER = this.attrs.saveParameter;
-        const PARAMETERS = this.attrs.widget.value.parameters;
-        SAVE_PARAMETER(PARAMETERS.output, {
+        const saveParameter = this.attrs.saveParameter;
+        const parameters = this.attrs.widget.value.parameters;
+        saveParameter(parameters.output, {
             state: ['defined'],
             value: this.get('textFieldValue')
         });
