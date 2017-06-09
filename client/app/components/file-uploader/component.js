@@ -7,26 +7,26 @@ export default Ember.Component.extend({
 
         uploadFile: function(ev) {
 
-            const READER = new FileReader();
-            const FILE_HANDLE = ev.target.files[0];
-            const SAVE_PARAMETER = this.attrs.saveParameter
-            const FILENAME_PARTS = ev.currentTarget.value.split('\\')
-            const FILENAME = FILENAME_PARTS[FILENAME_PARTS.length - 1];
-            const PARAMETERS = this.attrs.widget.value.parameters;
+            const reader = new FileReader();
+            const fileHandle = ev.target.files[0];
+            const saveParameter = this.attrs.saveParameter
+            const filenameParts = ev.currentTarget.value.split('\\')
+            const filename = filenameParts[filenameParts.length - 1];
+            const parameters = this.attrs.widget.value.parameters;
 
-            SAVE_PARAMETER(PARAMETERS.fileName, {
-                value: FILENAME,
+            saveParameter(parameters.fileName, {
+                value: filename,
                 state: ['defined']
             });
 
-            READER.onloadend = function(ev) {
-                SAVE_PARAMETER(PARAMETERS.fileData, {
+            reader.onloadend = function(ev) {
+                saveParameter(parameters.fileData, {
                     value: ev.target.result,
                     state: ['defined']
                 });
             };
 
-            READER.readAsBinaryString(FILE_HANDLE);
+            reader.readAsBinaryString(fileHandle);
 
         }
     }
