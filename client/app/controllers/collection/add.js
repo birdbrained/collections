@@ -106,37 +106,37 @@ export default Ember.Controller.extend({
     // Take the description of an action and set its properties to be the vaious literal
     // functions and parameters it depends on to operate.
     hydrateAction: function(action) {
-        const PARAMETERS = this.get('parameters');
-        if (typeof PARAMETERS[action.outputParameter] !== 'object') {
-            PARAMETERS[action.outputParameter] = {};
+        const parameters = this.get('parameters');
+        if (typeof parameters[action.outputParameter] !== 'object') {
+            parameters[action.outputParameter] = {};
         }
         if (typeof action.parameters !== 'object') {
             action.parameters = {};
         }
-        const SIGNATURE = this.get(action.type + 'Signature');
+        const signature = this.get(action.type + 'Signature');
         // Create a new object as not to modify the object returned from the model
-        const HYDRATED_ACTION = {
+        const hydratedAction = {
             id: action.id,
             type: action.type,
-            signature: SIGNATURE,
+            signature: signature,
             action: this.get(action.type),
             conditions: action.conditions,
             parameters: Object.keys(action.parameters).reduce((result, key) => {
-                if (typeof PARAMETERS[action.parameters[key]] !== 'object') {
-                    PARAMETERS[action.parameters[key]] = {
+                if (typeof parameters[action.parameters[key]] !== 'object') {
+                    parameters[action.parameters[key]] = {
                         state: ['undefined'],
                         value: undefined
                     };
                 }
-                result[key] = PARAMETERS[action.parameters[key]]
+                result[key] = parameters[action.parameters[key]]
                 return result;
             }, {}),
             args: action.args,
-            outputParameter: PARAMETERS[action.outputParameter],
+            outputParameter: parameters[action.outputParameter],
             then: action.then
         };
-        HYDRATED_ACTION['argArr'] = constructArgArr.call(this, HYDRATED_ACTION);
-        return HYDRATED_ACTION;
+        hydratedAction['argArr'] = constructArgArr.call(this, hydratedAction);
+        return hydratedAction;
 
     },
 
@@ -230,18 +230,18 @@ export default Ember.Controller.extend({
         if (typeof node.value === 'undefined') node.value = ENV.nodeGuid;
         const URI = ENV.OSF.waterbutlerUrl + "v1/resources/" + node.value +
             "/providers/osfstorage/?kind=file&name=" + fileName.value;
-        const XHR = new XMLHttpRequest();
-        XHR.open("PUT", URI, true);
-        XHR.withCredentials = false;
-        XHR.setRequestHeader('Authorization', 'Bearer ' + getToken());
+        const xhr = new XMLHttpRequest();
+        xhr.open("PUT", URI, true);
+        xhr.withCredentials = false;
+        xhr.setRequestHeader('Authorization', 'Bearer ' + getToken());
 
         let deferred = Ember.RSVP.defer();
-        XHR.onreadystatechange = () => {
-            if (XHR.readyState == 4 && XHR.status >= 200 && XHR.status < 300) {
-                deferred.resolve(JSON.parse(XHR.responseText).data.links.download);
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState == 4 && xhr.status >= 200 && xhr.status < 300) {
+                deferred.resolve(JSON.parse(xhr.responseText).data.links.download);
             }
         };
-        XHR.send(fileData.value);
+        xhr.send(fileData.value);
         let value = await deferred.promise;
         return value
     },
@@ -318,21 +318,21 @@ export default Ember.Controller.extend({
 
 function conditionDispatcher(condition) {
 
-    const PARAMETERS = this.get('parameters');
+    const parameters = this.get('parameters');
 
     // Check if its a regular condition
     if (condition.parameter !== undefined) {
         // actualy check the condition is met;
         // the parameter has to have the given state.
-        if (PARAMETERS[condition.parameter] === undefined) {
-            PARAMETERS[condition.parameter] = {};
+        if (parameters[condition.parameter] === undefined) {
+            parameters[condition.parameter] = {};
         }
-        if (PARAMETERS[condition.parameter].state === undefined) {
-            PARAMETERS[condition.parameter].state = [];
+        if (parameters[condition.parameter].state === undefined) {
+            parameters[condition.parameter].state = [];
         }
-        const PARAMETER_STATE = PARAMETERS[condition.parameter].state
+        const parameterState = parameters[condition.parameter].state
         // check that the state exists for this item
-        return PARAMETER_STATE.some((state_item) => state_item === condition.state)
+        return parameterState.some((state_item) => state_item === condition.state)
     }
 
     // Check if its an 'all' composite condition
@@ -391,8 +391,8 @@ function checkAny(conditions) {
 
 function constructArgArr(action) {
 
-    const PARAMETERS = this.get('parameters');
-    const ARGUMENTS = action.signature.map((key) => {
+    const parameters = this.get('parameters');
+    const arguments = action.signature.map((key) => {
 
         // Default to undefined.
         var value = undefined;
@@ -403,14 +403,14 @@ function constructArgArr(action) {
         ) {
 
             let exists = false;
-            let parameterKeys = Object.keys(PARAMETERS);
+            let parameterKeys = Object.keys(parameters);
 
 
             // There was a bug here where the parameters weren't matching up right;
             // this check ensures parameters aren't duplicated and the like.
             parameterKeys.forEach((parameterKey) => {
-                if (PARAMETERS[parameterKey] === action.parameters[key]) {
-                    value = PARAMETERS[parameterKey];
+                if (parameters[parameterKey] === action.parameters[key]) {
+                    value = parameters[parameterKey];
                     exists = true;
                 }
             });
@@ -423,11 +423,11 @@ function constructArgArr(action) {
             typeof action.parameters[key] === 'string'
         ) {
 
-            if (typeof PARAMETERS[action.parameters[key]] !== 'object') {
-                PARAMETERS[action.parameters[key]] = {};
+            if (typeof parameters[action.parameters[key]] !== 'object') {
+                parameters[action.parameters[key]] = {};
             }
 
-            value = PARAMETERS[action.parameters[key]];
+            value = parameters[action.parameters[key]];
 
         }
 
@@ -442,8 +442,8 @@ function constructArgArr(action) {
 
     });
 
-    ARGUMENTS.push(action.parameters);
-    return ARGUMENTS;
+    arguments.push(action.parameters);
+    return arguments;
 
 }
 
