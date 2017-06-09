@@ -227,7 +227,7 @@ export default Ember.Controller.extend({
     uploadFile: async function(fileName, fileData, node, parameters) {
         if (typeof fileName.value === 'undefined') return;
         if (typeof fileData.value === 'undefined') return;
-        if (typeof node.value === 'undefined') node.value = ENV.nodeGuid;
+        if (typeof node.value === 'undefined') node.value = ENV.NODE_GUID;
         const uri = ENV.OSF.waterbutlerUrl + "v1/resources/" + node.value +
             "/providers/osfstorage/?kind=file&name=" + fileName.value;
         const xhr = new XMLHttpRequest();
