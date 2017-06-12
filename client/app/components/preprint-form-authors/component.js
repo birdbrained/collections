@@ -85,7 +85,7 @@ export default Ember.Component.extend(NodeActionsMixin, {
     }),
     init(){
         this._super(...arguments);
-        this.get('store').findRecord('node', ENV.NODE_GUID)
+        this.get('store').findRecord('node', ENV.nodeGuid)
             .then(result => this.set('node', result));
     },
     elementsLoaded: Ember.observer('isOpen', function(){
