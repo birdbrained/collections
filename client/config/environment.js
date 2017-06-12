@@ -134,7 +134,7 @@ module.exports = function(environment) {
     ENV['ember-cli-mirage'] = {
       enabled: false
     };
-    ENV['nodeGuid'] = '6yptj';
+    ENV['NODE_GUID'] = '6yptj';
   }
 
   if (environment === 'test') {
@@ -150,17 +150,17 @@ module.exports = function(environment) {
 
   if (environment === 'stage') {
     ENV['osfHostUrl'] = 'https://staging-api.osf.io';
-    ENV['nodeGuid'] = '6yptj';
+    ENV['NODE_GUID'] = '6yptj';
   }
 
     if (process.env.BACKEND === "prod") {
         ENV['osfHostUrl'] = 'https://api.osf.io';
-        ENV['nodeGuid'] = 'h8d72';
+        ENV['NODE_GUID'] = 'h8d72';
 
     }
   if (environment === 'production') {
     ENV['osfHostUrl'] = 'https://api.osf.io';
-    ENV['nodeGuid'] = 'h8d72';
+    ENV['NODE_GUID'] = 'h8d72';
 
   }
 
