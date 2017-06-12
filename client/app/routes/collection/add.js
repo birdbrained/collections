@@ -1,5 +1,6 @@
 import Ember from 'ember';
 
+const WORKFLOW_NAME = 'preprint-submission';
 
 export default Ember.Route.extend({
     panelActions: Ember.inject.service('panelActions'),
@@ -724,12 +725,12 @@ export default Ember.Route.extend({
             }]
 
         };
-        debugger;
         if (collectionType === 'Preprint') {
             return preprintForm;
         } else if (collectionType === 'Meeting') {
             return meetingForm;
         }
+        return this.store.findRecord('workflow', WORKFLOW_NAME);
     },
 
     setupController(controller, model) {
@@ -739,7 +740,7 @@ export default Ember.Route.extend({
         controller.set('parameters', model.initialParameters);
 
         // Hydrate actions in preperation for engine ignition
-        const actions = model.actions.map(controller.hydrateAction.bind(controller));
+        const actions = model.get('actions').map(controller.hydrate_action.bind(controller));
         controller.set('formActions', actions);
 
         // Start the engine.
