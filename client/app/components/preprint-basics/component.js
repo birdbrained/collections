@@ -58,11 +58,9 @@ export default Ember.Component.extend(BASICS_VALIDATIONS, {
     licenseValid: false,
 
     // Basics fields that are being validated are abstract, license and doi (title validated in upload section). If validation added for other fields, expand basicsValid definition.
-    basicsValid: Ember.computed('abstractValid', 'doiValid', 'licenseValid', function() {
-        let isValid = this.get('abstractValid') && this.get('doiValid') && this.get('licenseValid');
-        this.set('isSectionValid', isValid);
-        return isValid;
-    }),
+    basicsValid: Ember.computed.and('abstractValid', 'doiValid', 'licenseValid'),
+
+    /* Initial values */
     basicsAbstract:  Ember.computed('node.description', function() {
         let node = this.get('node');
         return node ? node.get('description') : null;
@@ -73,29 +71,21 @@ export default Ember.Component.extend(BASICS_VALIDATIONS, {
     }),
     basicsDOI: null,
     basicsLicense: null,
+    savedValues: null,
 
-    /* Check if discard is needed */
-    savedValues: Ember.computed('node', function() {
-        let node = this.get('node');
-        let values = {
-            basicsDOI: null,
-            basicsLicense: null,
-            basicsTags: node.get('tags').map(fixSpecialChar),
-            basicsAbstract: node.get('description')
-        }
-        return values ;
-    }),
-    basicsChanged:  Ember.computed('basicsDOI', 'basicsLicense', 'basicsTags.@each', 'basicsAbstract', 'applyLicense', function() {
+    basicsChanged:  Ember.observer('savedValues', 'basicsDOI', 'basicsLicense', 'basicsTags.@each', 'basicsAbstract', 'applyLicense', function() {
+        let changed = false;
         let saved = this.get('savedValues');
-        let doiChanged = saved.basicsDOI !== this.get('basicsDOI');
-        let licenseChanged = saved.basicsLicense !== this.get('basicsLicense') && this.get('applyLicense');
-        let abstractChanged = saved.basicsAbstract ? saved.basicsAbstract !== this.get('basicsAbstract') : false ;
-        let tagsChanged = saved.basicsTags ? saved.basicsTags.length !== this.get('basicsTags').length || saved.basicsTags.some((v,i) => v !== this.get('basicsTags')[i])  : false ;
-
-      return doiChanged || licenseChanged || abstractChanged || tagsChanged;
+        if (saved !== null) {
+            let doiChanged = saved.basicsDOI !== this.get('basicsDOI');
+            let licenseChanged = saved.basicsLicense !== this.get('basicsLicense') && this.get('applyLicense');
+            let abstractChanged = saved.basicsAbstract ? saved.basicsAbstract !== this.get('basicsAbstract') : false;
+            let tagsChanged = saved.basicsTags ? saved.basicsTags.length !== this.get('basicsTags').length || saved.basicsTags.some((v, i) => v !== this.get('basicsTags')[i]) : false;
+            changed = doiChanged || licenseChanged || abstractChanged || tagsChanged;
+        }
+        this.set('isSectionValid', !changed);
+        return changed;
     }),
-
-
 
     actions: {
         addTag(tag) {
@@ -132,7 +122,7 @@ export default Ember.Component.extend(BASICS_VALIDATIONS, {
            });
            this.set('initialLicenseChangeMade', true);
        },
-       saveBasics() {
+        saveBasics() {
             // Saves the description/tags on the node and the DOI on the preprint, then advances to next panel
             if (!this.get('basicsValid')) {
                 return;
@@ -192,6 +182,15 @@ export default Ember.Component.extend(BASICS_VALIDATIONS, {
         this._super(...arguments);
         this.get('store').findRecord('node', ENV.NODE_GUID).then((result)=>{
             this.set('node', result);
+            let node = this.get('node');
+            let values = {
+                basicsDOI: null,
+                basicsLicense: null,
+                basicsTags: node.get('tags').map(fixSpecialChar),
+                basicsAbstract: node.get('description')
+            };
+            this.set('savedValues', values);
         });
+
     }
 });
