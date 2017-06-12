@@ -8,10 +8,10 @@ export default Ember.Component.extend({
         uploadFile: function(ev) {
 
             const reader = new FileReader();
-            const file_handle = ev.target.files[0];
+            const fileHandle = ev.target.files[0];
             const saveParameter = this.attrs.saveParameter
-            const filename_parts = ev.currentTarget.value.split('\\')
-            const filename = filename_parts[filename_parts.length - 1];
+            const filenameParts = ev.currentTarget.value.split('\\')
+            const filename = filenameParts[filenameParts.length - 1];
             const parameters = this.attrs.widget.value.parameters;
 
             saveParameter(parameters.fileName, {
@@ -26,7 +26,7 @@ export default Ember.Component.extend({
                 });
             };
 
-            reader.readAsBinaryString(file_handle);
+            reader.readAsBinaryString(fileHandle);
 
         }
     }

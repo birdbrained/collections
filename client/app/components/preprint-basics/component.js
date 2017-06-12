@@ -4,7 +4,7 @@ import { validator, buildValidations } from 'ember-cp-validations';
 import ENV from '../../config/environment';
 
 // Form data and validations
-const BasicsValidations = buildValidations({
+const BASICS_VALIDATIONS = buildValidations({
     basicsAbstract: {
         description: 'Abstract',
         validators: [
@@ -29,12 +29,13 @@ const BasicsValidations = buildValidations({
     }
 });
 
+const DOI_REGEX = /\b(10\.\d{4,}(?:\.\d+)*\/\S+(?:(?!["&\'<>])\S))\b/;
+
 function doiRegexExec(doi) {
     //Strips url out of inputted doi, if any.  For example, user input this DOI: https://dx.doi.org/10.12345/hello. Returns 10.12345/hello.
     // If doi invalid, returns doi.
-    const doiRegex = /\b(10\.\d{4,}(?:\.\d+)*\/\S+(?:(?!["&\'<>])\S))\b/;
     if (doi) {
-        const doiOnly = doiRegex.exec(doi);
+        const doiOnly = DOI_REGEX.exec(doi);
         return doiOnly !== null ? doiOnly[0] : doi;
     }
     return doi;
@@ -42,7 +43,7 @@ function doiRegexExec(doi) {
 }
 
 /* Does not support editing */
-export default Ember.Component.extend(BasicsValidations, {
+export default Ember.Component.extend(BASICS_VALIDATIONS, {
     store: Ember.inject.service(),
     editMode: true,
     applyLicense: false,
@@ -182,7 +183,7 @@ export default Ember.Component.extend(BasicsValidations, {
     },
     init(){
         this._super(...arguments);
-        this.get('store').findRecord('node', ENV.node_guid).then((result)=>{
+        this.get('store').findRecord('node', ENV.NODE_GUID).then((result)=>{
             this.set('node', result);
         });
     }

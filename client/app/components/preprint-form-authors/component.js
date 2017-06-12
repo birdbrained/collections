@@ -15,7 +15,7 @@ import ENV from '../../config/environment';
  * that are not allowed are disabled (for example, you cannot remove the sole bibliographic author).
  * @class preprint-form-authors
  */
-export default Ember.Component.extend( NodeActionsMixin, {
+export default Ember.Component.extend(NodeActionsMixin, {
     i18n: Ember.inject.service(),
 
     // Variables that used to pass in from Controller
@@ -31,7 +31,7 @@ export default Ember.Component.extend( NodeActionsMixin, {
     node: null,
     contributors: Ember.computed('node', function(){
         let contribs = this.get('node.contributors');
-        this.attrs.saveParameter(this.attrs.widget.value.parameters.authors_list, {
+        this.attrs.saveParameter(this.attrs.widget.value.parameters.authorsList, {
             value: contribs,
             state: ['defined']
         })
@@ -48,9 +48,7 @@ export default Ember.Component.extend( NodeActionsMixin, {
     // Returns list of user ids associated with current node
     currentContributorIds: Ember.computed('contributors', function() {
         let contribIds = [];
-        this.get('contributors').forEach((contrib) => {
-            contribIds.push(contrib.get('userId'));
-        });
+        this.get('contributors').forEach(contrib => contribIds.push(contrib.get('userId')));
         return contribIds;
     }),
     // In Add mode, contributors are emailed on creation of preprint. In Edit mode,
@@ -85,13 +83,12 @@ export default Ember.Component.extend( NodeActionsMixin, {
     }),
     init(){
         this._super(...arguments);
-        this.get('store').findRecord('node', ENV.node_guid).then((result)=>{
-            this.set('node', result);
-        });
+        this.get('store').findRecord('node', ENV.NODE_GUID)
+            .then(result => this.set('node', result));
     },
     elementsLoaded: Ember.observer('isOpen', function(){
-        if(this.get('isOpen')){
-          Ember.run.once(this.get('applyPopovers').bind(this));
+        if (this.get('isOpen')) {
+            Ember.run.once(this.get('applyPopovers').bind(this));
         }
     }),
     /**
@@ -103,17 +100,17 @@ export default Ember.Component.extend( NodeActionsMixin, {
      * @return {User[]} Returns specified page of user records matching query
      */
     findContributors(query, page) {
-          return this.get('store').query('user', {
-              filter: {
+        return this.get('store').query('user', {
+            filter: {
                 'full_name,given_name,middle_names,family_name': query
-              },
-              page: page
-            }).then((contributors) => {
-              this.set('searchResults', contributors);
-          return contributors;
+            },
+            page: page
+        }).then(contributors => {
+            this.set('searchResults', contributors);
+            return contributors;
         }).catch(() => {
             this.get('toast').error(this.get('i18n').t('submit.search_contributors_error'));
-          this.highlightSuccessOrFailure('author-search-box', this, 'error');
+            this.highlightSuccessOrFailure('author-search-box', this, 'error');
         });
     },
     /**
@@ -126,11 +123,10 @@ export default Ember.Component.extend( NodeActionsMixin, {
     */
     highlightSuccessOrFailure(elementId, context, status) {
         const highlightClass = `${status === 'success' ? 'success' : 'error'}Highlight`;
-
         context.$('#' + elementId).addClass(highlightClass);
-
         Ember.run.later(() => context.$('#' + elementId).removeClass(highlightClass), 2000);
     },
+
     actions: {
         // Adds contributor then redraws view - addition of contributor may change which update/remove contributor requests are permitted
         addContributorLocal(user) {
@@ -159,8 +155,8 @@ export default Ember.Component.extend( NodeActionsMixin, {
                 }
             });
             this.get('actions.addContributors').call(this, contributorsToAdd, this.get('sendEmail'))
-                .then((contributors) => {
-                    contributors.map((contrib) => {
+                .then(contributors => {
+                    contributors.map(contrib => {
                         this.get('contributors').pushObject(contrib);
                     });
                     this.toggleAuthorModification();
@@ -174,7 +170,7 @@ export default Ember.Component.extend( NodeActionsMixin, {
         addUnregisteredContributor(fullName, email) {
             if (fullName && email) {
                 let res = this.get('actions.addContributor').call(this, null, 'write', true, this.get('sendEmail'), fullName, email, true);
-                res.then((contributor) => {
+                res.then(contributor => {
                     this.get('contributors').pushObject(contributor);
                     this.toggleAuthorModification();
                     this.set('addState', 'searchView');
@@ -182,7 +178,7 @@ export default Ember.Component.extend( NodeActionsMixin, {
                     this.set('email', '');
                     this.get('toast').success(this.get('i18n').t('submit.preprint_unregistered_author_added'));
                     this.highlightSuccessOrFailure(contributor.id, this, 'success');
-                }, (error) => {
+                }, error => {
                     if (error.errors[0] && error.errors[0].detail && error.errors[0].detail.indexOf('is already a contributor') > -1) {
                         this.get('toast').error(error.errors[0].detail);
                     } else {
@@ -196,12 +192,11 @@ export default Ember.Component.extend( NodeActionsMixin, {
         findContributors(page) {
             let query = this.get('query');
             if (query) {
-                this.findContributors(query, page).then(() => {
-                    this.set('addState', 'searchView');
-                }, () => {
-                    this.get('toast').error('Could not perform search query.');
-                    this.highlightSuccessOrFailure('author-search-box', this, 'error');
-                });
+                this.findContributors(query, page)
+                    .then(() => this.set('addState', 'searchView'), () => {
+                        this.get('toast').error('Could not perform search query.');
+                        this.highlightSuccessOrFailure('author-search-box', this, 'error');
+                    });
             }
         },
         // Removes contributor then redraws contributor list view - removal of contributor may change
