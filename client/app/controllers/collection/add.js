@@ -107,6 +107,7 @@ export default Ember.Controller.extend({
     // Take the description of an action and set its properties to be the vaious literal
     // functions and parameters it depends on to operate.
     hydrate_action: function(action) {
+        debugger;
         const parameters = this.get('parameters');
         if (typeof parameters[action.output_parameter] !== 'object') {
             parameters[action.output_parameter] = {};
