@@ -9,7 +9,6 @@ export default Ember.Route.extend({
     },
 
     setupController(controller, model) {
-        debugger;
         // Set up state defined on the model.
         controller.set('sections', model.get('sections'));
         controller.set('parameters', model.get('initialParameters'));
