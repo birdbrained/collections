@@ -4,20 +4,20 @@ import Ember from 'ember';
 export default Ember.Component.extend({
 
     didReceiveAttrs() {
-        this.set('widgetClasses', this.attrs.widget.value.css_classes)
+        this.set('widgetClasses', this.attrs.widget.value.cssClasses)
     },
 
     buttonString: 'Save',
 
     widgetClasses: ['section-submit-button'],
     widgetClassString: Ember.computed('widgetClasses', function() {
-        let classArr = this.get('widgetClasses')
-        if (classArr === undefined ||
-            classArr.constructor !== Array
+        const classes = this.get('widgetClasses')
+        if (classes === undefined ||
+            classes.constructor !== Array
         ) {
-            classArr = [];
+            return '';
         }
-        return classArr.join(' ');
+        return classes.join(' ');
     }),
 
     actions: {
