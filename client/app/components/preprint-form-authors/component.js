@@ -37,11 +37,9 @@ export default Ember.Component.extend(NodeActionsMixin, {
         })
         return contribs;
     }),
-    valid: Ember.observer('contributors.length', function() {
-        let hasContributors = this.get('contributors.length');
-        this.set('isSectionSaved', hasContributors);
-        return hasContributors;
-    }),
+
+
+    valid: Ember.computed.alias('newContributorId'),
     authorModification: false,
     currentPage: 1,
     // Permissions labels for dropdown
