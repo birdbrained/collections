@@ -39,7 +39,7 @@ export default Ember.Component.extend(NodeActionsMixin, {
     }),
     valid: Ember.observer('contributors.length', function() {
         let hasContributors = this.get('contributors.length');
-        this.set('isSectionValid', hasContributors);
+        this.set('isSectionSaved', hasContributors);
         return hasContributors;
     }),
     authorModification: false,

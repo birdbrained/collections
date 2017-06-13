@@ -80,7 +80,7 @@ export default Ember.Component.extend(BASICS_VALIDATIONS, {
             let tagsChanged = saved.basicsTags ? saved.basicsTags.length !== this.get('basicsTags').length || saved.basicsTags.some((v, i) => v !== this.get('basicsTags')[i]) : false;
             changed = doiChanged || licenseChanged || abstractChanged || tagsChanged;
         }
-        this.set('isSectionValid', !changed);
+        this.set('isSectionSaved', !changed);
         return changed;
     }),
 
