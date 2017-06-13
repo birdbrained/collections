@@ -111,7 +111,7 @@ export default Ember.Component.extend({
 
     disciplineChanged: Ember.computed('subjects.@each.subject', 'selected.@each.subject', 'disciplineModifiedToggle',  function() {
         let changed = !(disciplineArraysEqual(subjectIdMap(this.get('subjects')), subjectIdMap(this.get('selected'))));
-        this.set('isSectionValid', !changed);
+        this.set('isSectionSaved', !changed);
         return changed;
     }),
 
