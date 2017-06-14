@@ -77,7 +77,10 @@ export default Ember.Component.extend(BASICS_VALIDATIONS, {
             let doiChanged = saved.basicsDOI !== this.get('basicsDOI');
             let licenseChanged = saved.basicsLicense !== this.get('basicsLicense') && this.get('applyLicense');
             let abstractChanged = saved.basicsAbstract ? saved.basicsAbstract !== this.get('basicsAbstract') : false;
-            let tagsChanged = saved.basicsTags ? saved.basicsTags.length !== this.get('basicsTags').length || saved.basicsTags.some((v, i) => v !== this.get('basicsTags')[i]) : false;
+            let tagsChanged = false;
+            if (saved.basicsTags) {
+                tagsChanged = saved.basicsTags.length !== this.get('basicsTags').length || saved.basicsTags.some((v, i) => v !== this.get('basicsTags')[i])
+            }
             changed = doiChanged || licenseChanged || abstractChanged || tagsChanged;
         }
         this.set('isSectionSaved', !changed);
