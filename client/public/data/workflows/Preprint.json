@@ -1,6 +1,133 @@
 {
-  "id": "preprint-submission",
-  "submissionFormName": "Preprints Submission Form",
+  "id":"Preprint",
+  "submissionFormType": "collectionType",
+  "initialWidgets": [],
+  "submission_form_name": "Preprints Submission Form",
+  "initialParameters": {
+    "basicInfoWidget": {
+      "state": [
+        "undefined"
+      ],
+      "value": "undefined"
+    },
+    "authorsWidget": {
+      "state": [
+        "undefined"
+      ],
+      "value": "undefined"
+    },
+    "disciplinesSection": {
+      "isSectionSaved": false,
+      "state": [
+        "disabled"
+      ],
+      "showValidationIndicator": true,
+      "allowOpen": true,
+      "open": false,
+      "value": "undefined"
+    },
+    "uploadSection": {
+      "isSectionSaved": false,
+      "state": [
+        "unsaved",
+        "editing"
+      ],
+      "showValidationIndicator": true,
+      "allowOpen": true,
+      "open": true,
+      "value": "undefined"
+    },
+    "preprintFileUploadWidget": {
+      "state": [
+        "undefined"
+      ],
+      "value": "undefined"
+    },
+    "submitButtonWidget": {
+      "state": [
+        "undefined"
+      ],
+      "value": "undefined"
+    },
+    "basicInfoSection": {
+      "isSectionSaved": false,
+      "state": [
+        "disabled"
+      ],
+      "showValidationIndicator": true,
+      "allowOpen": true,
+      "open": false,
+      "value": "undefined"
+    },
+    "preprintFileUrl": {
+      "state": [
+        "undefined"
+      ],
+      "value": "undefined"
+    },
+    "editUploadSectionWidget": {
+      "state": [
+        "undefined"
+      ],
+      "value": "undefined"
+    },
+    "submitButton": {
+      "isSectionSaved": false,
+      "state": [
+        "disabled"
+      ],
+      "showValidationIndicator": false,
+      "allowOpen": true,
+      "open": false,
+      "value": "undefined"
+    },
+    "fileUrlMissingNotice": {
+      "state": [
+        "undefined"
+      ],
+      "value": "undefined"
+    },
+    "subjectPickerWidget": {
+      "state": [
+        "undefined"
+      ],
+      "value": "undefined"
+    },
+    "saveAuthorsSectionWidget": {
+      "state": [
+        "undefined"
+      ],
+      "value": "undefined"
+    },
+    "saveUploadSectionWidget": {
+      "state": [
+        "undefined"
+      ],
+      "value": "undefined"
+    },
+    "preprintTitleWidget": {
+      "state": [
+        "undefined"
+      ],
+      "value": "undefined"
+    },
+    "authorsSection": {
+      "isSectionSaved": false,
+      "state": [
+        "disabled"
+      ],
+      "showValidationIndicator": true,
+      "allowOpen": true,
+      "open": false,
+      "value": "undefined"
+    },
+    "editAuthorsSectionWidget": {
+      "state": [
+        "undefined"
+      ],
+      "value": "undefined"
+    }
+  },
   "sections": [
     {
       "name": "upload",
@@ -28,7 +155,6 @@
       "divId": "preprint-form-submit"
     }
   ],
-  "initialWidgets": [],
   "actions": [
     {
       "parameters": {
@@ -527,125 +653,5 @@
         "widgetObject": "submitButtonWidget"
       }
     }
-  ],
-  "initialParameters": {
-    "basicInfoWidget": {
-      "state": [
-        "undefined"
-      ],
-      "value": "undefined"
-    },
-    "authorsWidget": {
-      "state": [
-        "undefined"
-      ],
-      "value": "undefined"
-    },
-    "disciplinesSection": {
-      "state": [
-        "disabled"
-      ],
-      "open": false,
-      "showValidationIndicator": true,
-      "value": "undefined",
-      "allowOpen": true
-    },
-    "uploadSection": {
-      "state": [
-        "unsaved",
-        "editing"
-      ],
-      "open": true,
-      "showValidationIndicator": true,
-      "value": "undefined",
-      "allowOpen": true
-    },
-    "preprintFileUploadWidget": {
-      "state": [
-        "undefined"
-      ],
-      "value": "undefined"
-    },
-    "submitButtonWidget": {
-      "state": [
-        "undefined"
-      ],
-      "value": "undefined"
-    },
-    "basicInfoSection": {
-      "state": [
-        "disabled"
-      ],
-      "open": false,
-      "showValidationIndicator": true,
-      "value": "undefined",
-      "allowOpen": true
-    },
-    "preprintFileUrl": {
-      "state": [
-        "undefined"
-      ],
-      "value": "undefined"
-    },
-    "editUploadSectionWidget": {
-      "state": [
-        "undefined"
-      ],
-      "value": "undefined"
-    },
-    "submitButton": {
-      "state": [
-        "disabled"
-      ],
-      "open": false,
-      "showValidationIndicator": false,
-      "value": "undefined",
-      "allowOpen": true
-    },
-    "fileUrlMissingNotice": {
-      "state": [
-        "undefined"
-      ],
-      "value": "undefined"
-    },
-    "subjectPickerWidget": {
-      "state": [
-        "undefined"
-      ],
-      "value": "undefined"
-    },
-    "saveAuthorsSectionWidget": {
-      "state": [
-        "undefined"
-      ],
-      "value": "undefined"
-    },
-    "saveUploadSectionWidget": {
-      "state": [
-        "undefined"
-      ],
-      "value": "undefined"
-    },
-    "preprintTitleWidget": {
-      "state": [
-        "undefined"
-      ],
-      "value": "undefined"
-    },
-    "authorsSection": {
-      "state": [
-        "disabled"
-      ],
-      "open": false,
-      "showValidationIndicator": true,
-      "value": "undefined",
-      "allowOpen": true
-    },
-    "editAuthorsSectionWidget": {
-      "state": [
-        "undefined"
-      ],
-      "value": "undefined"
-    }
-  }
+  ]
 }
