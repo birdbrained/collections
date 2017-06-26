@@ -12,7 +12,7 @@ export default Ember.Route.extend({
         // Set up state defined on the model.
         controller.set('sections', model.get('sections'));
         controller.set('parameters', model.get('initialParameters'));
-
+        debugger;
         // Hydrate actions in preperation for engine ignition
         const actions = model.get('actions').map(controller.hydrateAction.bind(controller));
         controller.set('formActions', actions);

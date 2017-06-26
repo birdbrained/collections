@@ -1,8 +1,8 @@
 {
   "id": "Meeting",
   "submissionFormType": "collectionType",
-  "initial_widgets": [],
-  "submission_form_name": "Meeting Submission Form",
+  "initialWidgets": [],
+  "submissionFormName": "Meeting Submission Form",
   "sections": [
     {
       "name": "upload",
@@ -23,7 +23,7 @@
   "actions": [
     {
       "type": "create_widget",
-      "output_parameter": "preprint_file_upload_widget",
+      "outputParameter": "preprint_file_upload_widget",
       "conditions": [
         {
           "all": [
@@ -39,17 +39,17 @@
         }
       ],
       "parameters": {
-        "output_parameter": "preprint_file_data"
+        "outputParameter": "preprint_file_data"
       },
       "args": {
         "section": "upload",
-        "widget_component": "file-uploader",
+        "widgetComponent": "file-uploader",
         "description": "Choose the preprint file to upload"
       }
     },
     {
       "type": "create_widget",
-      "output_parameter": "preprint_title_widget",
+      "outputParameter": "preprint_title_widget",
       "conditions": [
         {
           "all": [
@@ -69,17 +69,17 @@
         }
       ],
       "parameters": {
-        "output_parameter": "preprint_file_name"
+        "outputParameter": "preprint_file_name"
       },
       "args": {
         "section": "upload",
-        "widget_component": "text-field",
+        "widgetComponent": "text-field",
         "description": "Enter the title for this meeting."
       }
     },
     {
       "type": "create_widget",
-      "output_parameter": "edit_upload_section_widget",
+      "outputParameter": "edit_upload_section_widget",
       "conditions": [
         {
           "all": [
@@ -103,18 +103,18 @@
         }
       ],
       "parameters": {
-        "output_parameter": "upload_section"
+        "outputParameter": "upload_section"
       },
       "args": {
         "section": "upload",
-        "widget_component": "button-widget",
+        "widgetComponent": "button-widget",
         "description": "Edit this section",
         "action_id": "28fe8c59-fab7-4a0c-8e7e-38a5176ae34d"
       }
     },
     {
       "args": {
-        "updated_parameter": {
+        "updatedParameter": {
           "state": [
             "editing",
             "saved"
@@ -129,7 +129,7 @@
     },
     {
       "type": "create_widget",
-      "output_parameter": "save_upload_section_widget",
+      "outputParameter": "save_upload_section_widget",
       "conditions": [
         {
           "all": [
@@ -153,18 +153,18 @@
         }
       ],
       "parameters": {
-        "output_parameter": "preprint_file_url"
+        "outputParameter": "preprint_file_url"
       },
       "args": {
         "section": "upload",
-        "widget_component": "button-widget",
+        "widgetComponent": "button-widget",
         "description": "Save this section",
-        "action_id": "5db3456b-cef7-4c87-bb60-16a04ee89bad"
+        "actionId": "5db3456b-cef7-4c87-bb60-16a04ee89bad"
       }
     },
     {
       "then": "cec150d6-0396-49a9-b6cb-8ab375b2d09e",
-      "output_parameter": "preprint_file_url",
+      "outputParameter": "preprint_file_url",
       "type": "upload_file",
       "id": "5db3456b-cef7-4c87-bb60-16a04ee89bad",
       "parameters": {
@@ -175,7 +175,7 @@
     },
     {
       "args": {
-        "updated_parameter": {
+        "updatedParameter": {
           "state": [
             "closed",
             "saved"
@@ -203,11 +203,11 @@
       "parameters": {
         "widget_object": "save_upload_section_widget"
       },
-      "output_parameter": "null"
+      "outputParameter": "null"
     },
     {
       "type": "delete_widget",
-      "output_parameter": "null",
+      "outputParameter": "null",
       "conditions": [
         {
           "all": [
@@ -219,12 +219,12 @@
         }
       ],
       "parameters": {
-        "widget_object": "save_upload_section_widget"
+        "widgetObject": "save_upload_section_widget"
       }
     },
     {
       "type": "create_widget",
-      "output_parameter": "authors_widget",
+      "outputParameter": "authors_widget",
       "conditions": [
         {
           "all": [
@@ -236,41 +236,41 @@
         }
       ],
       "parameters": {
-        "output_parameter": "authors_list"
+        "outputParameter": "authors_list"
       },
       "args": {
         "section": "authors",
-        "widget_component": "preprint-form-authors",
+        "widgetComponent": "preprint-form-authors",
         "description": "Add and manage authors"
       }
     }
   ],
-  "initial_parameters": {
-    "edit_upload_section_widget": {
+  "initialParameters": {
+    "editUploadSectionWidget": {
       "state": [
         "undefined"
       ],
       "value": "undefined"
     },
-    "preprint_file_upload_widget": {
+    "preprintFileUploadWidget": {
       "state": [
         "undefined"
       ],
       "value": "undefined"
     },
-    "preprint_title_widget": {
+    "preprintTitleWidget": {
       "state": [
         "undefined"
       ],
       "value": "undefined"
     },
-    "authors_widget": {
+    "authorsWidget": {
       "state": [
         "undefined"
       ],
       "value": "undefined"
     },
-    "authors_section": {
+    "authorsSection": {
       "state": [
         "disabled"
       ],
@@ -279,7 +279,7 @@
       "value": "undefined",
       "allowOpen": true
     },
-    "submit_button": {
+    "submitButton": {
       "state": [
         "disabled"
       ],
@@ -288,7 +288,7 @@
       "value": "undefined",
       "allowOpen": true
     },
-    "upload_section": {
+    "uploadSection": {
       "state": [
         "unsaved",
         "editing"
@@ -298,7 +298,7 @@
       "value": "undefined",
       "allowOpen": true
     },
-    "save_upload_section_widget": {
+    "saveUploadSectionWidget": {
       "state": [
         "undefined"
       ],
