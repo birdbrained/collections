@@ -6,17 +6,17 @@
   "sections": [
     {
       "name": "upload",
-      "param": "upload_section",
+      "param": "uploadSection",
       "divId": "preprint-form-upload"
     },
     {
       "name": "authors",
-      "param": "authors_section",
+      "param": "authorsSection",
       "divId": "preprint-form-authors"
     },
     {
       "name": "submit",
-      "param": "submit_button",
+      "param": "submitButton",
       "divId": "preprint-form-submit"
     }
   ],
@@ -48,7 +48,7 @@
       }
     },
     {
-      "type": "create_widget",
+      "type": "createWidget",
       "outputParameter": "preprintTitleWidget",
       "conditions": [
         {
@@ -78,7 +78,7 @@
       }
     },
     {
-      "type": "create_widget",
+      "type": "createWidget",
       "outputParameter": "editUploadSectionWidget",
       "conditions": [
         {
@@ -128,7 +128,7 @@
       }
     },
     {
-      "type": "create_widget",
+      "type": "createWidget",
       "outputParameter": "saveUploadSectionWidget",
       "conditions": [
         {
@@ -165,7 +165,7 @@
     {
       "then": "cec150d6-0396-49a9-b6cb-8ab375b2d09e",
       "outputParameter": "preprintFileUrl",
-      "type": "upload_file",
+      "type": "uploadFile",
       "id": "5db3456b-cef7-4c87-bb60-16a04ee89bad",
       "parameters": {
         "file_data": "preprintFileData",
