@@ -16,6 +16,8 @@ You will need the following things properly installed on your computer.
 * [Bower](http://bower.io/)
 * [Ember CLI](http://ember-cli.com/)
 * [PhantomJS](http://phantomjs.org/)
+* [Yarn](https://yarnpkg.com/lang/en/docs/install/)
+
 
 
 ## Installation
@@ -31,7 +33,7 @@ Setting up a virtual environment for Python 3 is recommended.
     $ pyenv virtualenv 3.6.0 osf-collections
     $ pip install -r requirements.txt
     $ cd ../client
-    $ npm install
+    $ yarn install
     $ bower install
 
 
@@ -67,8 +69,14 @@ Set up the backend to use either staging or prod. Do this in the sessions for bo
 * Project homepage URL: http://localhost:8000/
 * Callback URL: http://localhost:8000/accounts/osf/login/callback/
 
-#### Create a new Site with domain name: http://localhost:8000/ in the django admin panel:
-* Note: The site id must match the `SITE_ID` variable defined in `collections/service/service/settings/base.py` or `SITE_ID` should be set to the site id in `collections/service/service/settings/local.py`
+### create a django super user:
+` $ python manage.py createsuperuser`
+
+#### Create a new Site with domain name: http://localhost:8000/admin/sites/ in the django 
+
+* Note: The site id must match the `SITE_ID` variable defined in  `SITE_ID` should be set to the site id in `collections/service/service/settings/local.py`
+* The SITE_ID can be found in the URL 
+* you may have to define SITE_ID in the local.py file 
 
 #### Create a SocialAccount in the django admin panel:
 * Set provider to "Open Science Framework"
