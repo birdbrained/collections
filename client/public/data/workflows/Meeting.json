@@ -1,0 +1,308 @@
+{
+  "id": "Meeting",
+  "submissionFormType": "collectionType",
+  "initialWidgets": [],
+  "submissionFormName": "Meeting Submission Form",
+  "sections": [
+    {
+      "name": "upload",
+      "param": "uploadSection",
+      "divId": "preprint-form-upload"
+    },
+    {
+      "name": "authors",
+      "param": "authorsSection",
+      "divId": "preprint-form-authors"
+    },
+    {
+      "name": "submit",
+      "param": "submitButton",
+      "divId": "preprint-form-submit"
+    }
+  ],
+  "actions": [
+    {
+      "type": "createWidget",
+      "outputParameter": "preprintFileUploadWidget",
+      "conditions": [
+        {
+          "all": [
+            {
+              "state": "unsaved",
+              "parameter": "uploadSection"
+            },
+            {
+              "state": "undefined",
+              "parameter": "preprintFileUploadWidget"
+            }
+          ]
+        }
+      ],
+      "parameters": {
+        "outputParameter": "preprintFileData"
+      },
+      "args": {
+        "section": "upload",
+        "widgetComponent": "file-uploader",
+        "description": "Choose the preprint file to upload"
+      }
+    },
+    {
+      "type": "createWidget",
+      "outputParameter": "preprintTitleWidget",
+      "conditions": [
+        {
+          "all": [
+            {
+              "state": "undefined",
+              "parameter": "preprintTitleWidget"
+            },
+            {
+              "state": "defined",
+              "parameter": "preprintFileData"
+            },
+            {
+              "state": "editing",
+              "parameter": "uploadSection"
+            }
+          ]
+        }
+      ],
+      "parameters": {
+        "outputParameter": "preprintFileName"
+      },
+      "args": {
+        "section": "upload",
+        "widgetComponent": "text-field",
+        "description": "Enter the title for this meeting."
+      }
+    },
+    {
+      "type": "createWidget",
+      "outputParameter": "editUploadSectionWidget",
+      "conditions": [
+        {
+          "all": [
+            {
+              "state": "undefined",
+              "parameter": "editUploadSectionWidget"
+            },
+            {
+              "state": "defined",
+              "parameter": "preprintFileData"
+            },
+            {
+              "state": "defined",
+              "parameter": "preprintFileName"
+            },
+            {
+              "state": "closed",
+              "parameter": "uploadSection"
+            }
+          ]
+        }
+      ],
+      "parameters": {
+        "outputParameter": "uploadSection"
+      },
+      "args": {
+        "section": "upload",
+        "widgetComponent": "button-widget",
+        "description": "Edit this section",
+        "action_id": "28fe8c59-fab7-4a0c-8e7e-38a5176ae34d"
+      }
+    },
+    {
+      "args": {
+        "updatedParameter": {
+          "state": [
+            "editing",
+            "saved"
+          ]
+        }
+      },
+      "type": "saveParameter",
+      "id": "28fe8c59-fab7-4a0c-8e7e-38a5176ae34d",
+      "parameters": {
+        "parameter": "uploadSection"
+      }
+    },
+    {
+      "type": "createWidget",
+      "outputParameter": "saveUploadSectionWidget",
+      "conditions": [
+        {
+          "all": [
+            {
+              "state": "undefined",
+              "parameter": "saveUploadSectionWidget"
+            },
+            {
+              "state": "defined",
+              "parameter": "preprintFileData"
+            },
+            {
+              "state": "defined",
+              "parameter": "preprintFileName"
+            },
+            {
+              "state": "editing",
+              "parameter": "uploadSection"
+            }
+          ]
+        }
+      ],
+      "parameters": {
+        "outputParameter": "preprintFileUrl"
+      },
+      "args": {
+        "section": "upload",
+        "widgetComponent": "button-widget",
+        "description": "Save this section",
+        "actionId": "5db3456b-cef7-4c87-bb60-16a04ee89bad"
+      }
+    },
+    {
+      "then": "cec150d6-0396-49a9-b6cb-8ab375b2d09e",
+      "outputParameter": "preprintFileUrl",
+      "type": "uploadFile",
+      "id": "5db3456b-cef7-4c87-bb60-16a04ee89bad",
+      "parameters": {
+        "file_data": "preprintFileData",
+        "file_name": "preprintFileName",
+        "node": "preprintNode"
+      }
+    },
+    {
+      "args": {
+        "updatedParameter": {
+          "state": [
+            "closed",
+            "saved"
+          ]
+        }
+      },
+      "type": "saveParameter",
+      "id": "cec150d6-0396-49a9-b6cb-8ab375b2d09e",
+      "parameters": {
+        "parameter": "uploadSection"
+      }
+    },
+    {
+      "conitions": [
+        {
+          "all": [
+            {
+              "state": "saved",
+              "parameter": "uploadSection"
+            }
+          ]
+        }
+      ],
+      "type": "deleteWidget",
+      "parameters": {
+        "widget_object": "saveUploadSectionWidget"
+      },
+      "outputParameter": "null"
+    },
+    {
+      "type": "deleteWidget",
+      "outputParameter": "null",
+      "conditions": [
+        {
+          "all": [
+            {
+              "state": "defined",
+              "parameter": "preprintFileUrl"
+            }
+          ]
+        }
+      ],
+      "parameters": {
+        "widgetObject": "saveUploadSectionWidget"
+      }
+    },
+    {
+      "type": "createWidget",
+      "outputParameter": "authorsWidget",
+      "conditions": [
+        {
+          "all": [
+            {
+              "state": "undefined",
+              "parameter": "authorsWidget"
+            }
+          ]
+        }
+      ],
+      "parameters": {
+        "outputParameter": "authorsList"
+      },
+      "args": {
+        "section": "authors",
+        "widgetComponent": "preprint-form-authors",
+        "description": "Add and manage authors"
+      }
+    }
+  ],
+  "initialParameters": {
+    "editUploadSectionWidget": {
+      "state": [
+        "undefined"
+      ],
+      "value": "undefined"
+    },
+    "preprintFileUploadWidget": {
+      "state": [
+        "undefined"
+      ],
+      "value": "undefined"
+    },
+    "preprintTitleWidget": {
+      "state": [
+        "undefined"
+      ],
+      "value": "undefined"
+    },
+    "authorsWidget": {
+      "state": [
+        "undefined"
+      ],
+      "value": "undefined"
+    },
+    "authorsSection": {
+      "state": [
+        "disabled"
+      ],
+      "open": false,
+      "showValidationIndicator": true,
+      "value": "undefined",
+      "allowOpen": true
+    },
+    "submitButton": {
+      "state": [
+        "disabled"
+      ],
+      "open": false,
+      "showValidationIndicator": false,
+      "value": "undefined",
+      "allowOpen": true
+    },
+    "uploadSection": {
+      "state": [
+        "unsaved",
+        "editing"
+      ],
+      "open": true,
+      "showValidationIndicator": true,
+      "value": "undefined",
+      "allowOpen": true
+    },
+    "saveUploadSectionWidget": {
+      "state": [
+        "undefined"
+      ],
+      "value": "undefined"
+    }
+  }
+}
