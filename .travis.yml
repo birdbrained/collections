@@ -1,0 +1,9 @@
+install:
+    - cp ./client/* ./
+    - cp ./client/.* ./
+    - yarn install
+    - bower install
+script:
+    - ember github-pages:commit --message "gh-pages release"
+after_success:
+    - 'HELLO'
