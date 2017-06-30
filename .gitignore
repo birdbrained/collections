@@ -15,6 +15,7 @@ coverage/*
 libpeerconnection.log
 npm-debug.log
 testem.log
+.editorconfig
 
 .python-version
 *.pyc
