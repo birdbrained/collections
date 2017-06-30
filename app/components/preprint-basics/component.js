@@ -12,9 +12,9 @@ const BASICS_VALIDATIONS = buildValidations({
             validator('length', {
                 // currently min of 20 characters -- this is what arXiv has as the minimum length of an abstract
                 min: 20,
-                max: 5000
-            })
-        ]
+                max: 5000,
+            }),
+        ],
     },
     basicsDOI: {
         description: 'DOI',
@@ -23,23 +23,22 @@ const BASICS_VALIDATIONS = buildValidations({
                 // Simplest regex- try not to diverge too much from the backend
                 regex: /\b(10\.\d{4,}(?:\.\d+)*\/\S+(?:(?!["&\'<>])\S))\b/,
                 allowBlank: true,
-                message: 'Please use a valid {description}'
-            })
-        ]
-    }
+                message: 'Please use a valid {description}',
+            }),
+        ],
+    },
 });
 
 const DOI_REGEX = /\b(10\.\d{4,}(?:\.\d+)*\/\S+(?:(?!["&\'<>])\S))\b/;
 
 function doiRegexExec(doi) {
-    //Strips url out of inputted doi, if any.  For example, user input this DOI: https://dx.doi.org/10.12345/hello. Returns 10.12345/hello.
+    // Strips url out of inputted doi, if any.  For example, user input this DOI: https://dx.doi.org/10.12345/hello. Returns 10.12345/hello.
     // If doi invalid, returns doi.
     if (doi) {
         const doiOnly = DOI_REGEX.exec(doi);
         return doiOnly !== null ? doiOnly[0] : doi;
     }
     return doi;
-
 }
 
 /* Does not support editing */
@@ -52,14 +51,14 @@ export default Ember.Component.extend(BASICS_VALIDATIONS, {
     uploadValid: Ember.computed.alias('nodeLocked'), // Once the node has been locked (happens in step one of upload section), users are free to navigate through form unrestricted
     abstractValid: Ember.computed.alias('validations.attrs.basicsAbstract.isValid'),
     doiValid: Ember.computed.alias('validations.attrs.basicsDOI.isValid'),
-    licenseValid: false,     // Must have year and copyrightHolders filled if those are required by the licenseType selected
+    licenseValid: false, // Must have year and copyrightHolders filled if those are required by the licenseType selected
 
     // Basics fields that are being validated are abstract, license and doi (title validated in upload section). If validation added for other fields, expand basicsValid definition.
     basicsValid: Ember.computed.and('abstractValid', 'doiValid', 'licenseValid'),
 
     /* Initial values */
-    basicsAbstract:  Ember.computed('node.description', function() {
-        let node = this.get('node');
+    basicsAbstract: Ember.computed('node.description', function() {
+        const node = this.get('node');
         return node ? node.get('description') : null;
     }),
     basicsTags: Ember.computed('node', function() {
@@ -70,16 +69,16 @@ export default Ember.Component.extend(BASICS_VALIDATIONS, {
     basicsLicense: null,
     savedValues: null,
 
-    basicsChanged:  Ember.observer('savedValues', 'basicsDOI', 'basicsLicense', 'basicsTags.@each', 'basicsAbstract', 'applyLicense', function() {
+    basicsChanged: Ember.observer('savedValues', 'basicsDOI', 'basicsLicense', 'basicsTags.@each', 'basicsAbstract', 'applyLicense', function() {
         let changed = false;
-        let saved = this.get('savedValues');
+        const saved = this.get('savedValues');
         if (saved !== null) {
-            let doiChanged = saved.basicsDOI !== this.get('basicsDOI');
-            let licenseChanged = saved.basicsLicense !== this.get('basicsLicense') && this.get('applyLicense');
-            let abstractChanged = saved.basicsAbstract ? saved.basicsAbstract !== this.get('basicsAbstract') : false;
+            const doiChanged = saved.basicsDOI !== this.get('basicsDOI');
+            const licenseChanged = saved.basicsLicense !== this.get('basicsLicense') && this.get('applyLicense');
+            const abstractChanged = saved.basicsAbstract ? saved.basicsAbstract !== this.get('basicsAbstract') : false;
             let tagsChanged = false;
             if (saved.basicsTags) {
-                tagsChanged = saved.basicsTags.length !== this.get('basicsTags').length || saved.basicsTags.some((v, i) => v !== this.get('basicsTags')[i])
+                tagsChanged = saved.basicsTags.length !== this.get('basicsTags').length || saved.basicsTags.some((v, i) => v !== this.get('basicsTags')[i]);
             }
             changed = doiChanged || licenseChanged || abstractChanged || tagsChanged;
         }
@@ -99,9 +98,9 @@ export default Ember.Component.extend(BASICS_VALIDATIONS, {
         },
         discardBasics() {
             // Discard changes since load or last save
-            let saved = this.get('savedValues');
+            const saved = this.get('savedValues');
 
-            this.set('basicsTags', saved.basicsTags.map(function(a){return a;}) );
+            this.set('basicsTags', saved.basicsTags.map(function(a) { return a; }));
             this.set('basicsAbstract', saved.basicsAbstract);
             this.set('basicsDOI', saved.basicsDOI);
             this.set('basicsLicense', saved.basicsLicense);
@@ -112,16 +111,16 @@ export default Ember.Component.extend(BASICS_VALIDATIONS, {
         },
         stripDOI() {
             // Replaces the inputted doi link with just the doi itself
-            let basicsDOI = this.get('basicsDOI');
+            const basicsDOI = this.get('basicsDOI');
             this.set('basicsDOI', doiRegexExec(basicsDOI));
         },
         editLicense(basicsLicense, licenseValid) {
-           this.setProperties({
-               basicsLicense,
-               licenseValid
-           });
-           this.set('initialLicenseChangeMade', true);
-       },
+            this.setProperties({
+                basicsLicense,
+                licenseValid,
+            });
+            this.set('initialLicenseChangeMade', true);
+        },
         saveBasics() {
             // Saves the description/tags on the node and the DOI on the preprint, then advances to next panel
             if (!this.get('basicsValid')) {
@@ -129,18 +128,18 @@ export default Ember.Component.extend(BASICS_VALIDATIONS, {
             }
 
             // Save locally
-            let values = {
-                basicsDOI:  this.get('basicsDOI'),
+            const values = {
+                basicsDOI: this.get('basicsDOI'),
                 basicLicense: this.get('basicsLicense'),
                 basicsTags: this.get('basicsTags').slice(),
-                basicsAbstract: this.get('basicsAbstract')
+                basicsAbstract: this.get('basicsAbstract'),
             };
             this.set('savedValues', values);
 
             this.get('action')(this).then((result) => {
-                this.attrs.saveParameter(this.attrs.widget.value.parameters.basicInfo ,{
+                this.attrs.saveParameter(this.attrs.widget.value.parameters.basicInfo, {
                     value: this.get('basicsAbstract'),
-                    state: ['defined']
+                    state: ['defined'],
                 });
                 this.set('editMode', false);
                 this.attrs.closeSection(this.get('name'));
@@ -178,19 +177,18 @@ export default Ember.Component.extend(BASICS_VALIDATIONS, {
             //     });
         },
     },
-    init(){
+    init() {
         this._super(...arguments);
-        this.get('store').findRecord('node', ENV.NODE_GUID).then((result)=>{
+        this.get('store').findRecord('node', ENV.NODE_GUID).then((result) => {
             this.set('node', result);
-            let node = this.get('node');
-            let values = {
+            const node = this.get('node');
+            const values = {
                 basicsDOI: null,
                 basicsLicense: null,
                 basicsTags: node.get('tags').map(fixSpecialChar),
-                basicsAbstract: node.get('description')
+                basicsAbstract: node.get('description'),
             };
             this.set('savedValues', values);
         });
-
-    }
+    },
 });

@@ -6,7 +6,7 @@ module('Unit | Helper | min admins');
 
 // Replace this with your real tests.
 test('it works', function(assert) {
-  let result = minAdmins([42]);
-  assert.ok(result);
+    const result = minAdmins([42]);
+    assert.ok(result);
 });
 

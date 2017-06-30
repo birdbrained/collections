@@ -16,12 +16,12 @@ import NavbarAuthDropdown from 'ember-osf/components/navbar-auth-dropdown/compon
  */
 export default NavbarAuthDropdown.extend({
     gravatarUrl: Ember.computed('session.data.authenticated.user', function() {
-        let userData = this.get('session.data.authenticated.user');
-        let imgLink = userData.gravatar;
+        const userData = this.get('session.data.authenticated.user');
+        const imgLink = userData.gravatar;
         return imgLink ? `${imgLink}&s=25` : '';
     }),
     userName: Ember.computed('session.data.authenticated.user', function() {
-        let userData = this.get('session.data.authenticated.user');
+        const userData = this.get('session.data.authenticated.user');
         if (userData) {
             return `${userData.first_name} ${userData.last_name}`;
         }
@@ -29,6 +29,6 @@ export default NavbarAuthDropdown.extend({
     actions: {
         logout() {
             this.get('session').invalidate().catch(() => window.location.href = 'http://localhost:4200/');
-        }
-    }
+        },
+    },
 });

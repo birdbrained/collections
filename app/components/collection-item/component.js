@@ -6,13 +6,13 @@ export default Ember.Component.extend({
     cardView: true,
     item: null,
     selected: false,
-    rowSelected: Ember.computed('organizeMode', 'item.selected', function(){
+    rowSelected: Ember.computed('organizeMode', 'item.selected', function() {
         return this.get('organizeMode') ? this.get('item.selected') : false;
     }),
-    actions : {
+    actions: {
         markSelected (item) {
             this.get('item').toggleProperty('selected');
             this.sendAction('toggleSelectedList', this.get('item.selected'), item);
-        }
-    }
+        },
+    },
 });

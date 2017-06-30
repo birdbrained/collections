@@ -1,10 +1,10 @@
 import Ember from 'ember';
 
-var filters = {
+const filters = {
     'Open Science Framework': 'OSF',
     'Cognitive Sciences ePrint Archive': 'Cogprints',
     OSF: 'OSF Preprints',
-    'Research Papers in Economics': 'RePEc'
+    'Research Papers in Economics': 'RePEc',
 };
 
 /**

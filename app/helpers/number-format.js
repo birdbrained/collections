@@ -11,7 +11,7 @@ import Ember from 'ember';
   * @param {Integer} element
   * @return {String} Return formatted string.
   */
-export function numberFormat(params/*, hash*/) {
+export function numberFormat(params/* , hash*/) {
     const [number] = params;
 
     return number.toLocaleString();

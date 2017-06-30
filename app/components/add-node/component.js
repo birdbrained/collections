@@ -10,32 +10,32 @@ export default Ember.Component.extend({
     findItemError: null,
     results: null,
     showResults: false,
-    displayItemType: Ember.computed('type', function(){
-        return this.get('type') === 'node' ? 'projects' : this.get('type') + 's';
+    displayItemType: Ember.computed('type', function() {
+        return this.get('type') === 'node' ? 'projects' : `${this.get('type')}s`;
     }),
     recordType: Ember.computed('type', function() {
-        var collectionType = this.get('type');
+        const collectionType = this.get('type');
         return (collectionType === 'project' || collectionType === 'preprint') ? 'node' : collectionType;
     }),
 
-    clearFilters(){
+    clearFilters() {
         this.set('searchGuid', '');
         this.set('searchFilter', '');
     },
-    clearView(){
+    clearView() {
         this.set('loadingItem', false);
         this.set('showAddItemDetails', false);
         this.set('findItemError', null);
         this.set('results', null);
         this.set('showResults', false);
     },
-    buildNodeObject (item){
+    buildNodeObject (item) {
         this.get('newItemNode').setProperties({
-            title:  item.get('title'),
+            title: item.get('title'),
             description: item.get('description'),
             type: this.get('type'), // set by the app based on selection of tab
             source_id: item.get('id'),
-            link: item.get('links.html')
+            link: item.get('links.html'),
         });
     },
     didUpdateAttrs () {
@@ -44,16 +44,16 @@ export default Ember.Component.extend({
     },
     actions: {
         findNode () {
-            if(!this.get('searchGuid')){
+            if (!this.get('searchGuid')) {
                 return;
             }
             this.clearView();
             this.set('loadingItem', true);
             // We need to add type variable here because there is no model for project in ember-osf but 'node
-            let type = this.get('type') === 'project' ? 'node' : this.get('type');
-            this.get('store').findRecord(type, this.get('searchGuid')).then(item => {
-                if(this.get('type') === 'preprint'){
-                    item.get('node').then(node => {
+            const type = this.get('type') === 'project' ? 'node' : this.get('type');
+            this.get('store').findRecord(type, this.get('searchGuid')).then((item) => {
+                if (this.get('type') === 'preprint') {
+                    item.get('node').then((node) => {
                         item.set('title', node.get('title'));
                         this.buildNodeObject(node);
                     });
@@ -62,26 +62,25 @@ export default Ember.Component.extend({
                 }
                 this.set('showAddItemDetails', true);
                 this.set('loadingItem', false);
-            }).catch(error => {
+            }).catch((error) => {
                 this.clearView();
                 this.clearFilters();
                 this.set('findItemError', error.errors);
             });
-
         },
-        addItem(node){
-            if(node){
+        addItem(node) {
+            if (node) {
                 this.buildNodeObject(node);
             }
-            let nodeObject = this.get('newItemNode');
-            let item = this.get('store').createRecord('item', {
+            const nodeObject = this.get('newItemNode');
+            const item = this.get('store').createRecord('item', {
                 title: nodeObject.get('title'),
                 type: nodeObject.get('type'),
                 metadata: '',
                 status: 'pending',
                 url: nodeObject.get('link'),
                 source_id: nodeObject.get('source_id'),
-                collection : this.get('model')
+                collection: this.get('model'),
             });
             item.save().then(() => {
                 this.get('transition')('collection.browse', this.get('model.id'));
@@ -90,33 +89,33 @@ export default Ember.Component.extend({
             this.clearFilters();
         },
         searchNode () {
-            let filterText = this.get('searchFilter');
-            if(!filterText){
+            const filterText = this.get('searchFilter');
+            if (!filterText) {
                 return;
             }
             this.clearView();
             this.set('loadingItem', true);
-            let filter = {};
+            const filter = {};
             filter['filter[title]'] = filterText;
-            if(this.get('type') === 'preprint'){
+            if (this.get('type') === 'preprint') {
                 filter['filter[preprint]'] = true;
             }
-            this.get('store').query(this.get('recordType'), filter).then(results => {
+            this.get('store').query(this.get('recordType'), filter).then((results) => {
                 this.set('results', results);
                 this.set('loadingItem', false);
                 this.set('showResults', true);
-            }).catch(error => {
+            }).catch((error) => {
                 this.clearView();
                 this.clearFilters();
                 this.set('findItemError', error.errors);
             });
         },
-        enterPressSearch(){
+        enterPressSearch() {
             this.get('actions').searchNode.call(this);
         },
-        enterPressGuid(){
+        enterPressGuid() {
             this.get('actions').findNode.call(this);
-        }
-    }
+        },
+    },
 
 });

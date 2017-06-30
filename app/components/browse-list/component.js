@@ -6,16 +6,16 @@ export default Ember.Component.extend({
     organizeMode: false,
     groupView: false,
     cardView: true,
-    selectedItems : Ember.A(), // List of items selected for actions like delete
+    selectedItems: Ember.A(), // List of items selected for actions like delete
     showDeleteConfirmation: false, // Modal for deleting items
     showGroupConfirmation: false, // Modal for grouping
     addingGroup: false,
     groupTitle: '',
     // Build list
     groups: Ember.computed('model.groups', function() {
-        if(this.get('groupView')){ return; }
-            let groups = this.get('model.groups');
-            groups.forEach(function(group) {
+        if (this.get('groupView')) { return; }
+        const groups = this.get('model.groups');
+        groups.forEach(function(group) {
             group.set('type', 'group');
         });
         return groups;
@@ -26,11 +26,11 @@ export default Ember.Component.extend({
             this.send('emptySelectedList');
             this.toggleProperty('organizeMode');
         },
-        toggleDeleteConfirmation(){
+        toggleDeleteConfirmation() {
             this.toggleProperty('showDeleteConfirmation');
         },
         clearSelected() {
-            let selected = this.get('selectedItems');
+            const selected = this.get('selectedItems');
             selected.clear();
         },
         clearModals() {
@@ -39,39 +39,39 @@ export default Ember.Component.extend({
             this.set('groupTitle', '');
             this.set('addingGroup', false);
         },
-        deleteSelected(){
-            let items = this.get('list');
-            let selected = this.get('selectedItems');
+        deleteSelected() {
+            const items = this.get('list');
+            const selected = this.get('selectedItems');
             selected.forEach(item =>
                 Ember.run.once(() =>
-                  item.destroyRecord()
-            ));
+                    item.destroyRecord(),
+                ));
             items.removeObjects(selected);
             this.send('clearSelected');
             this.send('clearModals');
             this.send('toggleOrganizeMode');
         },
-        toggleGroupConfirmation ( ){
+        toggleGroupConfirmation () {
             this.toggleProperty('showGroupConfirmation');
         },
-        groupSelected(){
+        groupSelected() {
             this.set('addingGroup', true);
-            let selected = this.get('selectedItems');
+            const selected = this.get('selectedItems');
             // Create new group
-            let newGroup = this.get('store').createRecord('group', {
+            const newGroup = this.get('store').createRecord('group', {
                 title: this.get('groupTitle'),
                 description: '',
-                collection: this.get('model')
+                collection: this.get('model'),
             });
-            newGroup.save().then(record => {
+            newGroup.save().then((record) => {
                 // For each item, set group to new group
-                selected.forEach(item => {
+                selected.forEach((item) => {
                     item.set('group', record);
                     item.save();
                 });
 
                 // remove items that were put into the group;
-                let list = this.get('model.items');
+                const list = this.get('model.items');
                 list.removeObjects(selected);
                 this.send('clearSelected');
                 this.send('clearModals');
@@ -79,20 +79,20 @@ export default Ember.Component.extend({
             });
         },
         // Adds or removes item to the selectedItems list
-        toggleSelectedList(selected, item){
-            let currentList = this.get('selectedItems');
-            if(!selected){
+        toggleSelectedList(selected, item) {
+            const currentList = this.get('selectedItems');
+            if (!selected) {
                 currentList.removeObject(item);
             } else {
                 currentList.addObject(item);
             }
         },
-        emptySelectedList(){
+        emptySelectedList() {
             this.get('selectedItems').clear();
             this.get('list').setEach('selected', false);
         },
         changeView(cardView) {
             this.set('cardView', cardView);
-        }
-    }
+        },
+    },
 });

@@ -11,5 +11,5 @@ export default DS.Model.extend({
     createdBy: DS.belongsTo('user'),
     metadata: DS.attr('string'),
     dateAdded: DS.attr('date'),
-    dateUpdated: DS.attr('date')
+    dateUpdated: DS.attr('date'),
 });

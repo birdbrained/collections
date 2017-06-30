@@ -62,8 +62,8 @@ export default Ember.Component.extend({
 
     tierSorting: ['text:asc'],
     tier1Filtered: Ember.computed('tier1FilterText', '_tier1.[]', function() {
-        let items = this.get('_tier1') || [];
-        let filterText = this.get('tier1FilterText').toLowerCase();
+        const items = this.get('_tier1') || [];
+        const filterText = this.get('tier1FilterText').toLowerCase();
         if (filterText) {
             return items.filter(item => item.get('text').toLowerCase().includes(filterText));
         }
@@ -72,8 +72,8 @@ export default Ember.Component.extend({
     tier1Sorted: Ember.computed.sort('tier1Filtered', 'tierSorting'),
 
     tier2Filtered: Ember.computed('tier2FilterText', '_tier2.[]', function() {
-        let items = this.get('_tier2') || [];
-        let filterText = this.get('tier2FilterText').toLowerCase();
+        const items = this.get('_tier2') || [];
+        const filterText = this.get('tier2FilterText').toLowerCase();
         if (filterText) {
             return items.filter(item => item.get('text').toLowerCase().includes(filterText));
         }
@@ -82,8 +82,8 @@ export default Ember.Component.extend({
     tier2Sorted: Ember.computed.sort('tier2Filtered', 'tierSorting'),
 
     tier3Filtered: Ember.computed('tier3FilterText', '_tier3.[]', function() {
-        let items = this.get('_tier3') || [];
-        let filterText = this.get('tier3FilterText').toLowerCase();
+        const items = this.get('_tier3') || [];
+        const filterText = this.get('tier3FilterText').toLowerCase();
         if (filterText) {
             return items.filter(item => item.get('text').toLowerCase().includes(filterText));
         }
@@ -109,8 +109,8 @@ export default Ember.Component.extend({
         return Ember.$.extend(true, [], this.get('subjects')).reduce((acc, val) => acc.concat(val), []).uniqBy('id');
     }),
 
-    disciplineChanged: Ember.computed('subjects.@each.subject', 'selected.@each.subject', 'disciplineModifiedToggle',  function() {
-        let changed = !(disciplineArraysEqual(subjectIdMap(this.get('subjects')), subjectIdMap(this.get('selected'))));
+    disciplineChanged: Ember.computed('subjects.@each.subject', 'selected.@each.subject', 'disciplineModifiedToggle', function() {
+        const changed = !(disciplineArraysEqual(subjectIdMap(this.get('subjects')), subjectIdMap(this.get('selected'))));
         this.set('isSectionSaved', !changed);
         return changed;
     }),
@@ -122,15 +122,15 @@ export default Ember.Component.extend({
             .then(provider => provider
                 .query('taxonomies', {
                     filter: {
-                        parents
+                        parents,
                     },
                     page: {
-                        size: 100
-                    }
-                })
+                        size: 100,
+                    },
+                }),
             )
             .then(results => this
-                .set(`_tier${tier + 1}`, results.toArray())
+                .set(`_tier${tier + 1}`, results.toArray()),
             );
     },
 
@@ -143,7 +143,7 @@ export default Ember.Component.extend({
 
     setSubjects(subjects) {
         // Sets selected with pending subjects. Does not save.
-        let disciplineModifiedToggle = this.get('disciplineModifiedToggle');
+        const disciplineModifiedToggle = this.get('disciplineModifiedToggle');
         this.set('disciplineModifiedToggle', !disciplineModifiedToggle); // Need to observe if discipline in nested array has changed. Toggling this will force 'disciplineChanged' to be recalculated
         this.set('selected', subjects);
     },
@@ -154,14 +154,13 @@ export default Ember.Component.extend({
             if (subject.length === 1) {
                 index = 0;
             } else {
-                let parent = subject.slice(0, -1);
+                const parent = subject.slice(0, -1);
                 index = this.get('selected').findIndex(item => item !== subject && arrayStartsWith(item, parent));
             }
 
             let wipe = 4; // Tiers to clear
             if (index === -1) {
-                if (this.get(`selection${subject.length}`) === subject[subject.length - 1])
-                    wipe = subject.length + 1;
+                if (this.get(`selection${subject.length}`) === subject[subject.length - 1]) { wipe = subject.length + 1; }
                 subject.removeAt(subject.length - 1);
             } else {
                 this.get('selected').removeAt(this.get('selected').indexOf(subject));
@@ -173,8 +172,8 @@ export default Ember.Component.extend({
             }
 
             for (let i = wipe; i < 4; i++) {
-              this.set(`_tier${i}`, null);
-              this.set(`selection${i}`, null);
+                this.set(`_tier${i}`, null);
+                this.set(`selection${i}`, null);
             }
             this.setSubjects(this.get('selected'));
         },
@@ -186,14 +185,14 @@ export default Ember.Component.extend({
 
             // Inserting the subject lol
             let index = -1;
-            let selection = [...Array(tier).keys()].map(index => this.get(`selection${index + 1}`));
+            const selection = [...Array(tier).keys()].map(index => this.get(`selection${index + 1}`));
 
             // An existing tag has this prefix, and this is the lowest level of the taxonomy, so no need to fetch child results
             if (!(tier !== 3 && this.get('selected').findIndex(item => arrayStartsWith(item, selection)) !== -1)) {
                 for (let i = 0; i < selection.length; i++) {
-                    let sub = selection.slice(0, i + 1);
+                    const sub = selection.slice(0, i + 1);
                     // "deep" equals
-                    index = this.get('selected').findIndex(item => arrayEquals(item, sub));  // jshint ignore:line
+                    index = this.get('selected').findIndex(item => arrayEquals(item, sub)); // jshint ignore:line
 
                     if (index === -1) continue;
 
@@ -201,16 +200,14 @@ export default Ember.Component.extend({
                     break;
                 }
 
-                if (index === -1)
-                    this.get('selected').pushObject(selection);
+                if (index === -1) { this.get('selected').pushObject(selection); }
             }
 
             this.setSubjects(this.get('selected'));
 
             if (tier === 3) return;
 
-            for (let i = tier + 1; i < 4; i++)
-                this.set(`_tier${i}`, null);
+            for (let i = tier + 1; i < 4; i++) { this.set(`_tier${i}`, null); }
 
             // TODO: Fires a network request every time clicking here, instead of only when needed?
             this.querySubjects(selected.id, tier);
@@ -220,12 +217,12 @@ export default Ember.Component.extend({
             this.set('selected', Ember.$.extend(true, [], this.get('subjects')));
         },
         saveSubjects() {
-            let currentSubjects = Ember.$.extend(true, [], this.get('subjects'));
-            let subjectMap = Ember.$.extend(true, [], this.get('selected'));
+            const currentSubjects = Ember.$.extend(true, [], this.get('subjects'));
+            const subjectMap = Ember.$.extend(true, [], this.get('selected'));
             this.get('action')(this).then((result) => {
                 this.attrs.saveParameter(this.attrs.widget.value.parameters.subjects, {
                     value: subjectMap,
-                    state: ['defined']
+                    state: ['defined'],
                 });
                 // Update subjects with selected subjects
                 this.set('subjects', Ember.$.extend(true, [], subjectMap));
@@ -235,6 +232,6 @@ export default Ember.Component.extend({
                     this.sendAction('closeSection', this.get('name'));
                 }
             });
-        }
-    }
+        },
+    },
 });

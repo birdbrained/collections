@@ -6,7 +6,7 @@ module('Unit | Helper | contributor is current user');
 
 // Replace this with your real tests.
 test('it works', function(assert) {
-  let result = contributorIsCurrentUser([42]);
-  assert.ok(result);
+    const result = contributorIsCurrentUser([42]);
+    assert.ok(result);
 });
 

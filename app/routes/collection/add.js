@@ -4,17 +4,17 @@ import Ember from 'ember';
 export default Ember.Route.extend({
     panelActions: Ember.inject.service('panelActions'),
     model() {
-        let collectionSettings = this.modelFor('collection').get('settings');
-        let collectionType = JSON.parse(collectionSettings).collectionType;
-        let preprintForm = {
+        const collectionSettings = this.modelFor('collection').get('settings');
+        const collectionType = JSON.parse(collectionSettings).collectionType;
+        const preprintForm = {
             submissionFormType: collectionType,
             submission_form_name: 'Preprints Submission Form',
             sections: [
-              {name: 'upload', divId: 'preprint-form-upload', param: 'uploadSection'},
-              {name: 'disciplines', divId: 'preprint-form-subjects', param: 'disciplinesSection'},
-              {name: 'basic info', divId: 'preprint-form-basics', param: 'basicInfoSection'},
-              {name: 'authors', divId: 'preprint-form-authors', param: 'authorsSection'},
-              {name: 'submit', divId: 'preprint-form-submit', param: 'submitVutton'}
+                { name: 'upload', divId: 'preprint-form-upload', param: 'uploadSection' },
+                { name: 'disciplines', divId: 'preprint-form-subjects', param: 'disciplinesSection' },
+                { name: 'basic info', divId: 'preprint-form-basics', param: 'basicInfoSection' },
+                { name: 'authors', divId: 'preprint-form-authors', param: 'authorsSection' },
+                { name: 'submit', divId: 'preprint-form-submit', param: 'submitVutton' },
             ],
             initialParameters: {
                 uploadSection: {
@@ -23,7 +23,7 @@ export default Ember.Route.extend({
                     open: true,
                     showValidationIndicator: true,
                     value: undefined,
-                    isSectionSaved: false
+                    isSectionSaved: false,
                 },
                 disciplinesSection: {
                     state: ['disabled'],
@@ -31,7 +31,7 @@ export default Ember.Route.extend({
                     open: false,
                     showValidationIndicator: true,
                     value: undefined,
-                    isSectionSaved: false
+                    isSectionSaved: false,
                 },
                 basicInfoSection: {
                     state: ['disabled'],
@@ -39,15 +39,15 @@ export default Ember.Route.extend({
                     open: false,
                     showValidationIndicator: true,
                     value: undefined,
-                    isSectionSaved: false
+                    isSectionSaved: false,
                 },
                 authorsSection: {
-                    state:  ['disabled'],
+                    state: ['disabled'],
                     allowOpen: true,
                     open: false,
                     showValidationIndicator: true,
                     value: undefined,
-                    isSectionSaved: false
+                    isSectionSaved: false,
                 },
                 submitButton: {
                     state: ['disabled'],
@@ -55,56 +55,56 @@ export default Ember.Route.extend({
                     open: false,
                     showValidationIndicator: false,
                     value: undefined,
-                    isSectionSaved: false
+                    isSectionSaved: false,
                 },
                 preprintFileUploadWidget: {
                     state: ['undefined'],
-                    value: undefined
+                    value: undefined,
                 },
                 preprintTitleWidget: {
                     state: ['undefined'],
-                    value: undefined
+                    value: undefined,
                 },
                 preprintFileUrl: {
                     state: ['undefined'],
-                    value: undefined
+                    value: undefined,
                 },
                 saveUploadSectionWidget: {
                     state: ['undefined'],
-                    value: undefined
+                    value: undefined,
                 },
                 subjectPickerWidget: {
                     state: ['undefined'],
-                    value: undefined
+                    value: undefined,
                 },
                 basicInfoWidget: {
                     state: ['undefined'],
-                    value: undefined
+                    value: undefined,
                 },
                 authorsWidget: {
                     state: ['undefined'],
-                    value: undefined
+                    value: undefined,
                 },
                 fileUrlMissingNotice: {
                     state: ['undefined'],
-                    value: undefined
+                    value: undefined,
                 },
                 editUploadSectionWidget: {
                     state: ['undefined'],
-                    value: undefined
+                    value: undefined,
                 },
                 saveAuthorsSectionWidget: {
                     state: ['undefined'],
-                    value: undefined
+                    value: undefined,
                 },
                 editAuthorsSectionWidget: {
                     state: ['undefined'],
-                    value: undefined
+                    value: undefined,
                 },
                 submitButtonWidget: {
                     state: ['undefined'],
-                    value: undefined
-                }
+                    value: undefined,
+                },
             },
             initialWidgets: [],
             actions: [{
@@ -126,9 +126,9 @@ export default Ember.Route.extend({
                         state: 'unsaved',
                     }, {
                         parameter: 'preprintFileUploadWidget',
-                        state: 'undefined'
-                    }]
-                }]
+                        state: 'undefined',
+                    }],
+                }],
             }, {
                 id: 'c6e5a8ff-e1e9-49fe-8ee4-7d12d2fb56dd',
                 type: 'createWidget',
@@ -138,7 +138,7 @@ export default Ember.Route.extend({
                     section: 'upload',
                 },
                 parameters: {
-                    output: 'preprintFileName'
+                    output: 'preprintFileName',
                 },
                 outputParameter: 'preprintTitleWidget',
                 conditions: [{
@@ -152,7 +152,7 @@ export default Ember.Route.extend({
                         parameter: 'uploadSection',
                         state: 'editing',
                     }],
-                }]
+                }],
             }, {
                 id: '99e941be-3fae-41d7-b481-89764a1561b6',
                 type: 'createWidget',
@@ -161,7 +161,7 @@ export default Ember.Route.extend({
                     description: 'Edit this section',
                     section: 'upload',
                     cssClasses: ['section-submit-button'],
-                    actionId: '28fe8c59-fab7-4a0c-8e7e-38a5176ae34d'
+                    actionId: '28fe8c59-fab7-4a0c-8e7e-38a5176ae34d',
                 },
                 parameters: {
                     outputParameter: 'uploadSection',
@@ -176,23 +176,23 @@ export default Ember.Route.extend({
                         state: 'defined',
                     }, {
                         parameter: 'preprintFileName',
-                        state: 'defined'
+                        state: 'defined',
                     }, {
                         parameter: 'uploadSection',
                         state: 'closed',
                     }],
-                }]
+                }],
             }, {
                 id: '28fe8c59-fab7-4a0c-8e7e-38a5176ae34d',
                 type: 'saveParameter',
                 args: {
                     updatedParameter: {
-                        state: ['editing', 'saved']
-                    }
+                        state: ['editing', 'saved'],
+                    },
                 },
                 parameters: {
-                    parameter: 'uploadSection'
-                }
+                    parameter: 'uploadSection',
+                },
             }, {
                 id: '5d46c582-7335-43cc-bf15-fb30ba52a39c',
                 type: 'createWidget',
@@ -201,7 +201,7 @@ export default Ember.Route.extend({
                     description: 'Save and continue',
                     section: 'upload',
                     cssClasses: ['section-submit-button'],
-                    actionId: '5db3456b-cef7-4c87-bb60-16a04ee89bad'
+                    actionId: '5db3456b-cef7-4c87-bb60-16a04ee89bad',
                 },
                 parameters: {
                     parameter: 'preprintFileUrl',
@@ -216,19 +216,19 @@ export default Ember.Route.extend({
                         state: 'defined',
                     }, {
                         parameter: 'preprintFileName',
-                        state: 'defined'
+                        state: 'defined',
                     }, {
                         parameter: 'uploadSection',
                         state: 'editing',
                     }],
-                }]
+                }],
             }, {
                 id: '5db3456b-cef7-4c87-bb60-16a04ee89bad',
                 type: 'uploadFile',
                 parameters: {
                     fileData: 'preprintFileData',
                     fileName: 'preprintFileName',
-                    node: 'preprintNode'
+                    node: 'preprintNode',
                 },
                 outputParameter: 'preprintFileUrl',
                 then: 'cec150d6-0396-49a9-b6cb-8ab375b2d09e',
@@ -237,33 +237,33 @@ export default Ember.Route.extend({
                 type: 'saveParameter',
                 args: {
                     updatedParameter: {
-                        state: ['closed', 'saved']
-                    }
+                        state: ['closed', 'saved'],
+                    },
                 },
                 parameters: {
-                    parameter: 'uploadSection'
+                    parameter: 'uploadSection',
                 },
-                then: 'cdefb5db-2486-4466-8c1c-5d24ffd7e6ab'
+                then: 'cdefb5db-2486-4466-8c1c-5d24ffd7e6ab',
             }, {
                 id: 'cdefb5db-2486-4466-8c1c-5d24ffd7e6ab',
                 type: 'closeSection',
                 args: {
-                    sectionName: 'upload'
+                    sectionName: 'upload',
                 },
-                then: '7fb38183-d1f2-41a2-aef5-1bc99743762e'
+                then: '7fb38183-d1f2-41a2-aef5-1bc99743762e',
             }, {
                 id: '7fb38183-d1f2-41a2-aef5-1bc99743762e',
                 type: 'disableWidget',
                 parameters: {
-                    widgetObject: 'saveUploadSectionWidget'
+                    widgetObject: 'saveUploadSectionWidget',
                 },
-                then: '6606b697-9a53-4fc7-aab6-898a2904c579'
+                then: '6606b697-9a53-4fc7-aab6-898a2904c579',
             }, {
                 id: '6606b697-9a53-4fc7-aab6-898a2904c579',
                 type: 'openSection',
                 args: {
-                    sectionName: 'disciplines'
-                }
+                    sectionName: 'disciplines',
+                },
             }, {
                 id: '2726a848-6240-4e24-8492-6aab673f1f6d',
                 type: 'createWidget',
@@ -271,30 +271,30 @@ export default Ember.Route.extend({
                     widgetComponent: 'subject-picker',
                     description: 'Save this section',
                     section: 'disciplines',
-                    actionId: 'a11388e0-c3b2-488a-a100-60de46172adf'
+                    actionId: 'a11388e0-c3b2-488a-a100-60de46172adf',
                 },
                 parameters: {
-                    subjects: 'selectedSubjects'
+                    subjects: 'selectedSubjects',
                 },
                 outputParameter: 'subjectPickerWidget',
                 conditions: [{
                     all: [{
                         parameter: 'subjectPickerWidget',
-                        state: 'undefined'
-                    }]
-                }]
+                        state: 'undefined',
+                    }],
+                }],
             }, {
                 id: 'a11388e0-c3b2-488a-a100-60de46172adf',
                 type: 'openSection',
                 args: {
-                    sectionName: 'basic info'
+                    sectionName: 'basic info',
                 },
-                then: '39cb9157-617e-404a-ac1d-77e9d273b478'
+                then: '39cb9157-617e-404a-ac1d-77e9d273b478',
             }, {
                 id: '39cb9157-617e-404a-ac1d-77e9d273b478',
                 type: 'closeSection',
                 args: {
-                    sectionName: 'disciplines'
+                    sectionName: 'disciplines',
                 },
             }, {
                 id: '9ac6cdb6-1ae4-47ad-b25b-7f7f8d627265',
@@ -303,41 +303,41 @@ export default Ember.Route.extend({
                     widgetComponent: 'preprint-basics',
                     description: 'License and other things',
                     section: 'basic info',
-                    actionId: '886cde3c-9e25-4950-b02f-832fad8923cc'
+                    actionId: '886cde3c-9e25-4950-b02f-832fad8923cc',
                 },
                 parameters: {
-                    basicInfo: 'basicInfo'
+                    basicInfo: 'basicInfo',
                 },
                 outputParameter: 'basicInfoWidget',
                 conditions: [{
                     all: [{
                         parameter: 'basicInfoWidget',
-                        state: 'undefined'
-                    }]
-                }]
+                        state: 'undefined',
+                    }],
+                }],
             }, {
                 id: '886cde3c-9e25-4950-b02f-832fad8923cc',
                 type: 'closeSection',
                 args: {
-                    sectionName: 'basic info'
+                    sectionName: 'basic info',
                 },
-                then: '1eaae481-1a80-4dfe-9c12-1a7f7383c1a7'
+                then: '1eaae481-1a80-4dfe-9c12-1a7f7383c1a7',
             }, {
                 id: '1eaae481-1a80-4dfe-9c12-1a7f7383c1a7',
                 type: 'openSection',
                 args: {
-                    sectionName: 'authors'
-                }
+                    sectionName: 'authors',
+                },
             }, {
                 id: 'd82139b4-4975-4410-92d1-ab0dee02b4e8',
                 type: 'createWidget',
                 args: {
                     widgetComponent: 'paragraph-display',
                     description: 'The preprint\'s file has not yet been uploaded.',
-                    section: 'submit'
+                    section: 'submit',
                 },
                 parameters: {
-                    outputParameter: 'null'
+                    outputParameter: 'null',
                 },
                 outputParameter: 'fileUrlMissingNotice',
                 conditions: [{
@@ -346,19 +346,19 @@ export default Ember.Route.extend({
                         state: 'undefined',
                     }, {
                         parameter: 'preprintFileUrl',
-                        state: 'undefined'
-                    }]
-                }]
+                        state: 'undefined',
+                    }],
+                }],
             }, {
                 id: 'a91f560f-b8c1-4087-be3b-3490c2861f24',
                 type: 'createWidget',
                 args: {
                     widgetComponent: 'preprint-form-authors',
                     description: 'Add and manage authors',
-                    section: 'authors'
+                    section: 'authors',
                 },
                 parameters: {
-                    authorsList: 'authorsList'
+                    authorsList: 'authorsList',
                 },
                 outputParameter: 'authorsWidget',
                 conditions: [{
@@ -366,7 +366,7 @@ export default Ember.Route.extend({
                         parameter: 'authorsWidget',
                         state: 'undefined',
                     }],
-                }]
+                }],
             }, {
                 id: '7231cc6f-b861-439e-a628-a01fe0a20587',
                 type: 'createWidget',
@@ -375,7 +375,7 @@ export default Ember.Route.extend({
                     cssClasses: ['section-submit-button'],
                     description: 'Save and continue',
                     section: 'authors',
-                    actionId: '60d11fd0-c2da-4fdd-9d08-0310aa17a3e4'
+                    actionId: '60d11fd0-c2da-4fdd-9d08-0310aa17a3e4',
                 },
                 parameters: {
                     parameter: 'authorsSection',
@@ -387,9 +387,9 @@ export default Ember.Route.extend({
                         state: 'undefined',
                     }, {
                         parameter: 'authorsSection',
-                        state: 'editing'
+                        state: 'editing',
                     }],
-                }]
+                }],
             }, {
                 id: '60d11fd0-c2da-4fdd-9d08-0310aa17a3e4',
                 type: 'createWidget',
@@ -398,40 +398,40 @@ export default Ember.Route.extend({
                     description: 'Edit this section',
                     cssClasses: ['section-submit-button'],
                     section: 'authors',
-                    actionId: '0dcc508a-9946-437a-a0b2-73c7f88aa2fe'
+                    actionId: '0dcc508a-9946-437a-a0b2-73c7f88aa2fe',
                 },
                 parameters: {
                     parameter: 'authorsSection',
                 },
                 outputParameter: 'editAuthorsSectionWidget',
-                then: '3f5d1d8e-a01c-4c22-bbba-c7d5ad385a88'
+                then: '3f5d1d8e-a01c-4c22-bbba-c7d5ad385a88',
             }, {
                 id: '3f5d1d8e-a01c-4c22-bbba-c7d5ad385a88',
                 type: 'deleteWidget',
                 parameters: {
-                    widgetObject: 'saveAuthorsSectionWidget'
+                    widgetObject: 'saveAuthorsSectionWidget',
                 },
-                then: '18db45c2-029e-4c0a-b662-69a6a14d3d3d'
+                then: '18db45c2-029e-4c0a-b662-69a6a14d3d3d',
             }, {
                 id: '18db45c2-029e-4c0a-b662-69a6a14d3d3d',
                 type: 'closeSection',
                 args: {
-                    sectionName: 'authors'
-                }
+                    sectionName: 'authors',
+                },
             }, {
                 id: '0dcc508a-9946-437a-a0b2-73c7f88aa2fe',
                 type: 'openSection',
                 args: {
-                    sectionName: 'authors'
+                    sectionName: 'authors',
                 },
-                then: '1cf0323c-72c5-4344-b238-f3d8c5bd7b63'
+                then: '1cf0323c-72c5-4344-b238-f3d8c5bd7b63',
             }, {
                 id: '1cf0323c-72c5-4344-b238-f3d8c5bd7b63',
                 type: 'deleteWidget',
                 parameters: {
-                    widgetObject: 'editAuthorsSectionWidget'
+                    widgetObject: 'editAuthorsSectionWidget',
                 },
-                then: '7231cc6f-b861-439e-a628-a01fe0a20587'
+                then: '7231cc6f-b861-439e-a628-a01fe0a20587',
             }, {
                 id: '1d4bcab7-c454-450d-95c5-113d89121f89',
                 type: 'createWidget',
@@ -441,31 +441,31 @@ export default Ember.Route.extend({
                     description: 'Submit',
                     disabled: 'true',
                     cssClasses: ['submit_button', 'btn-lg', 'btn-success'],
-                    actionId: 'afa2e526-ea5f-47f7-a99d-459536e24fd1'
+                    actionId: 'afa2e526-ea5f-47f7-a99d-459536e24fd1',
                 },
                 conditions: [{
                     all: [{
                         parameter: 'submitButtonWidget',
-                        state: 'undefined'
-                    }]
+                        state: 'undefined',
+                    }],
                 }],
-                outputParameter: 'submitButtonWidget'
+                outputParameter: 'submitButtonWidget',
             }, {
                 id: 'afa2e526-ea5f-47f7-a99d-459536e24fd1',
                 type: 'browserAlert',
                 args: {
-                    alertString: 'FORM SUBMITTTED'
-                }
+                    alertString: 'FORM SUBMITTTED',
+                },
             }, {
                 id: 'a58fcc41-ed0c-43ab-a765-d83cb36f6a9b',
                 type: 'saveParameter',
                 args: {
                     updatedParameter: {
-                        state: ['enabled']
-                    }
+                        state: ['enabled'],
+                    },
                 },
                 parameters: {
-                    parameter: 'submitButton'
+                    parameter: 'submitButton',
                 },
                 conditions: [{
                     all: [{
@@ -473,38 +473,38 @@ export default Ember.Route.extend({
                         state: 'defined',
                     }, {
                         parameter: 'submitButton',
-                        state: 'disabled'
+                        state: 'disabled',
                     }, {
                         parameter: 'preprintFileUrl',
-                        state: 'defined'
+                        state: 'defined',
                     }, {
                         parameter: 'selectedSubjects',
                         state: 'defined',
                     }, {
                         parameter: 'basicInfo',
-                        state: 'defined'
+                        state: 'defined',
                     }, {
                         parameter: 'authorsList',
-                        state: 'defined'
-                    }]
+                        state: 'defined',
+                    }],
                 }],
                 outputParameter: 'null',
-                then: '60edeef7-189c-4189-b44a-157b79ce88ef'
+                then: '60edeef7-189c-4189-b44a-157b79ce88ef',
             }, {
                 id: '60edeef7-189c-4189-b44a-157b79ce88ef',
                 type: 'enableWidget',
                 parameters: {
-                    widgetObject: 'submitButtonWidget'
+                    widgetObject: 'submitButtonWidget',
                 },
-            }]
+            }],
         };
-        let meetingForm = {
+        const meetingForm = {
             submissionFormType: collectionType,
             submission_form_name: 'Meeting Submission Form',
             sections: [
-              {name: 'upload', divId: 'preprint-form-upload', param: 'upload_section'},
-              {name: 'authors', divId: 'preprint-form-authors', param: 'authors_section'},
-              {name: 'submit', divId: 'preprint-form-submit', param: 'submit_button'}
+                { name: 'upload', divId: 'preprint-form-upload', param: 'upload_section' },
+                { name: 'authors', divId: 'preprint-form-authors', param: 'authors_section' },
+                { name: 'submit', divId: 'preprint-form-submit', param: 'submit_button' },
             ],
             initial_parameters: {
                 upload_section: {
@@ -512,42 +512,42 @@ export default Ember.Route.extend({
                     allowOpen: true,
                     open: true,
                     showValidationIndicator: true,
-                    value: undefined
+                    value: undefined,
                 },
                 authors_section: {
-                    state:  ['disabled'],
+                    state: ['disabled'],
                     allowOpen: true,
                     open: false,
                     showValidationIndicator: true,
-                    value: undefined
+                    value: undefined,
                 },
                 submit_button: {
                     state: ['disabled'],
                     allowOpen: true,
                     open: false,
                     showValidationIndicator: false,
-                    value: undefined
+                    value: undefined,
                 },
                 preprint_file_upload_widget: {
                     state: ['undefined'],
-                    value: undefined
+                    value: undefined,
                 },
                 preprint_title_widget: {
                     state: ['undefined'],
-                    value: undefined
+                    value: undefined,
                 },
                 save_upload_section_widget: {
                     state: ['undefined'],
-                    value: undefined
+                    value: undefined,
                 },
                 authors_widget: {
                     state: ['undefined'],
-                    value: undefined
+                    value: undefined,
                 },
                 edit_upload_section_widget: {
                     state: ['undefined'],
-                    value: undefined
-                }
+                    value: undefined,
+                },
             },
             initial_widgets: [],
             actions: [{
@@ -558,7 +558,7 @@ export default Ember.Route.extend({
                     section: 'upload',
                 },
                 parameters: {
-                    output_parameter: 'preprint_file_data'
+                    output_parameter: 'preprint_file_data',
                 },
                 output_parameter: 'preprint_file_upload_widget',
                 conditions: [{
@@ -567,9 +567,9 @@ export default Ember.Route.extend({
                         state: 'unsaved',
                     }, {
                         parameter: 'preprint_file_upload_widget',
-                        state: 'undefined'
-                    }]
-                }]
+                        state: 'undefined',
+                    }],
+                }],
             }, {
                 type: 'create_widget',
                 args: {
@@ -578,7 +578,7 @@ export default Ember.Route.extend({
                     section: 'upload',
                 },
                 parameters: {
-                    output_parameter: 'preprint_file_name'
+                    output_parameter: 'preprint_file_name',
                 },
                 output_parameter: 'preprint_title_widget',
                 conditions: [{
@@ -592,14 +592,14 @@ export default Ember.Route.extend({
                         parameter: 'upload_section',
                         state: 'editing',
                     }],
-                }]
+                }],
             }, {
                 type: 'create_widget',
                 args: {
                     widget_component: 'button-widget',
                     description: 'Edit this section',
                     section: 'upload',
-                    action_id: '28fe8c59-fab7-4a0c-8e7e-38a5176ae34d'
+                    action_id: '28fe8c59-fab7-4a0c-8e7e-38a5176ae34d',
                 },
                 parameters: {
                     output_parameter: 'upload_section',
@@ -614,30 +614,30 @@ export default Ember.Route.extend({
                         state: 'defined',
                     }, {
                         parameter: 'preprint_file_name',
-                        state: 'defined'
+                        state: 'defined',
                     }, {
                         parameter: 'upload_section',
                         state: 'closed',
                     }],
-                }]
+                }],
             }, {
                 id: '28fe8c59-fab7-4a0c-8e7e-38a5176ae34d',
                 type: 'saveParameter',
                 args: {
                     updated_parameter: {
-                        state: ['editing', 'saved']
-                    }
+                        state: ['editing', 'saved'],
+                    },
                 },
                 parameters: {
-                    parameter: 'upload_section'
-                }
+                    parameter: 'upload_section',
+                },
             }, {
                 type: 'create_widget',
                 args: {
                     widget_component: 'button-widget',
                     description: 'Save this section',
                     section: 'upload',
-                    action_id: '5db3456b-cef7-4c87-bb60-16a04ee89bad'
+                    action_id: '5db3456b-cef7-4c87-bb60-16a04ee89bad',
                 },
                 parameters: {
                     output_parameter: 'preprint_file_url',
@@ -652,19 +652,19 @@ export default Ember.Route.extend({
                         state: 'defined',
                     }, {
                         parameter: 'preprint_file_name',
-                        state: 'defined'
+                        state: 'defined',
                     }, {
                         parameter: 'upload_section',
                         state: 'editing',
                     }],
-                }]
+                }],
             }, {
                 id: '5db3456b-cef7-4c87-bb60-16a04ee89bad',
                 type: 'upload_file',
                 parameters: {
                     file_data: 'preprint_file_data',
                     file_name: 'preprint_file_name',
-                    node: 'preprint_node'
+                    node: 'preprint_node',
                 },
                 output_parameter: 'preprint_file_url',
                 then: 'cec150d6-0396-49a9-b6cb-8ab375b2d09e',
@@ -673,58 +673,58 @@ export default Ember.Route.extend({
                 type: 'saveParameter',
                 args: {
                     updated_parameter: {
-                        state: ['closed', 'saved']
-                    }
+                        state: ['closed', 'saved'],
+                    },
                 },
                 parameters: {
-                    parameter: 'upload_section'
-                }
+                    parameter: 'upload_section',
+                },
             }, {
                 type: 'delete_widget',
                 parameters: {
-                    widget_object: 'save_upload_section_widget'
+                    widget_object: 'save_upload_section_widget',
                 },
                 output_parameter: 'null',
                 conitions: [{
                     all: [{
                         parameter: 'upload_section',
                         state: 'saved',
-                    }]
-                }]
+                    }],
+                }],
             }, {
                 type: 'delete_widget',
                 parameters: {
-                    widget_object: 'save_upload_section_widget'
+                    widget_object: 'save_upload_section_widget',
                 },
                 output_parameter: 'null',
                 conditions: [{
                     all: [{
                         parameter: 'preprint_file_url',
-                        state: 'defined'
-                    }]
-                }]
+                        state: 'defined',
+                    }],
+                }],
             }, {
                 type: 'create_widget',
                 args: {
                     widget_component: 'preprint-form-authors',
                     description: 'Add and manage authors',
-                    section: 'authors'
+                    section: 'authors',
                 },
                 parameters: {
-                    output_parameter: 'authors_list'
+                    output_parameter: 'authors_list',
                 },
                 output_parameter: 'authors_widget',
                 conditions: [{
                     all: [{
                         parameter: 'authors_widget',
                         state: 'undefined',
-                    }
+                    },
                     ],
-                }]
-            }]
+                }],
+            }],
 
         };
-        debugger;
+
         if (collectionType === 'Preprint') {
             return preprintForm;
         } else if (collectionType === 'Meeting') {
@@ -744,7 +744,6 @@ export default Ember.Route.extend({
 
         // Start the engine.
         controller.updateState.call(controller, actions);
-
-    }
+    },
 
 });

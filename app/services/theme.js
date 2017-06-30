@@ -28,8 +28,7 @@ export default Ember.Service.extend({
     provider: Ember.computed('id', function() {
         const id = this.get('id');
 
-        if (!id)
-            return;
+        if (!id) { return; }
 
         return this
             .get('store')
@@ -75,8 +74,7 @@ export default Ember.Service.extend({
     stylesheet: Ember.computed('id', function() {
         const id = this.get('id');
 
-        if (!id)
-            return;
+        if (!id) { return; }
 
         const prefix = this.get('isDomain') ? '' : '/preprints';
         const suffix = config.ASSET_SUFFIX ? `-${config.ASSET_SUFFIX}` : '';
@@ -100,7 +98,7 @@ export default Ember.Service.extend({
     signupUrl: Ember.computed('id', function() {
         const query = Ember.$.param({
             campaign: `${this.get('id')}-preprints`,
-            next: window.location.href
+            next: window.location.href,
         });
 
         return `${config.OSF.url}register?${query}`;

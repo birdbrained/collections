@@ -6,7 +6,7 @@ module('Unit | Helper | min bibliographic');
 
 // Replace this with your real tests.
 test('it works', function(assert) {
-  let result = minBibliographic([42]);
-  assert.ok(result);
+    const result = minBibliographic([42]);
+    assert.ok(result);
 });
 

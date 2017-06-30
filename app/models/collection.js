@@ -9,5 +9,5 @@ export default DS.Model.extend({
     dateUpdated: DS.attr('date'),
     settings: DS.attr('object'),
     groups: DS.hasMany('group'),
-    items: DS.hasMany('items')
+    items: DS.hasMany('items'),
 });

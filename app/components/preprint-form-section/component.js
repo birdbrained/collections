@@ -38,7 +38,7 @@ export default CpPanelComponent.extend({
 
     trackOpenState: Ember.observer('isOpen', function() {
         // Whenever panel is opened (via any means), update the hasOpened state to reflect this fact
-        let isOpen = this.get('isOpen');
+        const isOpen = this.get('isOpen');
         if (isOpen) {
             this.set('hasOpened', true);
         }
@@ -83,7 +83,7 @@ export default CpPanelComponent.extend({
         if (!this.get('isOpen')) {
             if (this.get('allowOpen')) {
                 // Crude mechanism to prevent opening a panel if conditions are not met
-                //Ember.get(this, 'metrics')
+                // Ember.get(this, 'metrics')
                 //    .trackEvent({
                 //        category: 'div',
                 //        action: 'click',

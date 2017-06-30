@@ -1,1 +1,3 @@
-extends: airbnb-base
+root: true
+extends:
+    - cos-ember

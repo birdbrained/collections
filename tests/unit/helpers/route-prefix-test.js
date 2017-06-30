@@ -6,7 +6,7 @@ module('Unit | Helper | route prefix');
 
 // Replace this with your real tests.
 test('it works', function(assert) {
-  let result = routePrefix([42]);
-  assert.ok(result);
+    const result = routePrefix([42]);
+    assert.ok(result);
 });
 

@@ -25,20 +25,20 @@ export default Ember.Component.extend(NodeActionsMixin, {
     parentContributors: Ember.A(),
     searchResults: Ember.A(), // defaults, need update
     editMode: 'Submit', // defaults, need update
-    parentNode: null,// defaults, need update
+    parentNode: null, // defaults, need update
     isAdmin: true, // defaults, need update
     canEdit: true, // defaults, need update
     node: null,
-    contributors: Ember.computed('node', function(){
-        let contribs = this.get('node.contributors');
+    contributors: Ember.computed('node', function() {
+        const contribs = this.get('node.contributors');
         this.attrs.saveParameter(this.attrs.widget.value.parameters.authorsList, {
             value: contribs,
-            state: ['defined']
-        })
+            state: ['defined'],
+        });
         return contribs;
     }),
     valid: Ember.observer('contributors.length', function() {
-        let hasContributors = this.get('contributors.length');
+        const hasContributors = this.get('contributors.length');
         this.set('isSectionSaved', hasContributors);
         return hasContributors;
     }),
@@ -49,7 +49,7 @@ export default Ember.Component.extend(NodeActionsMixin, {
     parentContributorsAdded: false,
     // Returns list of user ids associated with current node
     currentContributorIds: Ember.computed('contributors', function() {
-        let contribIds = [];
+        const contribIds = [];
         this.get('contributors').forEach(contrib => contribIds.push(contrib.get('userId')));
         return contribIds;
     }),
@@ -67,28 +67,28 @@ export default Ember.Component.extend(NodeActionsMixin, {
     query: null,
     // Total contributor search results
     totalSearchResults: Ember.computed('searchResults.[]', function() {
-        let searchResults = this.get('searchResults');
+        const searchResults = this.get('searchResults');
         if (searchResults && searchResults.links) {
             return searchResults.meta.pagination.total;
         } else {
-            return;
+
         }
     }),
     // Total pages of contributor search results
     pages: Ember.computed('searchResults.[]', function() {
-        let searchResults = this.get('searchResults');
+        const searchResults = this.get('searchResults');
         if (searchResults && searchResults.links) {
             return searchResults.meta.total;
         } else {
-            return;
+
         }
     }),
-    init(){
+    init() {
         this._super(...arguments);
         this.get('store').findRecord('node', ENV.NODE_GUID)
             .then(result => this.set('node', result));
     },
-    elementsLoaded: Ember.observer('isOpen', function(){
+    elementsLoaded: Ember.observer('isOpen', function() {
         if (this.get('isOpen')) {
             Ember.run.once(this.get('applyPopovers').bind(this));
         }
@@ -104,10 +104,10 @@ export default Ember.Component.extend(NodeActionsMixin, {
     findContributors(query, page) {
         return this.get('store').query('user', {
             filter: {
-                'full_name,given_name,middle_names,family_name': query
+                'full_name,given_name,middle_names,family_name': query,
             },
-            page: page
-        }).then(contributors => {
+            page,
+        }).then((contributors) => {
             this.set('searchResults', contributors);
             return contributors;
         }).catch(() => {
@@ -125,8 +125,8 @@ export default Ember.Component.extend(NodeActionsMixin, {
     */
     highlightSuccessOrFailure(elementId, context, status) {
         const highlightClass = `${status === 'success' ? 'success' : 'error'}Highlight`;
-        context.$('#' + elementId).addClass(highlightClass);
-        Ember.run.later(() => context.$('#' + elementId).removeClass(highlightClass), 2000);
+        context.$(`#${elementId}`).addClass(highlightClass);
+        Ember.run.later(() => context.$(`#${elementId}`).removeClass(highlightClass), 2000);
     },
 
     actions: {
@@ -146,8 +146,8 @@ export default Ember.Component.extend(NodeActionsMixin, {
         // Adds all contributors from parent project to current component as long as they are not current contributors
         addContributorsFromParentProject() {
             this.set('parentContributorsAdded', true);
-            let contributorsToAdd = Ember.A();
-            this.get('parentContributors').toArray().forEach(contributor => {
+            const contributorsToAdd = Ember.A();
+            this.get('parentContributors').toArray().forEach((contributor) => {
                 if (this.get('currentContributorIds').indexOf(contributor.get('userId')) === -1) {
                     contributorsToAdd.push({
                         permission: contributor.get('permission'),
@@ -157,8 +157,8 @@ export default Ember.Component.extend(NodeActionsMixin, {
                 }
             });
             this.get('actions.addContributors').call(this, contributorsToAdd, this.get('sendEmail'))
-                .then(contributors => {
-                    contributors.map(contrib => {
+                .then((contributors) => {
+                    contributors.map((contrib) => {
                         this.get('contributors').pushObject(contrib);
                     });
                     this.toggleAuthorModification();
@@ -171,8 +171,8 @@ export default Ember.Component.extend(NodeActionsMixin, {
         // Should wait to transition until request has completed.
         addUnregisteredContributor(fullName, email) {
             if (fullName && email) {
-                let res = this.get('actions.addContributor').call(this, null, 'write', true, this.get('sendEmail'), fullName, email, true);
-                res.then(contributor => {
+                const res = this.get('actions.addContributor').call(this, null, 'write', true, this.get('sendEmail'), fullName, email, true);
+                res.then((contributor) => {
                     this.get('contributors').pushObject(contributor);
                     this.toggleAuthorModification();
                     this.set('addState', 'searchView');
@@ -180,7 +180,7 @@ export default Ember.Component.extend(NodeActionsMixin, {
                     this.set('email', '');
                     this.get('toast').success(this.get('i18n').t('submit.preprint_unregistered_author_added'));
                     this.highlightSuccessOrFailure(contributor.id, this, 'success');
-                }, error => {
+                }, (error) => {
                     if (error.errors[0] && error.errors[0].detail && error.errors[0].detail.indexOf('is already a contributor') > -1) {
                         this.get('toast').error(error.errors[0].detail);
                     } else {
@@ -192,7 +192,7 @@ export default Ember.Component.extend(NodeActionsMixin, {
         },
         // Requests a particular page of user results
         findContributors(page) {
-            let query = this.get('query');
+            const query = this.get('query');
             if (query) {
                 this.findContributors(query, page)
                     .then(() => this.set('addState', 'searchView'), () => {
@@ -257,9 +257,9 @@ export default Ember.Component.extend(NodeActionsMixin, {
         // Reorders contributors in UI then sends server request to reorder contributors. If request fails, reverts
         // contributor list in UI back to original.
         reorderItems(itemModels, draggedContrib) {
-            let originalOrder = this.get('contributors');
+            const originalOrder = this.get('contributors');
             this.set('contributors', itemModels);
-            let newIndex = itemModels.indexOf(draggedContrib);
+            const newIndex = itemModels.indexOf(draggedContrib);
             this.get('actions.reorderContributors').call(this, draggedContrib, newIndex, itemModels).then(() => {
                 this.highlightSuccessOrFailure(draggedContrib.id, this, 'success');
             }, () => {
@@ -271,23 +271,23 @@ export default Ember.Component.extend(NodeActionsMixin, {
         },
         // Action used by the pagination-pager component to the handle user-click event.
         pageChanged(current) {
-            let query = this.get('query');
+            const query = this.get('query');
             if (query) {
                 this.findContributors(query, current).then(() => {
                     this.set('addState', 'searchView');
                     this.set('currentPage', current);
                 })
-                .catch(() => {
+                    .catch(() => {
                         this.get('toast').error('Could not perform search query.');
                         this.highlightSuccessOrFailure('author-search-box', this, 'error');
                     });
             }
-        }
+        },
     },
-    applyPopovers(){
+    applyPopovers() {
         this.$('#permissions-popover').popover({
-          container: 'body',
-          content: '<dl>' +
+            container: 'body',
+            content: '<dl>' +
           '<dt>Read</dt>' +
           '<dd><ul><li>View preprint</li></ul></dd>' +
           '<dt>Read + Write</dt>' +
@@ -298,17 +298,17 @@ export default Ember.Component.extend(NodeActionsMixin, {
           '<li>Read and write privileges</li>' +
           '<li>Manage authors</li>' +
           '<li>Public-private settings</li></ul></dd>' +
-          '</dl>'
+          '</dl>',
         });
         this.$('#bibliographic-popover').popover({
-          container: 'body',
-          content: 'Only checked authors will be included in preprint citations. ' +
-          'Authors not in the citation can read and modify the preprint as normal.'
+            container: 'body',
+            content: 'Only checked authors will be included in preprint citations. ' +
+          'Authors not in the citation can read and modify the preprint as normal.',
         });
         this.$('#author-popover').popover({
-          container: 'body',
-          content: 'Preprints must have at least one registered administrator and one author showing in the citation at all times.  ' +
-          'A registered administrator is a user who has both confirmed their account and has administrator privileges.'
+            container: 'body',
+            content: 'Preprints must have at least one registered administrator and one author showing in the citation at all times.  ' +
+          'A registered administrator is a user who has both confirmed their account and has administrator privileges.',
         });
     },
 
@@ -324,5 +324,5 @@ export default Ember.Component.extend(NodeActionsMixin, {
     others, depending on what requests are permitted */
     toggleAuthorModification() {
         this.toggleProperty('authorModification');
-    }
+    },
 });

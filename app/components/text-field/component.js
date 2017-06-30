@@ -3,9 +3,9 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
-    description: "Enter a title for the preprint.",
+    description: 'Enter a title for the preprint.',
 
-    didReceiveAttrs: function() {
+    didReceiveAttrs() {
         this.set('description', this.attrs.description);
     },
 
@@ -14,7 +14,7 @@ export default Ember.Component.extend({
         const parameters = this.attrs.widget.value.parameters;
         saveParameter(parameters.output, {
             state: ['defined'],
-            value: this.get('textFieldValue')
+            value: this.get('textFieldValue'),
         });
     }),
 

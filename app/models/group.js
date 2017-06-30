@@ -8,5 +8,5 @@ export default DS.Model.extend({
     createdBy: DS.belongsTo('user'),
     dateCreated: DS.attr('date'),
     dateUpdated: DS.attr('date'),
-    items: DS.hasMany('item')
+    items: DS.hasMany('item'),
 });

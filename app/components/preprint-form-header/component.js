@@ -42,5 +42,5 @@ export default CpPanelToggleComponent.extend({
         }
     }),
     // CSS controls icon color and display. If neither valid nor invalid state applies, don't show icon.
-    classNameBindings: ['enabled::disabled', 'valid:valid', 'invalid:invalid', 'isValidationActive::not-validated']
+    classNameBindings: ['enabled::disabled', 'valid:valid', 'invalid:invalid', 'isValidationActive::not-validated'],
 });

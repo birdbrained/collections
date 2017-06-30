@@ -15,9 +15,9 @@ import Ember from 'ember';
   * @return {Boolean} Return if matches a filter.
   */
 export function ifFilter(params) {
-    let [element, filter, intersection] = params;
+    const [element, filter, intersection] = params;
     if (intersection) {
-        let match = element.filter(each => filter.includes(each));
+        const match = element.filter(each => filter.includes(each));
         return match.length;
     }
     if ((typeof filter === 'object')) {

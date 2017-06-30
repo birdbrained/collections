@@ -6,7 +6,7 @@ module('Unit | Helper | permission to remove contributor');
 
 // Replace this with your real tests.
 test('it works', function(assert) {
-  let result = permissionToRemoveContributor([42]);
-  assert.ok(result);
+    const result = permissionToRemoveContributor([42]);
+    assert.ok(result);
 });
 

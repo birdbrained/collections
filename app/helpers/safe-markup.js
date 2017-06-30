@@ -12,7 +12,7 @@ import Ember from 'ember';
   * @param {string} string
   * @return {Object} Returns Handlebars.SafeString
   */
-export function safeMarkup(params/*, hash*/) {
+export function safeMarkup(params/* , hash*/) {
     return Ember.String.htmlSafe(params.join(''));
 }
 

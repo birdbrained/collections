@@ -1,5 +1,6 @@
 // This component is derived from ember-cp-validations. See https://github.com/offirgolan/ember-cp-validations for more information
 import Ember from 'ember';
+
 const {
     isEmpty,
     computed,
@@ -19,7 +20,7 @@ export default Ember.Component.extend({
 
     init() {
         this._super(...arguments);
-        var valuePath = this.get('valuePath');
+        const valuePath = this.get('valuePath');
         defineProperty(this, 'validation', computed.oneWay(`model.validations.attrs.${valuePath}`));
         defineProperty(this, 'value', computed.alias(`model.${valuePath}`));
     },
@@ -48,6 +49,6 @@ export default Ember.Component.extend({
     actions: {
         pressSubmit() {
             this.sendAction('pressSubmit');
-        }
-    }
+        },
+    },
 });

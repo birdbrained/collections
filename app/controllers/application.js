@@ -6,6 +6,6 @@ export default Ember.Controller.extend({
     actions: {
         login() {
             this.get('session').authenticate('authenticator:osf-token');
-        }
-    }
+        },
+    },
 });

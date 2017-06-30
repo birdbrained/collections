@@ -15,7 +15,7 @@ export default DS.JSONAPIAdapter.extend({
         return this._super(url, method, hash);
     },
     buildURL() {
-        var base = this._super(...arguments);
+        const base = this._super(...arguments);
         return `${base}/`;
-    }
+    },
 });

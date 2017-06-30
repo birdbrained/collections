@@ -6,7 +6,7 @@ module('Unit | Helper | slice array');
 
 // Replace this with your real tests.
 test('it works', function(assert) {
-  let result = sliceArray([42]);
-  assert.ok(result);
+    const result = sliceArray([42]);
+    assert.ok(result);
 });
 

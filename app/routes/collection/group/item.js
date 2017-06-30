@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-    model (params){
-        return this.store.findRecord('item', params['group_item_id']);
-    }
+    model (params) {
+        return this.store.findRecord('item', params.group_item_id);
+    },
 });

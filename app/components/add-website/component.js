@@ -11,16 +11,16 @@ export default Ember.Component.extend({
         this.set('urlAddress', '');
         this.set('urlDescription', '');
     },
-    actions:{
-        addWebsite (){
-            let item = this.get('store').createRecord('item', {
+    actions: {
+        addWebsite () {
+            const item = this.get('store').createRecord('item', {
                 title: this.get('urlTitle'),
                 type: 'website',
                 metadata: this.get('urlDescription'),
                 status: 'pending',
                 url: this.get('urlAddress'),
                 source_id: this.get('urlAddress'),
-                collection : this.get('model')
+                collection: this.get('model'),
             });
             item.save().then(() => {
                 this.get('transition')('collection.browse', this.get('model.id'));
@@ -28,6 +28,6 @@ export default Ember.Component.extend({
                 this.set('urlSaveErrors', error.errors);
             });
             this.clearInputs();
-        }
-    }
+        },
+    },
 });
