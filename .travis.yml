@@ -1,6 +1,6 @@
 install:
-    - cp ./client/* ./
-    - cp ./client/.* ./
+    - cp -r ./client/* ./
+    - cp -r ./client/.* ./
     - yarn install
     - bower install
 script:
