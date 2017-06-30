@@ -1,0 +1,122 @@
+{
+  "collectionType": "preprint",
+  "branding": {
+    "colors": {
+      "primary": "#286090",
+      "secondary": "#eeeeee",
+      "background": "#214661",
+      "backgroundText": "#ffffff"
+    },
+    "logo": {
+      "label": "OSF Preprints",
+      "url": "https://osf.io/preprints/assets/img/preprints-logo-bb26fbaa227c1fc8b5cc6f8c7d1705e69c18bfd9.png",
+      "height": "70px"
+    }
+  },
+  "layout": [{
+    "type": "landing-hero",
+    "title": "OSF Preprints",
+    "tagline": "The open preprint repository network",
+    "data": null,
+    "settings": {
+      "useLogo": true
+    }
+  }, {
+    "type": "landing-list",
+    "title": "Subjects",
+    "data": "subjects",
+    "settings": null
+  }, {
+    "type": "landing-board",
+    "title": "Steering Committee",
+    "data": "people",
+    "settings": null
+  }, {
+    "type": "landing-copyright",
+    "title": null,
+    "data": "links",
+    "settings": null
+  }],
+  "data": {
+    "subjects": [{
+      "name": "Architecture",
+      "label": "Architectural Engineering, Construction Engineering, Environmental Design, Interior Architecture, Landscape Architecture",
+      "link": "/preprints/socarxiv/discover?subject=Arts%20and%20Humanities"
+    }, {
+      "name": "Business",
+      "label": "Accounting, Finance and Financial Management, Human Resource Management, Marketing, Taxation",
+      "link": "/preprints/socarxiv/discover?subject=Arts%20and%20Humanities"
+    }, {
+      "name": "Engineering",
+      "label": "Biomedical Engineering and Bioengineering, Chemical Engineering, Civil and Environmental Engineering, Electrical and Computer Engineering, Mechanical Engineering",
+      "link": "/preprints/socarxiv/discover?subject=Arts%20and%20Humanities"
+    }, {
+      "name": "Life Sciences",
+      "label": "Agriculture, Genetics and Genomics, Microbiology, Physiology, Zoology",
+      "link": "/preprints/socarxiv/discover?subject=Arts%20and%20Humanities"
+    }, {
+      "name": "Physical Sciences and Mathematics",
+      "label": "Chemistry, Computer Sciences, Earth Sciences, Physics, Statistics and Probability",
+      "link": "/preprints/socarxiv/discover?subject=Arts%20and%20Humanities"
+    }, {
+      "name": "Arts and Humanities",
+      "label": "Fine Arts, History, Music, Philosophy, Religion",
+      "link": "/preprints/socarxiv/discover?subject=Arts%20and%20Humanities"
+    }, {
+      "name": "Education",
+      "label": "Curriculum and Instruction, Educational Administration and Supervision, Educational Leadership, Higher Education, Liberal Studies",
+      "link": "/preprints/socarxiv/discover?subject=Arts%20and%20Humanities"
+    }, {
+      "name": "Law",
+      "label": "Civil Law, Criminal Law, Legislation, State and Local Government Law, Supreme Court of the United States",
+      "link": "/preprints/socarxiv/discover?subject=Arts%20and%20Humanities"
+    }, {
+      "name": "Medicine and Health Sciences",
+      "label": "Anatomy, Diseases, Medical Sciences, Public Health, Veterinary Medicine",
+      "link": "/preprints/socarxiv/discover?subject=Arts%20and%20Humanities"
+    }, {
+      "name": "Social and Behavioral Sciences",
+      "label": "Anthropology, Economics, Political Science, Psychology, Sociology",
+      "link": "/preprints/socarxiv/discover?subject=Arts%20and%20Humanities"
+    }],
+    "people": [{
+      "firstName": "Daniela",
+      "lastName": "Le Blanc",
+      "institution": "University of Connecticut"
+    },
+    {
+      "firstName": "George",
+      "lastName": "Chen",
+      "institution": "University of Virginia"
+    },
+    {
+      "firstName": "Bashar",
+      "lastName": "Mahmoudi",
+      "institution": "Cairo University"
+    },
+    {
+      "firstName": "James",
+      "lastName": "Aberdeen",
+      "institution": "University of York"
+    },{
+      "firstName": "Gloria",
+      "lastName": "von Devitt",
+      "institution": "California Institute of Technology"
+    }],
+    "links": [{
+      "label": "Support",
+      "url": "/support"
+    }, {
+      "label": "Contact",
+      "url": "/contact"
+    }, {
+      "label": "Twitter",
+      "url": "/twitter/somearchive",
+      "icon": "fa-twitter"
+    },{
+      "label": "Facebook",
+      "url": "/facebook/somearchive",
+      "icon": "fa-facebook"
+    }]
+  }
+}

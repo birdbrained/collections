@@ -1,0 +1,94 @@
+{
+  "collectionType": "preprint",
+  "branding": {
+    "colors": {
+      "primary": "#215264",
+      "secondary": "#eeeeee",
+      "background": "#e14b5a",
+      "backgroundText": "#ffffff"
+    },
+    "logo": {
+      "label": "socarxiv",
+      "url": "https://osf.io/preprints/assets/img/provider_logos/socarxiv-small-bb26fbaa227c1fc8b5cc6f8c7d1705e69c18bfd9.png",
+      "height": "140px"
+    }
+  },
+  "layout": [{
+    "type": "landing-hero",
+    "title": "You can override collection title here",
+    "tagline": "Open archive of the social sciences",
+    "data": null,
+    "settings": {
+      "useLogo": true
+    }
+  }, {
+    "type": "landing-list",
+    "title": "Subjects",
+    "data": "subjects",
+    "settings": null
+  }, {
+    "type": "landing-board",
+    "title": "Steering Committee",
+    "data": "people",
+    "settings": null
+  }, {
+    "type": "landing-copyright",
+    "title": null,
+    "data": "links",
+    "settings": null
+  }],
+  "data": {
+      "subjects": [{
+        "name": "Arts and Humanities",
+        "label": "Fine Arts, History, Music, Philosophy, Religion",
+        "link": "/preprints/socarxiv/discover?subject=Arts%20and%20Humanities"
+      }, {
+        "name": "Education",
+        "label": "Curriculum and Instruction, Educational Administration and Supervision, Educational Leadership, Higher Education, Liberal Studies",
+        "link": "/preprints/socarxiv/discover?subject=Arts%20and%20Humanities"
+      }, {
+        "name": "Law",
+        "label": "Civil Law, Criminal Law, Legislation, State and Local Government Law, Supreme Court of the United States",
+        "link": "/preprints/socarxiv/discover?subject=Arts%20and%20Humanities"
+      }, {
+        "name": "Social and Behavioral Sciences",
+        "label": "Anthropology, Economics, Political Science, Psychology, Sociology",
+        "link": "/preprints/socarxiv/discover?subject=Arts%20and%20Humanities"
+      }],
+    "people": [{
+      "firstName": "Maria",
+      "lastName": "Gonzales",
+      "institution": "University of North Carolina at Chapel Hill"
+    },
+    {
+      "firstName": "James",
+      "lastName": "Brown",
+      "institution": "University of California San Diego"
+    },
+    {
+      "firstName": "Jamal",
+      "lastName": "Beckett",
+      "institution": "Purdue University"
+    },
+    {
+      "firstName": "Andrea",
+      "lastName": "Schumer",
+      "institution": "Free University Berlin"
+    },{
+      "firstName": "Shauntel",
+      "lastName": "Rogers",
+      "institution": "Harvard University"
+    }],
+    "links": [{
+      "label": "Support",
+      "url": "/support"
+    }, {
+      "label": "Contact",
+      "url": "/contact"
+    }, {
+      "label": "Twitter",
+      "url": "/twitter/somearchive",
+      "icon": "fa-twitter"
+    }]
+  }
+}
