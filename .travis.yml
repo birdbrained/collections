@@ -1,6 +1,5 @@
 install:
-    - cp -r ./client/* ./
-    - cp -r ./client/.* ./
+    - cd client
     - yarn install
     - bower install
 script:
