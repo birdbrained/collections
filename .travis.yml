@@ -1,24 +1,27 @@
----
 language: node_js
 node_js:
-  - "4"
+    - "4"
 
 sudo: false
 
 cache:
-  directories:
-    - node_modules
+    directories:
+        - node_modules
 
 before_install:
-  - npm config set spin false
-  - npm install -g bower
-  - bower --version
-  - npm install phantomjs-prebuilt
-  - node_modules/phantomjs-prebuilt/bin/phantomjs --version
+    - npm config set spin false
+    - npm install -g bower
+    - bower --version
+    - npm install phantomjs-prebuilt
+    - node_modules/phantomjs-prebuilt/bin/phantomjs --version
 
 install:
-  - npm install
-  - bower install
-
+    - npm install
+    - bower install
+    - yarn install
+    - bower install
 script:
-  - npm test
+    - npm test
+after_success:
+    - ember github-pages:commit --message "gh-pages release"
+    - 'HELLdO'
