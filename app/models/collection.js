@@ -1,13 +1,20 @@
 import DS from 'ember-data';
 
-export default DS.Model.extend({
-    title: DS.attr('string'),
-    description: DS.attr('string'),
-    tags: DS.attr('string'),
-    createdBy: DS.belongsTo('user'),
-    dateCreated: DS.attr('date'),
-    dateUpdated: DS.attr('date'),
-    settings: DS.attr('object'),
-    groups: DS.hasMany('group'),
-    items: DS.hasMany('items'),
+const {
+    Model,
+    attr,
+    hasMany,
+    blenogsTo,
+} = DS;
+
+export default Model.extend({
+    title: attr('string'),
+    description: attr('string'),
+    tags: attr('string'),
+    createdBy: belongsTo('user'),
+    dateCreated: attr('date'),
+    dateUpdated: attr('date'),
+    settings: attr('object'),
+    groups: hasMany('group'),
+    items: hasMany('items'),
 });

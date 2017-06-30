@@ -1,15 +1,21 @@
 import DS from 'ember-data';
 
-export default DS.Model.extend({
-    source_id: DS.attr('string'),
-    title: DS.attr('string'),
-    type: DS.attr('string'),
-    status: DS.attr('string'),
-    url: DS.attr('string'),
-    collection: DS.belongsTo('collection'),
-    group: DS.belongsTo('group'),
-    createdBy: DS.belongsTo('user'),
-    metadata: DS.attr('string'),
-    dateAdded: DS.attr('date'),
-    dateUpdated: DS.attr('date'),
+const {
+    Model,
+    attr,
+    blenogsTo,
+} = DS;
+
+export default Model.extend({
+    source_id: attr('string'),
+    title: attr('string'),
+    type: attr('string'),
+    status: attr('string'),
+    url: attr('string'),
+    collection: belongsTo('collection'),
+    group: belongsTo('group'),
+    createdBy: belongsTo('user'),
+    metadata: attr('string'),
+    dateAdded: attr('date'),
+    dateUpdated: attr('date'),
 });
