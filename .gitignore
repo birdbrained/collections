@@ -1,25 +1,26 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # compiled output
-client/dist
-client/tmp
+dist
+tmp
 
 # dependencies
-client/node_modules
-client/bower_components
+node_modules
+bower_components
 
 # misc
-client/.sass-cache
-client/connect.lock
-client/coverage/*
-client/libpeerconnection.log
-client/npm-debug.log
-client/testem.log
+.sass-cache
+connect.lock
+coverage/*
+libpeerconnection.log
+npm-debug.log
+testem.log
+.editorconfig
 
 .python-version
 *.pyc
 local.py
-client/config/local.yaml
+config/local.yaml
 db.sqlite3
 local.yml
 0001_initial.py
