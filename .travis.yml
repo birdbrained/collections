@@ -24,7 +24,7 @@ install:
     - yarn install
     - bower install
 script:
-    - yarn test:cover
+    - yarn test
 after_success:
     - ember github-pages:commit --message "gh-pages release"
     - 'HELLdO'
