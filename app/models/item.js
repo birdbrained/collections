@@ -3,7 +3,7 @@ import DS from 'ember-data';
 const {
     Model,
     attr,
-    blenogsTo,
+    belongsTo,
 } = DS;
 
 export default Model.extend({
