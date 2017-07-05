@@ -4,7 +4,7 @@ const {
     Model,
     attr,
     hasMany,
-    blenogsTo,
+    belongsTo,
 } = DS;
 
 export default Model.extend({

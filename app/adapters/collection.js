@@ -1,13 +1,13 @@
 import Ember from 'ember';
 import DS from 'ember-data';
 
+const { JSONAPIAdapter } = DS;
 
-export default DS.JSONAPIAdapter.extend({
+export default JSONAPIAdapter.extend({
     session: Ember.inject.service(),
     host: 'http://localhost:8000',
     namespace: 'api',
     ajax(url, method, hash) {
-        hash = hash || {};
         hash.crossOrigin = true;
         hash.xhrFields = { withCredentials: true };
         hash.headers = hash.headers || {};

@@ -9,7 +9,7 @@ export default Ember.Component.extend({
 
     buttonString: 'Save',
 
-    widgetClasses: ['section-submit-button'],
+    widgetClasses: ['section-submit-button'], // eslint-disable-line
     widgetClassString: Ember.computed('widgetClasses', function() {
         const classes = this.get('widgetClasses');
         if (classes === undefined ||
