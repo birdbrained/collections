@@ -1,47 +1,38 @@
 import Ember from 'ember';
 
-export default Ember.Component.extend({
-    newItemNode: Ember.Object.create(),
-    store: Ember.inject.service(),
+const {
+    Component,
+    inject,
+    computed,
+} = Ember;
+
+export default Component.extend({
+
+    store: inject.service(),
+
+    showResults: false,
     searchGuid: '',
     searchFilter: '',
     loadingItem: false,
     showAddItemDetails: false,
     findItemError: null,
     results: null,
-    showResults: false,
-    displayItemType: Ember.computed('type', function() {
+
+    newItemNode: Ember.Object.create(),
+
+    displayItemType: computed('type', function() {
         return this.get('type') === 'node' ? 'projects' : `${this.get('type')}s`;
     }),
-    recordType: Ember.computed('type', function() {
+    recordType: computed('type', function() {
         const collectionType = this.get('type');
         return (collectionType === 'project' || collectionType === 'preprint') ? 'node' : collectionType;
     }),
 
-    clearFilters() {
-        this.set('searchGuid', '');
-        this.set('searchFilter', '');
-    },
-    clearView() {
-        this.set('loadingItem', false);
-        this.set('showAddItemDetails', false);
-        this.set('findItemError', null);
-        this.set('results', null);
-        this.set('showResults', false);
-    },
-    buildNodeObject (item) {
-        this.get('newItemNode').setProperties({
-            title: item.get('title'),
-            description: item.get('description'),
-            type: this.get('type'), // set by the app based on selection of tab
-            source_id: item.get('id'),
-            link: item.get('links.html'),
-        });
-    },
     didUpdateAttrs () {
         this.clearView();
         this.clearFilters();
     },
+
     actions: {
         findNode () {
             if (!this.get('searchGuid')) {
@@ -49,7 +40,8 @@ export default Ember.Component.extend({
             }
             this.clearView();
             this.set('loadingItem', true);
-            // We need to add type variable here because there is no model for project in ember-osf but 'node
+            // We need to add type variable here because there is no
+            // model for project in ember-osf but 'node
             const type = this.get('type') === 'project' ? 'node' : this.get('type');
             this.get('store').findRecord(type, this.get('searchGuid')).then((item) => {
                 if (this.get('type') === 'preprint') {
@@ -118,4 +110,24 @@ export default Ember.Component.extend({
         },
     },
 
+    clearFilters() {
+        this.set('searchGuid', '');
+        this.set('searchFilter', '');
+    },
+    clearView() {
+        this.set('loadingItem', false);
+        this.set('showAddItemDetails', false);
+        this.set('findItemError', null);
+        this.set('results', null);
+        this.set('showResults', false);
+    },
+    buildNodeObject (item) {
+        this.get('newItemNode').setProperties({
+            title: item.get('title'),
+            description: item.get('description'),
+            type: this.get('type'), // set by the app based on selection of tab
+            source_id: item.get('id'),
+            link: item.get('links.html'),
+        });
+    },
 });

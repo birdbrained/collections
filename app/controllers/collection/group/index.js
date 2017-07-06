@@ -3,8 +3,8 @@ import Ember from 'ember';
 export default Ember.Controller.extend({
     organizeMode: false,
     cardView: true,
-    selectedItems: Ember.A(),
     showDeleteItemConfirmation: false, // Modal for deleting items
+    selectedItems: Ember.A(),
     actions: {
         clearSelected() {
             const selected = this.get('selectedItems');

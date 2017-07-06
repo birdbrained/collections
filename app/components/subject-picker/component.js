@@ -21,7 +21,8 @@ function subjectIdMap(subjectArray) {
 }
 
 function arrayEquals(arr1, arr2) {
-    return arr1.length === arr2.length && arr1.reduce((acc, val, i) => acc && val === arr2[i], true);
+    return arr1.length === arr2.length
+        && arr1.reduce((acc, val, i) => acc && val === arr2[i], true);
 }
 
 function arrayStartsWith(arr, prefix) {
@@ -60,7 +61,7 @@ export default Ember.Component.extend({
     tier2FilterText: '',
     tier3FilterText: '',
 
-    tierSorting: ['text:asc'],
+    tierSorting: ['text:asc'], // eslint-disable-line ember/avoid-leaking-state-in-components
     tier1Filtered: Ember.computed('tier1FilterText', '_tier1.[]', function() {
         const items = this.get('_tier1') || [];
         const filterText = this.get('tier1FilterText').toLowerCase();
@@ -109,11 +110,16 @@ export default Ember.Component.extend({
         return Ember.$.extend(true, [], this.get('subjects')).reduce((acc, val) => acc.concat(val), []).uniqBy('id');
     }),
 
-    disciplineChanged: Ember.computed('subjects.@each.subject', 'selected.@each.subject', 'disciplineModifiedToggle', function() {
-        const changed = !(disciplineArraysEqual(subjectIdMap(this.get('subjects')), subjectIdMap(this.get('selected'))));
-        this.set('isSectionSaved', !changed);
-        return changed;
-    }),
+    disciplineChanged: Ember.computed(
+        'subjects.@each.subject',
+        'selected.@each.subject',
+        'disciplineModifiedToggle',
+        function() {
+            const changed = !(disciplineArraysEqual(subjectIdMap(this.get('subjects')), subjectIdMap(this.get('selected'))));
+            this.set('isSectionSaved', !changed);
+            return changed;
+        },
+    ),
 
     editMode: false,
 
@@ -144,7 +150,9 @@ export default Ember.Component.extend({
     setSubjects(subjects) {
         // Sets selected with pending subjects. Does not save.
         const disciplineModifiedToggle = this.get('disciplineModifiedToggle');
-        this.set('disciplineModifiedToggle', !disciplineModifiedToggle); // Need to observe if discipline in nested array has changed. Toggling this will force 'disciplineChanged' to be recalculated
+        // Need to observe if discipline in nested array has changed.
+        // Toggling this will force 'disciplineChanged' to be recalculated
+        this.set('disciplineModifiedToggle', !disciplineModifiedToggle);
         this.set('selected', subjects);
     },
 
@@ -160,7 +168,7 @@ export default Ember.Component.extend({
 
             let wipe = 4; // Tiers to clear
             if (index === -1) {
-                if (this.get(`selection${subject.length}`) === subject[subject.length - 1]) { wipe = subject.length + 1; }
+                if (this.get(`selection${subject.length}`) === subject[subject.length - 1]) wipe = subject.length + 1;
                 subject.removeAt(subject.length - 1);
             } else {
                 this.get('selected').removeAt(this.get('selected').indexOf(subject));
@@ -178,7 +186,7 @@ export default Ember.Component.extend({
             this.setSubjects(this.get('selected'));
         },
         select(selected, tier) {
-            tier = parseInt(tier);
+            tier = parseInt(tier, 10);
             if (this.get(`selection${tier}`) === selected) return;
 
             this.set(`selection${tier}`, selected);
@@ -217,9 +225,8 @@ export default Ember.Component.extend({
             this.set('selected', Ember.$.extend(true, [], this.get('subjects')));
         },
         saveSubjects() {
-            const currentSubjects = Ember.$.extend(true, [], this.get('subjects'));
             const subjectMap = Ember.$.extend(true, [], this.get('selected'));
-            this.get('action')(this).then((result) => {
+            this.get('action')(this).then(() => {
                 this.attrs.saveParameter(this.attrs.widget.value.parameters.subjects, {
                     value: subjectMap,
                     state: ['defined'],

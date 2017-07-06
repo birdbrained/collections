@@ -3,13 +3,9 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
-    didReceiveAttrs() {
-        this.set('widgetClasses', this.attrs.widget.value.cssClasses);
-    },
-
     buttonString: 'Save',
 
-    widgetClasses: ['section-submit-button'], // eslint-disable-line
+    widgetClasses: ['section-submit-button'], // eslint-disable-line ember/avoid-leaking-state-in-components
     widgetClassString: Ember.computed('widgetClasses', function() {
         const classes = this.get('widgetClasses');
         if (classes === undefined ||
@@ -19,6 +15,10 @@ export default Ember.Component.extend({
         }
         return classes.join(' ');
     }),
+
+    didReceiveAttrs() {
+        this.set('widgetClasses', this.attrs.widget.value.cssClasses);
+    },
 
     actions: {
         async pressButton() {

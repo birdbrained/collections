@@ -26,7 +26,8 @@ module.exports = function(environment) {
         },
         PREPRINTS: {
             defaultProvider: 'osf',
-            // Logos are needed for open graph sharing meta tags (Facebook, LinkedIn, etc) and must be at least 200x200
+            // Logos are needed for open graph sharing meta tags (Facebook, LinkedIn, etc)
+            // and must be at least 200x200
             providers: [
                 // OSF must be the first provider
                 {

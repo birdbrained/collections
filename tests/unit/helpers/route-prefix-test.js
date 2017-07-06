@@ -1,12 +1,16 @@
 
 import { routePrefix } from 'collections/helpers/route-prefix';
-import { module, test } from 'qunit';
+import { moduleFor, test } from 'ember-qunit';
 
-module('Unit | Helper | route prefix');
+moduleFor('helper:route-prefix', 'Unit | Helper | route prefix', {
+    needs: [
+        'service:theme',
+    ],
+});
 
 // Replace this with your real tests.
-test('it works', function(assert) {
-    const result = routePrefix([42]);
-    assert.ok(result);
+test('no provider has no prefix', function(assert) {
+    const result = routePrefix(['a', 'b', 'c']);
+    assert.ok(result === 'abc');
 });
 

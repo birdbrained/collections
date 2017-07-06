@@ -1,6 +1,7 @@
 import Ember from 'ember';
-import ENV from '../config/environment';
 import BaseAuthenticator from 'ember-simple-auth/authenticators/base';
+
+import ENV from '../config/environment';
 
 export default BaseAuthenticator.extend({
     session: Ember.inject.service(),
@@ -28,7 +29,10 @@ export default BaseAuthenticator.extend({
                 response = response.data.attributes;
                 if (!response || !response.token) {
                     if (redirectToLogin) {
-                        return window.location = `${ENV.apiBaseUrl}/accounts/osf/login/?${Ember.$.param({ next: 'http://localhost:4200/' })}`;
+                        window.location = `${ENV.apiBaseUrl
+                        }/accounts/osf/login/?${
+                            Ember.$.param({ next: 'http://localhost:4200/' })}`;
+                        return window.location;
                     }
                     reject('not logged in');
                 } else {

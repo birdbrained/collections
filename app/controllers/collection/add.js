@@ -3,26 +3,27 @@ import ENV from '../../config/environment';
 
 
 function createCookie(name, value, days) {
+    let expires;
     if (days) {
         const date = new Date();
         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-        var expires = `; expires=${date.toGMTString()}`;
-    } else var expires = '';
+        expires = `; expires=${date.toGMTString()}`;
+    } else expires = '';
     document.cookie = `${name}=${value}${expires}; path=/`;
 }
 
-function readCookie(name) {
+function readCookie(name) { // eslint-disable-line no-unused-vars
     const nameEQ = `${name}=`;
     const ca = document.cookie.split(';');
     for (let i = 0; i < ca.length; i++) {
         let c = ca[i];
-        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
-        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
     }
     return null;
 }
 
-function eraseCookie(name) {
+function eraseCookie(name) { // eslint-disable-line no-unused-vars
     createCookie(name, '', -1);
 }
 
@@ -38,30 +39,166 @@ function getToken() {
     }
 }
 
+// Engine helper functions.
+// ////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+function conditionDispatcher(condition) {
+    const parameters = this.get('parameters');
+
+    // Check if its a regular condition
+    if (condition.parameter !== undefined) {
+        // actualy check the condition is met;
+        // the parameter has to have the given state.
+        if (parameters[condition.parameter] === undefined) {
+            parameters[condition.parameter] = {};
+        }
+        if (parameters[condition.parameter].state === undefined) {
+            parameters[condition.parameter].state = [];
+        }
+        const parameterState = parameters[condition.parameter].state;
+        // check that the state exists for this item
+        return parameterState.some(stateItem => stateItem === condition.state);
+    }
+
+    // Check if its an 'all' composite condition
+    if (condition.all !== undefined &&
+        condition.all.constructor === Array
+    ) {
+        // if any conditions fail, the whole check fails.
+        return checkAll.call(this, condition.all); // eslint-disable-line no-use-before-define
+    }
+
+    // Check if its an 'any' composite condition
+    if (condition.any !== undefined &&
+        condition.any.constructor === Array
+    ) {
+        // if any conditions are met, the whole check passes.
+        return checkAny.call(this, condition.any); // eslint-disable-line no-use-before-define
+    }
+
+    // Check if its a 'none' composite condition
+    if (condition.none !== undefined &&
+        condition.none.constructor === Array
+    ) {
+        // if any conditions are met, the whole check fails.
+        return !checkAny.call(this, condition.none); // eslint-disable-line no-use-before-define
+    }
+
+    return false;
+}
+
+function checkAll(conditions) {
+    if (typeof conditions !== 'object') return false;
+    if (conditions.constructor !== Array) return false;
+    // if any conditions fail, the whole check fails.
+    return !conditions.some(condition => !conditionDispatcher.call(this, condition));
+}
+
+
+function checkAny(conditions) {
+    // If any conditions are met, the whole check passes.
+    return conditions.some(conditionDispatcher.bind(this));
+}
+
+
+// Constructs an array containing the parameters or arguments that are used by an
+// action function. Based on the action function's signature, which is an array of
+// strings that describe how to map the parameters from their keys on the controller
+// to the position in the function's arguments. This function constructs the array
+// that the action function gets applied with
+//
+// Future improvements:
+//
+// - Pass in only the signature, args, and parameters objects to the function;
+//   the function does not require the whole action object.
+
+function constructArgArr(action) {
+    const parameters = this.get('parameters');
+    const args = action.signature.map((key) => {
+        // Default to undefined.
+        let value;
+
+        // First try to use the parameter.
+        if (typeof action.parameters === 'object' &&
+            typeof action.parameters[key] === 'object'
+        ) {
+            const parameterKeys = Object.keys(parameters);
+
+            // There was a bug here where the parameters weren't matching up right;
+            // this check ensures parameters aren't duplicated and the like.
+            parameterKeys.forEach((parameterKey) => {
+                if (parameters[parameterKey] === action.parameters[key]) {
+                    value = parameters[parameterKey];
+                }
+            });
+        }
+
+        if (typeof action.parameters === 'object' &&
+            typeof action.parameters[key] === 'string'
+        ) {
+            if (typeof parameters[action.parameters[key]] !== 'object') {
+                parameters[action.parameters[key]] = {};
+            }
+
+            value = parameters[action.parameters[key]];
+        }
+
+        // If an arg is defined, it takes priority.
+        if (typeof action.args === 'object' &&
+            action.args[key] !== undefined
+        ) {
+            value = action.args[key];
+        }
+
+        return value;
+    });
+
+    args.push(action.parameters);
+    return args;
+}
+
+
+//
 
 export default Ember.Controller.extend({
 
-
-    addMethod: 'select', // 'select' or 'create'
     panelActions: Ember.inject.service('panelActions'),
+
+    editMode: false,
+    methodSelected: false,
+    addMethod: 'select', // 'select' or 'create'
+    widgets: [],
+    formActions: [],
+
     _names: Ember.computed('sections', function() {
         const sections = this.get('sections');
         return sections.map((section) => {
             return section.name;
         });
     }),
-    methodSelected: false,
     type: Ember.computed('model.settings', function() {
         const collectionType = this.get('model.settings.collectionType') || 'project';
         return collectionType.toLowerCase();
     }),
-    widgets: [],
-    formActions: [],
-    editMode: false,
+
+    actions: {
+
+        updateProperty(oldValue, newValue) {
+            this.set(oldValue, newValue);
+            this.set('methodSelected', true); // Change view to show the methods
+        },
+
+        transition(name, id) {
+            this.transitionToRoute(name, id);
+        },
+
+
+    },
 
     init () {
         this._super();
-        this.set('content', Em.Object.create({
+        this.set('content', Ember.Object.create({
             info: null,
         }));
         this.saveParameter = this.saveParameter.bind(this);
@@ -83,7 +220,7 @@ export default Ember.Controller.extend({
             //
             async function fireActions(actionId) {
                 if (typeof actionId === 'string') {
-                    const actionObj = actions.find(action => action.id == actionId);
+                    const actionObj = actions.find(action => action.id === actionId);
                     if (typeof actionObj.action === 'function') {
                         const result = await actionObj.action.apply(this, actionObj.argArr);
                         if (typeof actionObj.then === 'string') {
@@ -143,14 +280,13 @@ export default Ember.Controller.extend({
     // `this` must be bound to the controller for `create_widget`, as
     // `create_widget` requires access to the controller, and does so through `this`.
     createWidget(widgetComponent, description, disabled, cssClasses, section, outputParameter, actionId, parameters) {
-        let action;
         const controller = this;
 
         const actions = this.get('formActions');
 
         async function fireActions(actionId) {
             if (typeof actionId === 'string') {
-                const actionObj = actions.find(action => action.id == actionId);
+                const actionObj = actions.find(action => action.id === actionId);
                 if (typeof actionObj.action === 'function') {
                     const result = await actionObj.action.apply(this, actionObj.argArr);
                     if (typeof actionObj.then === 'string') {
@@ -160,12 +296,10 @@ export default Ember.Controller.extend({
                     controller.notifyPropertyChange('parameters');
                     return result;
                 }
-            } else {
-
             }
         }
 
-        action = context => fireActions.call(context, actionId);
+        const action = context => fireActions.call(context, actionId);
 
         const widget = {
             widgetComponent,
@@ -181,24 +315,34 @@ export default Ember.Controller.extend({
         return widget;
     },
 
+    saveSection(section) {
+        return function(widgets) {
+            widgets.filter((widget) => {
+                return widget.section === section;
+            }).map((widget) => {
+                return this[widget.output];
+            });
+        };
+    },
+
 
     // Delete widget and resets state
-    deleteWidgetSignature: ['widgetObject'],
-    deleteWidget(widgetObject, parameters) {
+    deleteWidgetSignature: ['widgetObject'], // eslint-disable-line ember/order-in-controllers
+    deleteWidget(widgetObject) {
         this.get('widgets').removeObject(widgetObject.value);
         Ember.set(widgetObject, 'value', undefined);
         Ember.set(widgetObject, 'state', ['undefined']);
     },
 
 
-    disableWidgetSignature: ['widgetObject'],
-    disableWidget(widgetObject, parameters) {
+    disableWidgetSignature: ['widgetObject'], // eslint-disable-line ember/order-in-controllers
+    disableWidget(widgetObject) {
         Ember.set(widgetObject, 'value.disabled', true);
     },
 
 
-    enableWidgetSignature: ['widgetObject'],
-    enableWidget(widgetObject, parameters) {
+    enableWidgetSignature: ['widgetObject'], // eslint-disable-line ember/order-in-controllers
+    enableWidget(widgetObject) {
         Ember.set(widgetObject, 'value.disabled', false);
         Ember.run.next(this, function() {
             this.get('updateState').call(this, this.get('formActions'));
@@ -206,8 +350,8 @@ export default Ember.Controller.extend({
     },
 
 
-    toggleWidgetSignature: ['widgetObject'],
-    toggleWidget(widgetObject, parameters) {
+    toggleWidgetSignature: ['widgetObject'], // eslint-disable-line ember/order-in-controllers
+    toggleWidget(widgetObject) {
         if (widgetObject.value.disabled === false) {
             Ember.set(widgetObject, 'value.disabled', true);
         } else {
@@ -219,8 +363,8 @@ export default Ember.Controller.extend({
     },
 
 
-    uploadFileSignature: ['fileName', 'fileData', 'node'],
-    async uploadFile(fileName, fileData, node, parameters) {
+    uploadFileSignature: ['fileName', 'fileData', 'node'], // eslint-disable-line ember/order-in-controllers
+    async uploadFile(fileName, fileData, node) {
         if (typeof fileName.value === 'undefined') return;
         if (typeof fileData.value === 'undefined') return;
         if (typeof node.value === 'undefined') node.value = ENV.NODE_GUID;
@@ -233,7 +377,7 @@ export default Ember.Controller.extend({
 
         const deferred = Ember.RSVP.defer();
         xhr.onreadystatechange = () => {
-            if (xhr.readyState == 4 && xhr.status >= 200 && xhr.status < 300) {
+            if (xhr.readyState === 4 && xhr.status >= 200 && xhr.status < 300) {
                 deferred.resolve(JSON.parse(xhr.responseText).data.links.download);
             }
         };
@@ -243,19 +387,8 @@ export default Ember.Controller.extend({
     },
 
 
-    saveSection(section) {
-        return function() {
-            widgets.filter((widget) => {
-                return widget.section == section;
-            }).map((widget) => {
-                return this[widget.output];
-            });
-        };
-    },
-
-
-    saveParameterSignature: ['parameter', 'updatedParameter'],
-    saveParameter(parameter, updatedParameter, parameters) {
+    saveParameterSignature: ['parameter', 'updatedParameter'], // eslint-disable-line ember/order-in-controllers
+    saveParameter(parameter, updatedParameter) {
         if (typeof updatedParameter.value !== 'undefined') {
             Ember.set(parameter, 'value', updatedParameter.value);
         }
@@ -268,169 +401,25 @@ export default Ember.Controller.extend({
     },
 
 
-    closeSectionSignature: ['sectionName'],
-    closeSection(sectionName, parameters) {
+    closeSectionSignature: ['sectionName'], // eslint-disable-line ember/order-in-controllers
+    closeSection(sectionName) {
         this.get('panelActions').close(this.get(`_names.${this.get('_names').indexOf(sectionName)}`));
         this.get('parameters')[this.get('sections').find(section => section.name === sectionName).param].state = ['closed', 'saved'];
         this.get('updateState').call(this, this.get('formActions'));
     },
 
 
-    openSectionSignature: ['sectionName'],
-    openSection(sectionName, parameters) {
+    openSectionSignature: ['sectionName'], // eslint-disable-line ember/order-in-controllers
+    openSection(sectionName) {
         this.get('panelActions').open(this.get(`_names.${this.get('_names').indexOf(sectionName)}`));
         this.get('parameters')[this.get('sections').find(section => section.name === sectionName).param].state = ['open', 'editing'];
     },
 
 
-    browserAlertSignature: ['alertString'],
+    browserAlertSignature: ['alertString'], // eslint-disable-line ember/order-in-controllers
     browserAlert(alertString) {
         this.toast.success(alertString);
     },
 
 
-    actions: {
-
-        updateProperty(oldValue, newValue) {
-            this.set(oldValue, newValue);
-            this.set('methodSelected', true); // Change view to show the methods
-        },
-
-        transition(name, id) {
-            this.transitionToRoute(name, id);
-        },
-
-
-    },
-
-
 });
-
-
-// Engine helper functions.
-// ////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-function conditionDispatcher(condition) {
-    const parameters = this.get('parameters');
-
-    // Check if its a regular condition
-    if (condition.parameter !== undefined) {
-        // actualy check the condition is met;
-        // the parameter has to have the given state.
-        if (parameters[condition.parameter] === undefined) {
-            parameters[condition.parameter] = {};
-        }
-        if (parameters[condition.parameter].state === undefined) {
-            parameters[condition.parameter].state = [];
-        }
-        const parameterState = parameters[condition.parameter].state;
-        // check that the state exists for this item
-        return parameterState.some(state_item => state_item === condition.state);
-    }
-
-    // Check if its an 'all' composite condition
-    if (condition.all !== undefined &&
-        condition.all.constructor === Array
-    ) {
-        // if any conditions fail, the whole check fails.
-        return checkAll.call(this, condition.all);
-    }
-
-    // Check if its an 'any' composite condition
-    if (condition.any !== undefined &&
-        condition.any.constructor === Array
-    ) {
-        // if any conditions are met, the whole check passes.
-        return checkAny.call(this, condition.any);
-    }
-
-    // Check if its a 'none' composite condition
-    if (condition.none !== undefined &&
-        condition.none.constructor === Array
-    ) {
-        // if any conditions are met, the whole check fails.
-        return !checkAny.call(this, condition.none);
-    }
-
-    return false;
-}
-
-function checkAll(conditions) {
-    const parameters = this.get('parameters');
-    if (typeof conditions !== 'object') return false;
-    if (conditions.constructor !== Array) return false;
-    // if any conditions fail, the whole check fails.
-    return !conditions.some(condition => !conditionDispatcher.call(this, condition));
-}
-
-
-function checkAny(conditions) {
-    // If any conditions are met, the whole check passes.
-    return conditions.some(conditionDispatcher.bind(this));
-}
-
-
-// Constructs an array containing the parameters or arguments that are used by an
-// action function. Based on the action function's signature, which is an array of
-// strings that describe how to map the parameters from their keys on the controller
-// to the position in the function's arguments. This function constructs the array
-// that the action function gets applied with
-//
-// Future improvements:
-//
-// - Pass in only the signature, args, and parameters objects to the function;
-//   the function does not require the whole action object.
-
-function constructArgArr(action) {
-    const parameters = this.get('parameters');
-    const args = action.signature.map((key) => {
-        // Default to undefined.
-        let value;
-
-        // First try to use the parameter.
-        if (typeof action.parameters === 'object' &&
-            typeof action.parameters[key] === 'object'
-        ) {
-            let exists = false;
-            const parameterKeys = Object.keys(parameters);
-
-
-            // There was a bug here where the parameters weren't matching up right;
-            // this check ensures parameters aren't duplicated and the like.
-            parameterKeys.forEach((parameterKey) => {
-                if (parameters[parameterKey] === action.parameters[key]) {
-                    value = parameters[parameterKey];
-                    exists = true;
-                }
-            });
-
-            if (!exists) console.log("No action with that key exists in the controller's action array. client/app/controllers/collection/add.js, line 421]");
-        }
-
-        if (typeof action.parameters === 'object' &&
-            typeof action.parameters[key] === 'string'
-        ) {
-            if (typeof parameters[action.parameters[key]] !== 'object') {
-                parameters[action.parameters[key]] = {};
-            }
-
-            value = parameters[action.parameters[key]];
-        }
-
-        // If an arg is defined, it takes priority.
-        if (typeof action.args === 'object' &&
-            action.args[key] !== undefined
-        ) {
-            value = action.args[key];
-        }
-
-        return value;
-    });
-
-    args.push(action.parameters);
-    return args;
-}
-
-
-//

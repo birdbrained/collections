@@ -10,10 +10,10 @@ const {
 export default Model.extend({
     title: attr('string'),
     description: attr('string'),
-    collection: belongsTo('collection'),
     tags: attr('string'),
-    createdBy: belongsTo('user'),
     dateCreated: attr('date'),
     dateUpdated: attr('date'),
+    collection: belongsTo('collection'),
+    createdBy: belongsTo('user'),
     items: hasMany('item'),
 });

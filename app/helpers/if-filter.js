@@ -6,7 +6,8 @@ import Ember from 'ember';
  */
 
 /**
-  * ifFilter helper. To be used within an {#if} block, to only display an item if it matches a filter.
+  * ifFilter helper. To be used within an {#if} block,
+  * to only display an item if it matches a filter.
   *
   * @class ifFilter
   * @param {String} element

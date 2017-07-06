@@ -1,4 +1,4 @@
-const collectionSettings = {
+export default {
     branding: {
         colors: {
             primary: '#215264',
@@ -134,8 +134,4 @@ const collectionSettings = {
             },
         ],
     },
-};
-
-export {
-    collectionSettings,
 };

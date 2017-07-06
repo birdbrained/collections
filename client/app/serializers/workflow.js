@@ -1,10 +1,11 @@
 import DS from 'ember-data';
 
+const { JSONSerializer } = DS;
 
-export default DS.JSONSerializer.extend({
-
-    isSuccess: function(status, headers, payload) {
-        return status >= 200 && status < 300 || status === 304;
-    }
-
+export default JSONSerializer.extend({
+    isSuccess(status) {
+        if (status >= 200 && status < 300) return true;
+        if (status === 304) return true;
+        return false;
+    },
 });

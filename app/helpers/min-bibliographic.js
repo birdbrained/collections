@@ -12,7 +12,8 @@ import Ember from 'ember';
  * @class minBibliographic
  * @param {Object} contrib contributor that you intend to modify bibliographic information
  * @param {Array} contributors list of all contributors on the preprint
- * @return {Boolean} Does updating this contributor leave minimum number of bibliographic contributors?
+ * @return {Boolean} Does updating this contributor leave minimum number of
+ *     bibliographic contributors?
  */
 export function minBibliographic(params/* , hash*/) {
     const [contrib, contributors] = params;

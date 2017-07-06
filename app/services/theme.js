@@ -1,20 +1,26 @@
 import Ember from 'ember';
 import config from 'ember-get-config';
 
+const {
+    Service,
+    inject,
+    computed,
+} = Ember;
 /**
  * @module ember-preprints
  * @submodule services
  */
 
 /**
- * Detects preprint provider and allows you to inject that provider's theme into parts of your application
+ * Detects preprint provider and allows you to inject that
+ * provider's theme into parts of your application
  *
  * @class theme
  * @extends Ember.Service
  */
-export default Ember.Service.extend({
-    store: Ember.inject.service(),
-    session: Ember.inject.service(),
+export default Service.extend({
+    store: inject.service(),
+    session: inject.service(),
 
     // If we're using a provider domain
     isDomain: false,
@@ -25,7 +31,7 @@ export default Ember.Service.extend({
     currentLocation: null,
 
     // The provider object
-    provider: Ember.computed('id', function() {
+    provider: computed('id', function() {
         const id = this.get('id');
 
         if (!id) { return; }
@@ -36,16 +42,17 @@ export default Ember.Service.extend({
     }),
 
     // If we're using a branded provider
-    isProvider: Ember.computed('id', function() {
+    isProvider: computed('id', function() {
         return this.get('id') !== 'osf';
     }),
 
-    // If we're using a branded provider and not under a branded domain (e.g. /preprints/<provider>)
-    isSubRoute: Ember.computed('isProvider', 'isDomain', function() {
+    // If we're using a branded provider and not
+    // under a branded domain (e.g. /preprints/<provider>)
+    isSubRoute: computed('isProvider', 'isDomain', function() {
         return this.get('isProvider') && !this.get('isDomain');
     }),
 
-    pathPrefix: Ember.computed('isProvider', 'isDomain', 'id', function() {
+    pathPrefix: computed('isProvider', 'isDomain', 'id', function() {
         let pathPrefix = '/';
 
         if (!this.get('isDomain')) {
@@ -60,7 +67,7 @@ export default Ember.Service.extend({
     }),
 
     // Needed for the content route
-    guidPathPrefix: Ember.computed('isSubRoute', 'id', function() {
+    guidPathPrefix: computed('isSubRoute', 'id', function() {
         let pathPrefix = '/';
 
         if (this.get('isSubRoute')) {
@@ -71,7 +78,7 @@ export default Ember.Service.extend({
     }),
 
     // The URL for the branded stylesheet
-    stylesheet: Ember.computed('id', function() {
+    stylesheet: computed('id', function() {
         const id = this.get('id');
 
         if (!id) { return; }
@@ -82,7 +89,7 @@ export default Ember.Service.extend({
     }),
 
     // The logo object for social sharing
-    logoSharing: Ember.computed('id', function() {
+    logoSharing: computed('id', function() {
         const id = this.get('id');
 
         const logo = config.PREPRINTS.providers
@@ -95,7 +102,7 @@ export default Ember.Service.extend({
     }),
 
     // The url to redirect users to sign up to
-    signupUrl: Ember.computed('id', function() {
+    signupUrl: computed('id', function() {
         const query = Ember.$.param({
             campaign: `${this.get('id')}-preprints`,
             next: window.location.href,
@@ -104,12 +111,12 @@ export default Ember.Service.extend({
         return `${config.OSF.url}register?${query}`;
     }),
 
-    redirectUrl: Ember.computed('currentLocation', function() {
+    redirectUrl: computed('currentLocation', function() {
         return this.get('currentLocation');
     }),
 
     // The translation key for the provider's permission language
-    permissionLanguage: Ember.computed('id', function() {
+    permissionLanguage: computed('id', function() {
         const id = this.get('id');
 
         return config.PREPRINTS.providers

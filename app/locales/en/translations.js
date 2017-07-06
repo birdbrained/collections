@@ -1,6 +1,6 @@
 const preprints = 'Preprints';
 const brand = `OSF ${preprints}`;
-const arxiv_trademark_license = 'arXiv is a trademark of Cornell University, used under license.';
+const arxiv_trademark_license = 'arXiv is a trademark of Cornell University, used under license.'; // eslint-disable-line camelcase
 
 export default {
     global: {
@@ -263,7 +263,7 @@ export default {
         },
         'permission-language': {
             arxiv_trademark_license,
-            arxiv_non_endorsement: `${arxiv_trademark_license} This license should not be understood to indicate endorsement of content on {{provider}} by Cornell University or arXiv.`,
+            arxiv_non_endorsement: `${arxiv_trademark_license} This license should not be understood to indicate endorsement of content on {{provider}} by Cornell University or arXiv.`, // eslint-disable-line camelcase
             no_trademark: '',
         },
         'preprint-form-authors': {

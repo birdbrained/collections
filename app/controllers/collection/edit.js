@@ -1,18 +1,12 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+
     session: Ember.inject.service(),
+
     editMode: false,
     collectionSettings: {},
-    resetModelCache() {
-        const model = this.get('model');
-        return {
-            title: model.get('title'),
-            description: model.get('description'),
-            tags: model.get('tags'),
-            settings: JSON.stringify(model.get('settings')),
-        };
-    },
+
     modelCache: Ember.computed('model', function() {
         return this.resetModelCache();
     }),
@@ -26,6 +20,17 @@ export default Ember.Controller.extend({
     settingsString: Ember.computed('model.settings', function() {
         return JSON.stringify(this.get('model.settings'));
     }),
+
+    resetModelCache() {
+        const model = this.get('model');
+        return {
+            title: model.get('title'),
+            description: model.get('description'),
+            tags: model.get('tags'),
+            settings: JSON.stringify(model.get('settings')),
+        };
+    },
+
     actions: {
         showEdit () {
             this.set('editMode', true);
@@ -47,4 +52,5 @@ export default Ember.Controller.extend({
             this.get('model').destroyRecord().then(() => this.transitionToRoute('/'));
         },
     },
+
 });

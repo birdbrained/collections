@@ -107,13 +107,12 @@ const Project = Item.extend({
                     this.get('session').authorize(authType, (headerName, content) => {
                         headers[headerName] = content;
                     });
-
                     Ember.$.ajax({
                         method: 'GET',
                         headers,
                         url,
                     }).done((data) => {
-                        this.get('viewContent.wiki').setValue(data);
+                        this.get('viewContent.wiki').setValue(data); // eslint-disable-line ember/jquery-ember-run
                     });
                 } else {
                     this.get('viewContent.wiki').setValue('This project does not have wikis.');
@@ -169,7 +168,7 @@ const Registration = Item.extend({
 });
 
 
-const itemClasses = {
+export default {
     viewData: ViewData,
     item: Item,
     website: Website,
@@ -177,5 +176,3 @@ const itemClasses = {
     preprint: Preprint,
     registration: Registration,
 };
-
-export { itemClasses };

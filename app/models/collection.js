@@ -11,10 +11,10 @@ export default Model.extend({
     title: attr('string'),
     description: attr('string'),
     tags: attr('string'),
-    createdBy: belongsTo('user'),
     dateCreated: attr('date'),
     dateUpdated: attr('date'),
-    settings: attr('object'),
+    settings: attr(),
+    createdBy: belongsTo('user'),
     groups: hasMany('group'),
     items: hasMany('items'),
 });

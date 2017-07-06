@@ -70,8 +70,6 @@ export default Ember.Component.extend(NodeActionsMixin, {
         const searchResults = this.get('searchResults');
         if (searchResults && searchResults.links) {
             return searchResults.meta.pagination.total;
-        } else {
-
         }
     }),
     // Total pages of contributor search results
@@ -79,8 +77,6 @@ export default Ember.Component.extend(NodeActionsMixin, {
         const searchResults = this.get('searchResults');
         if (searchResults && searchResults.links) {
             return searchResults.meta.total;
-        } else {
-
         }
     }),
     init() {
@@ -158,7 +154,7 @@ export default Ember.Component.extend(NodeActionsMixin, {
             });
             this.get('actions.addContributors').call(this, contributorsToAdd, this.get('sendEmail'))
                 .then((contributors) => {
-                    contributors.map((contrib) => {
+                    contributors.forEach((contrib) => {
                         this.get('contributors').pushObject(contrib);
                     });
                     this.toggleAuthorModification();

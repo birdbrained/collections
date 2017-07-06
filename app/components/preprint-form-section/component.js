@@ -45,7 +45,7 @@ export default CpPanelComponent.extend({
     }),
 
     // Fix deprecation warning
-    _setup: Ember.on('init', Ember.observer('open', function() {
+    _setup: Ember.on('init', Ember.observer('open', function() { // eslint-disable-line ember/no-on-calls-in-components
         this.set('panelState.boundOpenState', this.get('open'));
     })),
     /* Manual animation
@@ -66,13 +66,13 @@ export default CpPanelComponent.extend({
             $body.one('transitionend webkitTransitionEnd oTransitionEnd MSTransitionEnd', () => {
                 $body.addClass('no-transition');
                 $body.height('');
-                $body[0].offsetHeight; // jshint ignore: line
+                $body[0].offsetHeight; // eslint-disable-line no-unused-expressions
                 $body.removeClass('no-transition');
             });
         } else {
             $body.addClass('no-transition');
             $body.height($body.height());
-            $body[0].offsetHeight; // jshint ignore: line
+            $body[0].offsetHeight; // eslint-disable-line no-unused-expressions
             $body.removeClass('no-transition');
             $body.height('');
         }

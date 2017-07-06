@@ -6,7 +6,7 @@ const Router = Ember.Router.extend({
     rootURL: config.rootURL,
 });
 
-Router.map(function() {
+Router.map(function() { // eslint-disable-line array-callback-return
     this.route('index', { path: '/' });
     this.route('collection', { path: 'collection/:collection_id' }, function() {
         this.route('item', { path: 'item/:item_id' });

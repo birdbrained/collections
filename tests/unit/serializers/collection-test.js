@@ -4,9 +4,10 @@ moduleForModel('collection', 'Unit | Serializer | collection', {
     // Specify the other units that are required for this test.
     needs: [
         'serializer:collection',
+        'serializer:application',
         'model:user',
         'model:group',
-        'model:item'
+        'model:item',
     ],
 });
 

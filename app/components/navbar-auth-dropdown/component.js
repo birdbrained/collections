@@ -28,7 +28,7 @@ export default NavbarAuthDropdown.extend({
     }),
     actions: {
         logout() {
-            this.get('session').invalidate().catch(() => window.location.href = 'http://localhost:4200/');
+            this.get('session').invalidate().catch(function() { window.location.href = 'http://localhost:4200/'; });
         },
     },
 });

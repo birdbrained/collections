@@ -12,10 +12,10 @@ export default Model.extend({
     type: attr('string'),
     status: attr('string'),
     url: attr('string'),
-    collection: belongsTo('collection'),
-    group: belongsTo('group'),
-    createdBy: belongsTo('user'),
     metadata: attr('string'),
     dateAdded: attr('date'),
     dateUpdated: attr('date'),
+    collection: belongsTo('collection'),
+    group: belongsTo('group'),
+    createdBy: belongsTo('user'),
 });
