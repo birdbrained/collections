@@ -3,12 +3,12 @@ import DS from 'ember-data';
 const {
     Model,
     attr,
+    hasMany,
 } = DS;
 
 export default Model.extend({
-    submissionFormName: attr(),
-    sections: attr(),
-    initialWidgets: attr(),
-    actions: attr(),
-    initialParameters: attr(),
+    title: attr(),
+    sections: hasMany('section'),
+    actions: hasMany('action'),
+    initialParameters: hasMany('parameter'),
 });
