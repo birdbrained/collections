@@ -16,5 +16,5 @@ export default Model.extend({
     settings: attr(),
     createdBy: belongsTo('user'),
     groups: hasMany('group'),
-    items: hasMany('items'),
+    items: hasMany('item'),
 });
