@@ -1,6 +1,7 @@
 {
   "id": "Meeting",
   "title": "Meeting Submission Form",
+  "description": "The meeting submission form guides a speaker or meeting organizer through the process of creating an event for the meeting.",
   "sections": [
     {
       "id": "1",
@@ -12,14 +13,19 @@
           "label": "File",
           "desciption": "Choose a file to upload that represents the talk or poster. Drag and drop the file into the box below, or press the 'Upload File' button to pick the file using a dialog box.",
           "type": "file-uploader",
-          "parameter": "upload-file-widget"
+          "parameters": {
+            "fileData": "fileData",
+            "fileName": "fileName"
+          }
         },
         {
           "id": "2",
           "label": "Title",
           "description": "Enter the title of the talk.",
           "type": "text-field",
-          "parameter": "title-widget"
+          "parameters": {
+            "value": "title-widget"
+          }
         }
       ]
     },

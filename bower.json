@@ -1,8 +1,8 @@
 {
   "name": "collections",
   "dependencies": {
-    "ember": "~2.8.0",
-    "ember-cli-shims": "0.1.1",
+    "ember": "^2.14.1",
+    "ember-data": "^2.14.9",
     "Faker": "^3.1.0",
     "bootstrap": "^3.3.7",
     "bootstrap-sass": "^3.3.6",

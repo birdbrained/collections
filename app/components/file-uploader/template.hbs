@@ -31,22 +31,15 @@
 
 </style>
 
-{{#if (not isOpen)}}
-    Filename: {{filename}}
-{{/if}}
+<div class='submission-upload'>
+  <div class='directions'>
+      Select a preprint file to upload
+  </div>
+  <input
+      class='upload'
+      type="file"
+      onchange={{action "uploadFile" value=target}}
+  >
+</div>
 
-{{#preprint-form-body}}
-    {{#if isOpen}}
-        <div class='submission-upload'>
-          <div class='directions'>
-              Select a preprint file to upload
-          </div>
-          <input
-              class='upload'
-              type="file"
-              onchange={{action "uploadFile" value=target}}
-          >
-        </div>
-    {{/if}}
-{{/preprint-form-body}}
 {{yield}}

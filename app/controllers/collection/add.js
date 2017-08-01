@@ -177,6 +177,11 @@ export default Ember.Controller.extend({
             return section.name;
         });
     }),
+
+    //sxnz: Ember.observer('model.section', function() {
+    //    debugger;
+    //}),
+
     type: Ember.computed('model.settings', function() {
         const collectionType = this.get('model.settings.collectionType') || 'project';
         return collectionType.toLowerCase();

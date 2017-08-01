@@ -1,5 +1,4 @@
-{{#preprint-form-body}}
-    {{#if isOpen}}
+    {{#if editing}}
         <div class="row form">
           <div class="col-xs-12 col-md-5 col-division-right">
             <form {{action 'findContributors' 1 on='submit'}}>
@@ -187,9 +186,8 @@
           </div>
         </div>
     {{/if}}
-{{/preprint-form-body}}
 
-{{#if (not isOpen)}}
+{{#if (not editing)}}
         <div class="row">
             <div class="col-xs-12">
                 {{#if contributors}}

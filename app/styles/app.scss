@@ -10,6 +10,31 @@ $dark-banner: #607D8B;
 
 /* Global */
 
+.form-banner {
+    margin-top: 0;
+    padding-top: 80px;
+    padding-bottom: 50px;
+    background: url('/img/submit.jpg') top center no-repeat;
+    border-bottom: 1px solid #f0f0f0;
+    background-size: cover;
+    text-align: center;
+}
+
+.section {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 14px;
+    border-radius: 4px;
+    margin-bottom: 18px;
+    margin-top: 18px;
+}
+
+
+.section > .label {
+    color: #555;
+    font-size: 20px;
+    font-weight: 300;
+}
 
 .submit_button {
     display: block;

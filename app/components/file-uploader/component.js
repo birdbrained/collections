@@ -3,6 +3,12 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
+
+    didRender() {
+        console.log('hello')
+        debugger;
+    },
+
     actions: {
 
         uploadFile(ev) {
@@ -13,15 +19,10 @@ export default Ember.Component.extend({
             const filename = filenameParts[filenameParts.length - 1];
             const parameters = this.attrs.widget.value.parameters;
 
-            saveParameter(parameters.fileName, {
-                value: filename,
-                state: ['defined'],
-            });
-
             reader.onloadend = function(ev) {
-                saveParameter(parameters.fileData, {
-                    value: ev.target.result,
-                    state: ['defined'],
+                this.set('widget.parameter', {
+                    fileName: filename,
+                    fileData: ev.target.result
                 });
             };
 

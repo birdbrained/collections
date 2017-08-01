@@ -8,6 +8,7 @@ export default JSONAPIAdapter.extend({
     host: 'http://localhost:8000',
     namespace: 'api',
     ajax(url, method, hash) {
+        hash = hash || {};
         hash.crossOrigin = true;
         hash.xhrFields = { withCredentials: true };
         hash.headers = hash.headers || {};

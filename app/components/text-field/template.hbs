@@ -7,18 +7,16 @@
 
 </style>
 
-{{#if (not isOpen)}}
+{{#if (not editing)}}
 
-    {{valueName}}: {{textFieldValue}}
+    {{valueName}}: {{widget.parameter.value}}
 
 {{/if}}
 
-{{#preprint-form-body}}
-    {{#if isOpen}}
-        <div class='submission-text-field'>
-            <label>{{description}}</label>
-            {{input value=textFieldValue class='form-control ' }}
-        </div>
-    {{/if}}
-{{/preprint-form-body}}
+{{#if editing}}
+    <div class='submission-text-field'>
+        <label>{{widget.description}}</label>
+        {{input value=widget.parameter.value class='form-control'}}
+    </div>
+{{/if}}
 {{yield}}

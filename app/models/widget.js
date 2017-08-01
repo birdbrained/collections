@@ -1,4 +1,5 @@
 import DS from 'ember-data';
+import hashMany from 'collections/utils/hash-many';
 
 const {
     Model,
@@ -11,5 +12,5 @@ export default Model.extend({
     description: attr('string'),
     type: attr('string'),
     defaultValue: attr('string'),
-    parameter: belongsTo('parameter'),
+    parameters: hashMany('parameter'),
 });

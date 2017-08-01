@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import DS from 'ember-data';
 
 const {
@@ -7,8 +8,24 @@ const {
 } = DS;
 
 export default Model.extend({
-    title: attr(),
-    sections: hasMany('section'),
-    actions: hasMany('action'),
-    initialParameters: hasMany('parameter'),
+    title: attr('string'),
+    description: attr('string'),
+    sections: hasMany('section', {
+        async: false,
+        inverse: null,
+        embedded: 'always',
+    }),
+    //sections: Ember.computed('_sections', function() {
+    //    return this.get('_sections');
+    //}),
+    actions: hasMany('action', {
+        async: false,
+        inverse: null,
+        embedded: 'always',
+    }),
+    initialParameters: hasMany('parameter', {
+        async: false,
+        inverse: null,
+        embedded: 'always'
+    }),
 });
