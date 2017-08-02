@@ -35,6 +35,7 @@ function normalizeRelationship(store, JSONAPIDocument, rawRecord, normalizedReco
             'belongsTo': normalizeRecord
         }[childRelationshipMeta.kind](store, JSONAPIDocument, childRelationshipMeta, rawRecord[childKey]),
     };
+    debugger;
 
 }
 
