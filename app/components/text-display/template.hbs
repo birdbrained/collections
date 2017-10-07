@@ -4,15 +4,6 @@
         margin-top: 10px;
     }
 
-    .submission-text-field input:focus:invalid {
-        border: 1px solid #f00;
-    }
-
-    .submission-text-field input:valid {
-        border: 1px solid #0f0;
-    }
-
-
 
 </style>
 
@@ -25,7 +16,7 @@
 {{#if editing}}
     <div class='submission-text-field'>
         <label>{{widget.description}}</label>
-        {{input type="text" value=parameters.value.value class='form-control' pattern='.{6,}' required=true}}
+        {{input value=parameters.value.value class='form-control'}}
     </div>
 {{/if}}
 {{yield}}

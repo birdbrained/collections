@@ -12,14 +12,11 @@
             <div class="collapse navbar-collapse" id="myNavbar">
                 <div class="navbar navbar-right">
                     <ul class="nav navbar-nav">
-                        {{#if session.isAuthenticated}}
-                            <li>{{#link-to "collection.add"}}Submit {{/link-to}}</li>
-                        {{/if}}
                         <li>{{#link-to "collection.browse"}} Browse {{/link-to}}</li>
                         {{#if session.isAuthenticated}}
-                            <li>{{#link-to "collection.edit"}} Edit{{/link-to}}</li>
+                            <li>{{#link-to "collection.edit"}} Edit {{/link-to}}</li>
                         {{/if}}
-                        <li>{{#link-to "collection.submissions"}} My Submissions {{/link-to}}</li>
+                        <li>{{#link-to "collection.submissions"}} Submissions {{/link-to}}</li>
                     </ul>
                 </div>
             </div>

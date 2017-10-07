@@ -5,13 +5,254 @@
 @import 'components/meeting-keynote-speakers';
 @import 'components/datetime-picker';
 @import 'components/landing-paragraph';
-@import 'osf-style';
-
+@import 'logo';
 
 $navbar-color: #009688;
 $light-blue-banner: #e8f0f1;
 $light-grey-banner: #eeeeee;
 $dark-banner: #607D8B;
+
+html {
+    font-size: 13px;
+    font-family: 'Open Sans';
+    font-weight: 300;
+}
+
+body {
+    margin: 0;
+    margin-top: 46px;
+    padding: 0;
+}
+
+nav {
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: space-between;
+    padding: 0 30px;
+    min-height: 46px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #263947;
+    background-image: linear-gradient(to bottom,rgba(60,60,60,.5)0%,rgba(34,34,34,.5)100%);
+    border-bottom: 1px solid rgba(8, 8, 8, 0.5);
+    box-shadow: 0 0 5px 0 rgba(8, 8, 8, 0.8);
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+}
+
+nav .global-nav,
+nav .local-nav {
+    position: relative;
+    flex: 1 0 auto;
+}
+
+
+nav.navbar .navbar-toggle {
+    margin: 0;
+    flex: 0 0 auto;
+}
+
+.service-link {
+    font-size: 1.9rem;
+    padding: 0 10px;
+    line-height: 1.0;
+}
+
+img + .caret {
+    margin-left: 10px;
+}
+
+.caret {
+    display: inline-block;
+    width: 0;
+    height: 0;
+    margin-left: 2px;
+    vertical-align: middle;
+    border-top: 6px dashed;
+    border-top: 6px solid;
+    border-right: 6px solid transparent;
+    border-left: 6px solid transparent;
+    color: #fff;
+}
+
+.local-nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    border: none;
+    box-shadow: none;
+}
+
+.local-nav > a {
+    padding: 10px;
+    position: relative;
+}
+
+.local-nav > a:active {
+    background-color: #263947;
+    background-image: linear-gradient(to top,rgba(60, 60, 60, 0.5) 0%, rgba(34, 34, 34, 0.5) 100%);
+    border-radius: 15px;
+    top: 1px;
+}
+
+.local-nav button > img {
+    margin-right: 10px;
+}
+
+.global-nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+}
+
+.dropdown {
+    position: relative;
+    display: flex;
+    height: 100%;
+    padding-bottom: 10px;
+    align-self: stretch;
+    align-items: center;
+    margin-bottom: -10px;
+}
+
+.dropdown > button {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    background-color: transparent;
+    border-color: transparent;
+    outline: none;
+    cursor: pointer;
+    color: #fff;
+    font-size: 1.1rem;
+    padding: 0;
+    font-family: 'Open Sans';
+    line-height: 1.0;
+    align-self: stretch;
+}
+
+.dropdown > .dropdown-content {
+    position: absolute;
+    padding: 5px 0px;
+    font-size: 1.1rem;
+    border-radius: 3px;
+    border: 1px solid rgba(100, 100, 100, 0.3);
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+    min-width: 100%;
+    display: none;
+}
+
+#osf-nav .dropdown > .dropdown-content {
+    background-color: #2E6A74;
+    right: -8px;
+}
+
+
+#osf-nav .dropdown > .dropdown-content:before {
+    position: absolute;
+    display: inline-block;
+    border-right: 9px solid transparent;
+    border-bottom: 9px solid #2E6A74;
+    border-left: 9px solid transparent;
+    content: '';
+    top: -8px;
+    right: 6px;
+}
+
+.local-nav > a {
+    line-height: 1.0;
+    font-size: 1.1rem;
+}
+
+.local-nav > a:hover {
+    color: #ccc;
+}
+
+.local-nav > * {
+    margin-left: 25px;
+}
+
+.dropdown.open .dropdown-content {
+    display: block;
+}
+
+.dropdown > .dropdown-content > a {
+    white-space: nowrap;
+    display: block;
+    padding: 5px 25px;
+    font-size: 1.2rem;
+}
+
+.dropdown > .dropdown-content > a > i {
+    width: 25px;
+    text-align: center;
+}
+
+.dropdown > .dropdown-content > a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+
+
+.global-nav > .dropdown > .dropdown-content {
+    top: 100%;
+    right: 0;
+}
+
+.local-nav > .dropdown > .dropdown-content {
+    top: 100%;
+    right: 0;
+}
+
+.user-gravatar {
+    height: 25px;
+    width: 25px;
+    border: 1px solid #fff;
+    border-radius: 100%;
+    background-color: #fff;
+}
+
+
+.navbar-header > a,
+.navbar-header > .dropdown {
+    flex: 0 0 auto;
+}
+
+@media (max-width: 700px) {
+
+    .nav > .navbar-toggle {
+        display: block;
+    }
+
+    .nav > .local-nav {
+        position: fixed;
+    }
+
+}
+
+@media (min-width: 701px) {
+
+    .nav.navbar > .navbar-toggle {
+        display: none;
+    }
+
+}
+
+
+.local-nav.navbar-collapse.collapse {
+    display: flex !important;
+    flex: 0 0 auto;
+    align-items: center;
+    justify-content: flex-end;
+}
 
 
 /* Global */
@@ -80,7 +321,6 @@ h2:hover >.headerlink {
 }
 
 body {
-    margin-top: 50px;
     background-color: #f8f8f8;
 }
 .btn:focus {

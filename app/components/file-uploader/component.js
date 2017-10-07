@@ -19,7 +19,7 @@ export default Ember.Component.extend({
 
                 this.set('parameters.fileName.value',  filename);
                 this.set('fileChosen', true);
-                this.set('parameters.fileData.value',  JSON.stringify(ev.target.result));
+                this.set('parameters.fileData.value',  encodeURI(ev.target.result));
 
             };
 

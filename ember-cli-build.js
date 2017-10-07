@@ -8,9 +8,9 @@ module.exports = function(defaults) {
         // Add options here
         sassOptions: {
             includePaths: [
-                'node_modules/@centerforopenscience/ember-osf/addon/styles',
-                'bower_components/bootstrap-sass/assets/stylesheets',
-                'bower_components/osf-style/sass',
+            //    'node_modules/@centerforopenscience/ember-osf/addon/styles',
+             //   'bower_components/bootstrap-sass/assets/stylesheets',
+             //   'bower_components/osf-style/sass',
                 'bower_components/hint.css',
             ],
         },
@@ -30,10 +30,10 @@ module.exports = function(defaults) {
     // along with the exports of each module as its value.
 
 
-    app.import('bower_components/osf-style/css/base.css');
+  //  app.import('bower_components/osf-style/css/base.css');
     app.import('bower_components/loaders.css/loaders.min.css');
     app.import('bower_components/hint.css/hint.min.css');
-    app.import('bower_components/jquery.tagsinput/src/jquery.tagsinput.js');
-    app.import('vendor/assets/ember-osf.css');
+ //   app.import('bower_components/jquery.tagsinput/src/jquery.tagsinput.js');
+//    app.import('vendor/assets/ember-osf.css');
     return app.toTree();
 };

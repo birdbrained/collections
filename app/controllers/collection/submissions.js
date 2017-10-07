@@ -11,6 +11,7 @@ export default Ember.Controller.extend({
             const caxe = this.store.createRecord('case');
             const wf = collection.get('workflow');
             caxe.set('workflow', wf);
+            caxe.set('collection', collection);
             const case_saved_Promise = caxe.save()
             case_saved_Promise.then((caxe) => {
                 this.set('caxe.activeCase', caxe);

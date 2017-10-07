@@ -1,3 +1,11 @@
-{{new-osf-navbar loginAction=(action 'login') hideSearch=true}}
+{{new-osf-navbar loginAction=(action 'login')}}
+
+{{#if (not true)}}
+    {{!--
+        SEARCH DROPDOWN (FOR HOME SERVICE) - redirects to /search/?q=search_query
+    --}}
+    {{search-dropdown action='toggleSearch'}}
+{{/if}}
+
 {{outlet}}
 {{osf-footer}}

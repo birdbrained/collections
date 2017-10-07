@@ -33,10 +33,9 @@ export default Ember.Component.extend({
 
     actions: {
         async pressButton() {
-            // debugger;
             const item = this.get('store').createRecord('item');
 
-            item.set('type', this.get('parameters.type.value'));
+            item.set('type', 'meeting');
             item.set('title', this.get('parameters.title.value'));
 
             item.set('status', 'none');
@@ -52,7 +51,7 @@ export default Ember.Component.extend({
 
             let node = this.get('parameters.node.value');
             await node.save();
-            item.set('source_id', node.get('id'));
+            item.set('sourceId', node.get('id'));
 
             const uri = ENV.OSF.waterbutlerUrl + "v1/resources/" + node.get('id') + "/providers/osfstorage/?kind=file&name=" + this.get('parameters.fileName.value') + "&direct=true";
 
@@ -68,13 +67,19 @@ export default Ember.Component.extend({
                     item.set('fileLink', JSON.parse(xhr.responseText).data.links.download);
                     item.save().then(item => {
                         console.log('about to transition');
-                        this.get('router').transitionTo('collection.item', this.get('collection'), item);
+                        this.get('store').findRecord('workflow', 22).then(wf => {
+                            let caxe = this.get('store').createRecord('case');
+                            caxe.set('collection', this.get('collection'));
+                            caxe.set('workflow', wf);
+                            caxe.save();
+                            this.get('router').transitionTo('collection.item', this.get('collection'), item);
+                        })
 
                     }, err => console.log(err));
                 }
             };
 
-            xhr.send(this.get('parameters.fileData.value'));
+            xhr.send(decodeURI(this.get('parameters.fileData.value')));
         },
     },
 

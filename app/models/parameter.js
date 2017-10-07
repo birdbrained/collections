@@ -29,16 +29,20 @@ export default Model.extend({
         inverse: 'parameters'
     }),
 
+    disableAutosave: false,
+
     autoSave: Ember.observer('currentState.isDirty', function() {
-        if (this.get('currentState.isDirty')) {
-            Ember.run.next(() => this.save());
-        }
-        if ((() => {
+        Ember.run.debounce(() => {
+            this.get('currentState.isDirty') &&
+            !this.disableAutosave &&
+            this.save();
+        }, 1000)
+        /*if ((() => {
             let attrs = [];
             this.eachAttribute(attr => attrs.push(attr));
             return Object.keys(this, this.changedAttributes())
                 .find(key => attrs.includes(key));
-        })()) {}
+        })()) {}*/
     }),
 
 
