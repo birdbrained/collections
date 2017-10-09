@@ -1,16 +1,29 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+
     session: Ember.inject.service(),
     newCollectionTitle: '',
     modelCache: null,
     filterText: '',
     currentPage: 1,
     loadingMore: false,
+
     showLoadMore: Ember.computed('model.meta', function() {
         return this.get('model.meta.pagination.count') > this.get('model.length');
     }),
+
+    collectionTypes: [
+        "Meetings",
+        "Registrations",
+        "Datasets",
+        "Preprints",
+        "Proposals",
+        "Bookmarks"
+    ],
+
     actions: {
+
         filter () {
             const model = this.get('model');
             const text = this.get('filterText').toLowerCase();
@@ -21,9 +34,11 @@ export default Ember.Controller.extend({
                 return item.get('title').toLowerCase().includes(text);
             }));
         },
+
         clearFilter() {
             this.set('filterText', '');
         },
+
         loadMore() {
             this.set('loadingMore', true);
             this.store.query('collection', {
@@ -37,5 +52,7 @@ export default Ember.Controller.extend({
                 this.set('loadingMore', false);
             });
         },
+
     }
+
 });

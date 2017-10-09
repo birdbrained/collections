@@ -1,0 +1,90 @@
+<div id="explore-hero" class="hero">
+    <h1 class="f-w-lg">Explore</h1>
+</div>
+
+
+<div class="coll-toolbar row">
+
+
+    <h2>Showcase</h2>
+
+    <div class="cards">
+        {{#each collections as |collection|}}
+            {{#link-to "collections.collection" collection.id class="card"}}
+                <span
+                    class="card-image"
+                    style="background-image: url('/img/{{collection.settings.coverphoto}}')"
+                ></span>
+                <label>{{collection.title}}</label>
+                <span>{{collection.type}}</span>
+            {{/link-to}}
+        {{/each}}
+    </div>
+
+    <hr>
+
+    <h2>Collections By Type</h2>
+
+    <div class="cards">
+        {{#each collectionTypes as |collectionType|}}
+            <a class="card">
+                <span class="card-image" style="background-image: url('/img/{{lower-case collectionType}}.jpg')"></span>
+                <label>{{collectionType}}</label>
+            </a>
+        {{/each}}
+    </div>
+
+    {{#link-to "index" class="button"}}
+            <span {{action 'clearFilter'}}>More Types</span>
+    {{/link-to}}
+
+    <hr>
+
+    <h2>Newest collections</h2>
+
+    {{#each collections as |collection|}}
+
+        <div class="coll-single">
+
+            {{#link-to
+                "collections.collection"
+                collection.id
+                class="button pull-right"}}
+                    <span {{action 'clearFilter'}}>View</span>
+            {{/link-to}}
+
+            <h3>
+                {{#link-to "collections.collection" collection.id}}
+                    <span {{action 'clearFilter'}}>{{collection.title}}</span>
+                {{/link-to}}
+            </h3>
+
+            <p>{{truncate-text collection.description limit=250 omission="..."}}</p>
+
+            {{#if collection.tags}}
+                <div>Tags: {{collection.tags}}</div>
+            {{/if}}
+
+            <div class="text-muted">
+                Created on {{moment-format collection.dateCreated "MMMM DD, YYYY"}}
+            </div>
+
+        </div>
+
+    {{/each}}
+
+    <div class="text-center">
+
+        {{#if showLoadMore}}
+            {{#if loadingMore}}
+                <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw text-muted m-t-md"></i>
+            {{else}}
+                <button class="btn btn-default" {{action 'loadMore'}}> Load more </button>
+            {{/if}}
+        {{/if}}
+
+    </div>
+
+</div>
+
+{{outlet}}

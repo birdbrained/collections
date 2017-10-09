@@ -1,13 +1,6 @@
-<div id="{{get-section-id layout.title}}" class="landing-paragraph-container p-xl"
-     style="{{containerStyle}}">
-    <div class="container">
-        <div class="row wrapper">
-            {{#if layout.title}}
-                <h2>
-                    {{layout.title}}
-                </h2>
-            {{/if}}
-            <p class="text-left">{{layout.body}}</p>
-        </div>
-    </div>
-</div>
+{{#if layout.title}}
+    <h2>
+        {{layout.title}}
+    </h2>
+{{/if}}
+<p class="text-left">{{layout.body}}</p>

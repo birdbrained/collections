@@ -1,0 +1,15 @@
+<div id="collections-hero" class="hero">
+
+    <h1 class="f-w-lg">Open Science Framework</h1>
+
+    {{#if session.isAuthenticated}}
+        {{#link-to 'create' class="button"}}
+            Start a collection
+        {{/link-to}}
+        {{#link-to 'create' class="button"}}
+            My Collection
+        {{/link-to}}
+
+    {{/if}}
+
+</div>

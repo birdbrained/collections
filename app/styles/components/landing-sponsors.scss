@@ -1,9 +1,31 @@
-.logo-wrapper {
-  height: 80px;
-}
+.landing-sponsors {
 
-.sponsors-logo {
-  max-width: 150px;
-  max-height: 65px;
-  mix-blend-mode: luminosity;
+    h3 {
+        text-align: center;
+    }
+
+    .category {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+
+        a {
+            text-align: center;
+            display: block;
+            min-width: 25%;
+        }
+    }
+
+    hr {
+        margin: 30px auto;
+        border-top: 1px solid rgba(0,0,0,0.2);
+        width: 50%;
+    }
+
+    .sponsors-logo {
+        max-width: 150px;
+        max-height: 65px;
+        mix-blend-mode: luminosity;
+    }
+
 }

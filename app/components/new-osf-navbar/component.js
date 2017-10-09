@@ -26,6 +26,23 @@ export default Ember.Component.extend(AnalyticsMixin, {
     tagName: 'nav',
     classNames: [],
 
+    navLinks: [
+        {
+            name: "Explore",
+            type: "link-to",
+            route: "explore"
+        },
+        {
+            name: "My Content",
+            type: "link-to",
+            route: "my-content"
+        },
+        {
+            name: "Support",
+            type: "link",
+            href: "https://osf.io/support/"
+        },
+    ],
 
     session: Ember.inject.service(),
     showSearch: false,

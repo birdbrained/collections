@@ -1,59 +1,60 @@
-<div class="meetings-schedule-container p-lg" style="{{containerStyle}}">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6">
-                <div id="schedule-header">
-                    {{input value=filterString placeholder="Filter schedule" style="color:black;"}} | Filter by:
-                    <select onchange={{action (mut trackFilter) value="target.value"}}>
-                        <option value="" selected={{eq "" trackFilter}}>All Tracks</option>
-                        {{#each (await tracks) as |track|}}
-                            <option value={{track}} selected={{eq track trackFilter}}>{{track}}</option>
-                        {{/each}}
-                    </select>
-                    <select onchange={{action (mut roomFilter) value="target.value"}}>
-                        <option value="" selected={{eq "" roomFilter}}>All Rooms</option>
-                        {{#each (await rooms) as |room|}}
-                            <option value={{room}} selected={{eq room roomFilter}}>{{room}}</option>
-                        {{/each}}
-                    </select>
-                </div>
-                <div id="schedule-window">
-                    {{#each (await items) as |itemlist|}}
-                        <h4 class="time-slot-header">{{itemlist.[0].startTimeFormatted}}</h4>
-                        <table class="time-slot">
-                            {{#each itemlist as |item|}}
-                                {{#if (and (or (contains-substring item.scheduleFilterText filterString)
-                                        (contains-substring (await item.createdBy.computedFullName) filterString))
-                                              (contains-substring item.location roomFilter))}}
-                                    <tbody onclick={{action (mut selectedItemId) item.id}}>
-                                    <tr>
-                                        <td class="top-row left-cell event-title"><strong>{{item.title}}</strong></td>
-                                        <td class="top-row right-cell event-location">{{item.location}}</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="bottom-row left-cell event-presenter">{{await
-                                                item.createdBy.computedFullName}}</td>
-                                        <td class="bottom-row right-cell event-end-time">Ends
-                                            at {{item.endTimeFormatted}}</td>
-                                    </tr>
-                                    </tbody>
-                                {{/if}}
-                            {{/each}}
-                        </table>
-                        <br>
-                    {{/each}}
-                    <br><br>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="item-detail">
-                    <h2>{{get (await selectedItem) 'title'}}<br>
-                        <small>{{get (await selectedItem) 'createdBy.computedFullName'}}</small>
-                    </h2>
-                    <p>{{get (await selectedItem) 'description'}}</p>
-                    <p><a href="#">Link to author</a> | {{#link-to 'collection.item' model.id selectedItemId}}Link to presentation{{/link-to}}</p>
-                </div>
-            </div>
-        </div>
-    </div>
+<h2>Meeting Schedule</h2>
+
+<div class="schedule-header">
+    {{input value=filterString placeholder="Search Schedule..." style="color:black;"}}
+    <label>
+        Filter by:
+    </label>
+    <select onchange={{action (mut trackFilter) value="target.value"}}>
+        <option value="" selected={{eq "" trackFilter}}>All Tracks</option>
+        {{#each (await tracks) as |track|}}
+            <option value={{track}} selected={{eq track trackFilter}}>{{track}}</option>
+        {{/each}}
+    </select>
+    <select onchange={{action (mut roomFilter) value="target.value"}}>
+        <option value="" selected={{eq "" roomFilter}}>All Rooms</option>
+        {{#each (await rooms) as |room|}}
+            <option value={{room}} selected={{eq room roomFilter}}>{{room}}</option>
+        {{/each}}
+    </select>
 </div>
+
+
+<div class="schedule-table">
+    {{#each (await items) as |itemlist|}}
+        <h2 class="time-slot-header">{{itemlist.[0].startTimeFormatted}}</h2>
+        <table class="time-slot">
+            {{#each itemlist as |item|}}
+                {{#if (and (or (contains-substring item.scheduleFilterText filterString)
+                        (contains-substring (await item.createdBy.computedFullName) filterString))
+                              (contains-substring item.location roomFilter))}}
+                    <tbody onclick={{action (mut selectedItemId) item.id}}>
+                    <tr>
+                        <td class="top-row left-cell event-title"><strong>{{item.title}}</strong></td>
+                        <td class="top-row right-cell event-location">{{item.location}}</td>
+                    </tr>
+                    <tr>
+                        <td class="bottom-row left-cell event-presenter">{{await
+                                item.createdBy.computedFullName}}</td>
+                        <td class="bottom-row right-cell event-end-time">Ends
+                            at {{item.endTimeFormatted}}</td>
+                    </tr>
+                    </tbody>
+                {{/if}}
+            {{/each}}
+        </table>
+    {{else}}
+        No Items Yet.
+    {{/each}}
+</div>
+
+<div class="item-detail">
+    <h2>Select an item from the schedule to see more details about it.</h2>
+    <h2>{{get (await selectedItem) 'title'}}<br>
+        <small>{{get (await selectedItem) 'createdBy.computedFullName'}}</small>
+    </h2>
+    <p>{{get (await selectedItem) 'description'}}</p>
+    <p><a href="#" class="button">Link to author</a> | {{#link-to 'collections.collection.item' model.id selectedItemId class="button"}}Link to presentation{{/link-to}}</p>
+</div>
+
+<hr>

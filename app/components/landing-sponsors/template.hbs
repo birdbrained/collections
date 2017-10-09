@@ -1,26 +1,17 @@
-<div id="{{get-section-id layout.title}}" class="p-xl" style="{{containerStyle}}">
-    <div class="container">
-        <div class="row text-center">
-            <h2 class="p-b-lg">
-                {{layout.title}}
-            </h2>
-        </div>
-        {{#each data as |categorySponsors|}}
-            <div class="row">
-                {{#if categorySponsors.category}}
-                    <h3 class="text-center">{{categorySponsors.category}}</h3>
-                    <hr style="width:50%;">
-                {{/if}}
-                {{#each categorySponsors.sponsors as |sponsor|}}
-                    <div class="text-center col-xl-1 col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                        <div class="logo-wrapper">
-                            <a href="{{sponsor.website-url}}">
-                                <img class="sponsors-logo m-b-md" src="{{sponsor.img-url}}"/>
-                            </a>
-                        </div>
-                    </div>
-                {{/each}}
-            </div>
+<h2 class="p-b-lg">
+    {{layout.title}}
+</h2>
+
+{{#each data as |categorySponsors|}}
+    {{#if categorySponsors.category}}
+        <h3>{{categorySponsors.category}}</h3>
+        <hr>
+    {{/if}}
+    <div class="category">
+        {{#each categorySponsors.sponsors as |sponsor|}}
+            <a href="{{sponsor.website-url}}">
+                <img class="sponsors-logo m-b-md" src="{{sponsor.img-url}}"/>
+            </a>
         {{/each}}
     </div>
-</div>
+{{/each}}

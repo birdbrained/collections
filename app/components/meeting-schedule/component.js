@@ -3,21 +3,28 @@ import _ from 'lodash';
 import moment from 'moment';
 
 export default Ember.Component.extend({
+
     session: Ember.inject.service(),
     store: Ember.inject.service(),
     filterString: '',
     trackFilter: '',
     roomFilter: '',
     selectedItemId: 0,
+
+    classNames: ["schedule"],
+
     data: Ember.computed('layout', function () {
         const dataSource = this.get('layout.data');
         return this.get('model.settings').data[dataSource];
     }),
-    containerStyle: Ember.computed('layout', function() {
+
+    style: Ember.computed('layout', function() {
         const bg = this.get('layout.background_color') ? `background-color:${this.get('layout.background_color')};` : '';
         const txt = this.get('layout.text_color') ? `color: ${this.get('layout.text_color')};` : '';
         return Ember.String.htmlSafe(bg + txt);
     }),
+    attributeBindings: ['style'],
+
     items: Ember.computed('model', function () {
         // fetches the items, sorts them into buckets by start time, returns them as a list
         return this.get('model.items').then((results) => {

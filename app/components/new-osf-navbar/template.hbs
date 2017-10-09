@@ -1,23 +1,20 @@
-<div class="global-nav">
+<div class="nav-item-group global-nav">
 
     {{!--
         OSF Branding
     --}}
-    <a  class="navbar-logo"
-        href="/"
-        aria-label={{t 'eosf.navbar.goHome'}}></a>
-
+    {{#link-to "index"}}
+        <span class="navbar-logo"></span>
+    {{/link-to}}
     {{!--
         NAME OF CURRENT SERVICE - HOME, PREPRINTS, REGISTRIES, or MEETINGS
     --}}
-    <a class="service-link" href="{{currentServiceLink}}">
+    {{#link-to "index" class="service-link"}}
         <span class="hidden-xs"> OSF </span>
-        <span class="current-service"><strong>{{currentService}}</strong></span>
-    </a>
+    {{/link-to}}
 
     {{!--
         Primary Navigation - Toggles between Home, Preprints, Registries, and Meetings
-    --}}
     <div class="dropdown">
 
         <button
@@ -54,9 +51,13 @@
             </a>
 
         </div>
+
     </div>
+    --}}
 
 </div>
+
+<input type="text" placeholder="Search...">
 
 {{!--
     Toggle navigation button on xs screen
@@ -76,9 +77,9 @@
 {{!--
     Secondary Navigation - Displays corresponding links for selected service
 --}}
-<div class="local-nav">
+<div class="nav-item-group local-nav">
 
-    {{#each (build-secondary-nav-links currentService) as |navLink|}}
+    {{#each navLinks as |navLink|}}
         {{#if (and (eq currentService 'HOME') (eq navLink.type "search"))}}
 
             {{!TOGGLE SEARCH BUTTON FOR HOME SERVICE}}
@@ -86,17 +87,23 @@
                 class="btn-link search-toggle"
                 {{action 'toggleSearch'}}
                 {{action 'click' 'button' (concat 'Navbar - ' currentService navLink.name)}}>
-                    {{t navLink.name}}
+                    {{navLink.name}}
             </a>
 
         {{else}}
 
-            {{!SERVICE LINK}}
+            {{!--
+                SERVICE LINK
+            --}}
             {{#if (eq navLink.type 'donateToCOS')}}
                 <a  href="{{navLink.href}}"
                     onclick={{action 'click' 'link' (concat 'Navbar - ' navLink.name)}}>
-                        {{t navLink.name}}
+                        {{navLink.name}}
                 </a>
+            {{else if (eq navLink.type "link-to")}}
+                {{#link-to navLink.route}}
+                    {{navLink.name}}
+                {{/link-to}}
             {{else}}
                 <a  href="{{navLink.href}}"
                     onclick={{action 'click' 'link' (concat 'Navbar - ' navlink.name)}}>
@@ -104,7 +111,7 @@
                             <span class="hidden-xs hidden-sm">{{t navLink.name}}</span>
                             <span class="hidden-md hidden-lg hidden-xl">{{t 'eosf.navbar.add'}}</span>
                         {{else}}
-                            {{t navLink.name}}
+                            {{navLink.name}}
                         {{/if}}
                 </a>
             {{/if}}

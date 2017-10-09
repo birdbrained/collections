@@ -18,7 +18,7 @@
         <tbody>
         {{#each searchResults.data as |r|}}
             <tr>
-                <td>{{#link-to "collection.item"
+                <td>{{#link-to "collections.collection.item"
                                model.id r.id}}{{r.attributes.title}}{{/link-to}}</td>
                 <td>{{r.attributes.created-by}}</td>
                 <td>Event [debug this template]</td>
