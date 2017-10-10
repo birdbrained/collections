@@ -8,26 +8,25 @@ export default Ember.Route.extend({
 
     model(params) {
         return Ember.RSVP.hash({
-            "title": this.title,
-            "collection": this.modelFor('collection')
+            "collections": this.modelFor('collections')
         });
     },
 
     afterModel(model, transition) {
-        this.set("path.parts", transition.targetName.split(".").map((cur, i, arr) => {
+    },
+
+    setupController(controller, data) {
+        controller.set("title", this.get("title"));
+        controller.set("collections", data.collections);
+        this.set("path.parts", this.routeName.split(".").map((cur, i, arr) => {
             let routeName = arr.slice(0, i+1).join(".");
-            let model = this.modelFor(routeName);
+            let controller = this.controllerFor(routeName);
             return {
-                label: model.title,
+                label: controller.get("title"),
                 route: routeName,
                 routePart: cur
             };
         }));
-    },
-
-    setupController(controller, data) {
-        controller.set("title", data.title);
-        controller.set("collections", data.collection);
     },
 
 });

@@ -1,17 +1,23 @@
 
-
 <div class="nav-item-group breadcrumbs">
     {{#each path.parts as |part|}}
-        {{#link-to part.route class="nav-item"}}
-            {{part.label}}
-        {{/link-to}}
+        {{#if (eq link.type "routeWithModel")}}
+            {{#link-to part.route part.model class="nav-item"}}{{part.label}}{{/link-to}}
+        {{else}}
+            {{#link-to part.route class="nav-item"}}{{part.label}}{{/link-to}}
+        {{/if}}
     {{/each}}
 </div>
 
-
 <div class="nav-item-group" id="myNavbar">
     {{#each navLinks.links as |link|}}
-        {{#link-to link.route}}{{link.label}}{{/link-to}}
+
+        {{#if (eq link.type "routeWithModel")}}
+            {{#link-to link.route link.model}}{{link.label}}{{/link-to}}
+        {{else}}
+            {{#link-to link.route}}{{link.label}}{{/link-to}}
+        {{/if}}
+
     {{/each}}
 </div>
 

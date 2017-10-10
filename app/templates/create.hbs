@@ -11,7 +11,7 @@
 
     <h2>Select the type of collection to create</h2>
     {{#each typeList as |type|}}
-        {{radio-Button type=type name="radio-collection-type"}}
+        {{radio-Button type=type name="radio-collection-type" group="collection-type"}}
     {{/each}}
 
     <hr class="soften"/>
@@ -44,6 +44,9 @@
     {{/if}}
 
     <h2>How should items be added to the collection?</h2>
+    <p>
+        
+    </p>
     <select class="form-control" onchange={{action 'setWorkflow'}}>
         <option disabled selected> -- Select a submission workflow for the service -- </option>
         {{#each workflows as |workflowChoice|}}

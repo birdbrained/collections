@@ -20,15 +20,15 @@ Router.map(function() {
     this.route('collections', { path: 'collections'}, function() {
         this.route("collection", {path: ":collection_id" }, function() {
             this.route('item', { path: 'item/:item_id' });
+            this.route('submissions');
+            this.route('edit');
+            this.route('add');
             this.route('group', { path: 'group/:group_id' }, function() {
                 this.route('item', { path: 'item/:group_item_id' });
             });
         });
-        this.route('submissions');
-        this.route('add');
         this.route('search');
         this.route('browse');
-        this.route('edit');
     });
     this.route('appendices');
     this.route('create');

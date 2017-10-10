@@ -32,21 +32,19 @@ export default Ember.Route.extend({
                 route: "my-content"
             }
         ]);
-        if (transition.targetName === this.routeName) {
-            this.set("path.parts", transition.targetName.split(".").map((cur, i, arr) => {
-                let routeName = arr.slice(0, i+1).join(".");
-                let model = this.modelFor(routeName);
-                return {
-                    label: model.title,
-                    route: routeName,
-                    routePart: cur
-                };
-            }));
-        }
     },
 
     setupController(controller, data) {
         controller.set("title", data.title);
         controller.set("collections", data.collections);
+        this.set("path.parts", this.routeName.split(".").map((cur, i, arr) => {
+            let routeName = arr.slice(0, i+1).join(".");
+            let controller = this.controllerFor(routeName);
+            return {
+                label: controller.get("title"),
+                route: routeName,
+                routePart: cur
+            };
+        }));
     },
 });

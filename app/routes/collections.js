@@ -7,29 +7,26 @@ export default Ember.Route.extend({
     title: "Collections",
 
     model(params) {
-        return Ember.RSVP.hash({
-            "title": this.get("title"),
-            "collections": this.store.findAll('collection')
-        });
+        return this.store.findAll('collection')
     },
 
-    afterModel(model, transition) {
-        if (transition.targetName === this.routeName) {
-            this.set("path.parts", transition.targetName.split(".").map((cur, i, arr) => {
-                let routeName = arr.slice(0, i+1).join(".");
-                let model = this.modelFor(routeName);
-                return {
-                    label: model.title,
-                    route: routeName,
-                    routePart: cur
-                };
-            }));
-        }
-    },
+    afterModel(model, transition) {},
 
     setupController(controller, data) {
-        controller.set("title", data.title);
-        controller.set("collection", data.collections);
+        controller.set("title", this.get("title"));
+        controller.set("model", data);
+        controller.set("hasDynamicPart", false);
+        controller.set("collection", data);
+        let pathParts = this.routeName.split(".").map((cur, i, arr) => {
+            let routeName = arr.slice(0, i+1).join(".");
+            let controller = this.controllerFor(routeName);
+            return {
+                label: controller.get("title"),
+                route: routeName,
+                routePart: cur
+            };
+        });
+        this.set("path.parts", pathParts);
     }
 
 });

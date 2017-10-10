@@ -2,7 +2,7 @@
     <h1>My Content</h1>
 </div>
 
-<div class="notices">
+<!--<div class="notices">
     <div class="section">
         <p>Content you generate is stored in a collection. Every OSF user has a collection named 'My Collection'. This collection may contain any type of item, and the form used to create the items that exist in 'My Collection' can be customized to suit your needs.</p>
         <p>Each item in your 'My Collection' may additionally be marked as 'Private' or 'Public'. All users will be able to see public items that are in your collection, but only you will be able to see items that are private, unless you choose to explicitly share that item.</p>
@@ -13,7 +13,7 @@
         <p>The OSF allow you to create collections and items that exist in that collection. Each user's 'My Collection' is public. It will be seen by other users as &lt;your username&gt;'s Collection.</p>
         <p>You can create collections in addition to "My Collection". All of thes collections are public, but the items in each may be marked as public or private.</p>
     </div>
-</div>
+</div>-->
 
 <div>
     {{#link-to "create" class="button"}}
@@ -25,12 +25,17 @@
     {{/link-to}}
 </div>
 
-{{#each collections as |collection|}}
-    <div>
-        <h2>{{collection.title}}</h2>
-        <p>{{collection.description}}</p>
-        {{#link-to "collections.collection" collection.id class="button"}}
-            View this collection
-        {{/link-to}}
-    </div>
-{{/each}}
+<div class="collection-list">
+    {{#each collections as |collection|}}
+        <div class="collection-overview">
+            <h2>{{collection.title}}</h2>
+            <p>{{collection.description}}</p>
+            {{#link-to "collections.collection" collection.id class="button"}}
+                View this collection
+            {{/link-to}}
+            {{#link-to "collections.collection.edit" collection.id class="button"}}
+                Edit this collection
+            {{/link-to}}
+        </div>
+    {{/each}}
+</div>

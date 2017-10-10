@@ -25,20 +25,20 @@ export default Ember.Route.extend({
                 route: "explore"
             }
         ]);
-        this.set("path.parts", transition.targetName.split(".").map((cur, i, arr) => {
-            let routeName = arr.slice(0, i+1).join(".");
-            let model = this.modelFor(routeName);
-            return {
-                label: model.title,
-                route: routeName,
-                routePart: cur
-            };
-        }));
     },
 
     setupController(collection, data) {
         collection.set('collections', data.collections);
         collection.set("title", data.title)
+        this.set("path.parts", this.routeName.split(".").map((cur, i, arr) => {
+            let routeName = arr.slice(0, i+1).join(".");
+            let controller = this.controllerFor(routeName);
+            return {
+                label: controller.title,
+                route: routeName,
+                routePart: cur
+            };
+        }));
     }
 
 });

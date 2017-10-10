@@ -2,11 +2,22 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
 
+    panelActions: Ember.inject.service('panelActions'),
+    caxe: Ember.inject.service(),
+
     path: Ember.inject.service(),
     navLinks: Ember.inject.service(),
 
-    model(params) {
-        return this.store.findRecord("collection", params.collection_id)
+    title: "Settings",
+
+    model() {
+        const collection = this.modelFor('collections.collection');
+        return Ember.RSVP.hash({
+            cases: this.store.query("case", {
+                collection: collection.id
+            }),
+            collection: collection
+        });
     },
 
     afterModel(model, transition) {
@@ -33,14 +44,13 @@ export default Ember.Route.extend({
     },
 
     setupController(controller, data) {
-        controller.set("model", data);
+        controller.set("model", data.collection);
         controller.set("hasDynamicPart", true);
-        controller.set("title", data.get("title"));
-        controller.set("collection", data);
+        controller.set("title", this.get("title"));
+        controller.set("collection", data.collection);
         this.set("path.parts", this.routeName.split(".").map((cur, i, arr) => {
             let routeName = arr.slice(0, i+1).join(".");
             let controller = this.controllerFor(routeName);
-            console.log("collections.collection")
             return {
                 label: controller.get("title"),
                 route: routeName,

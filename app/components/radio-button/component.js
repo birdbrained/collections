@@ -1,11 +1,13 @@
 import Ember from "ember";
 
-export default Ember.component.extend({
+export default Ember.Component.extend({
 
     tagName: "div",
-    className:"radio",
+    classNames: ["radio"],
     attributeBindings: ["type", "checked", "value", "name", "disabled"],
 
-    checked: Ember.computed(),
+    checked: Ember.computed("tagName", function() {
+        
+    }),
 
 });

@@ -15,14 +15,14 @@ export default Ember.Controller.extend({
             const case_saved_Promise = caxe.save()
             case_saved_Promise.then((caxe) => {
                 this.set('caxe.activeCase', caxe);
-                this.transitionToRoute("collection.add", collection)
+                this.transitionToRoute("collections.collection.add", collection)
             })
         },
 
         continueCase(caxe, collection) {
 
             this.set('caxe.activeCase', caxe);
-            this.transitionToRoute('collection.add', collection)
+            this.transitionToRoute('collections.collection.add', collection)
 
         }
 

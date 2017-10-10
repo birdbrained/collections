@@ -7,10 +7,12 @@
     .category {
         display: flex;
         justify-content: space-between;
+        align-items: center;
         flex-wrap: wrap;
 
         a {
             text-align: center;
+            margin: 15px auto;
             display: block;
             min-width: 25%;
         }

@@ -1,0 +1,15 @@
+<div class="hero">
+    <h1>Browsing all collections</h1>
+</div>
+
+<div class="collection-list">
+    {{#each collections as |collection|}}
+        <div class="collection-overview">
+            <h2>{{collection.title}}</h2>
+            <p>{{collection.description}}</p>
+            
+        </div>
+    {{/each}}
+</div>
+
+{{outlet}}
