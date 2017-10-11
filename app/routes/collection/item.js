@@ -13,9 +13,4 @@ export default Ember.Route.extend({
 
         });
     },
-
-    setupController(controller, data) {
-        controller.set('item', data.item);
-        controller.set('collection', data.collection);
-    }
 });

@@ -55,11 +55,13 @@ select {
 }
 
 .radio {
-  margin: 0.5rem;
+  margin: 15px 0;
   input[type="radio"] {
     position: absolute;
     opacity: 0;
     + label {
+
+      padding: 0;
       &:before {
         content: '';
         background: $color1;

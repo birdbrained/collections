@@ -3,60 +3,60 @@
 </div>
 
 
-<div class="form">
+<section>
     <h2>Name this collection</h2>
     {{input class="form-control" value=title placeholder="Enter collection name"}}
+</section>
 
-    <hr class="soften"/>
-
+<section>
     <h2>Select the type of collection to create</h2>
     {{#each typeList as |type|}}
-        {{radio-Button type=type name="radio-collection-type" group="collection-type"}}
+        <div class="radio">
+            {{radio-button id=type.value value=type.value name="radio-collection-type" checked=collectionType}}
+            <label for="{{type.value}}" >{{type.label}}<p>{{type.description}}</p></label>
+        </div>
     {{/each}}
+</section>
 
-    <hr class="soften"/>
-
+<section>
     <h2>Add a description</h2>
     {{textarea class="form-control" value=description rows="6"}}
-
-    <hr class="soften" />
+</section>
 
     {{#if (eq selectedType 'meeting')}}
 
-        <hr class="soften" />
+        <section>
+            <h2>Where will the meeting be held?</h2>
+            {{input class="form-control" value=location placeholder="Enter meeting location"}}
+        </section>
 
-        <h2>Where will the meeting be held?</h2>
-        {{input class="form-control" value=location placeholder="Enter meeting location"}}
+        <section>
+            <h2>Add the adress of the location</h2>
+            {{input class="form-control" value=address placeholder="Enter meeting address"}}
+        </section>
 
-        <hr class="soften" />
-
-        <h2>Add the adress of the location</h2>
-        {{input class="form-control" value=address placeholder="Enter meeting address"}}
-
-        <hr class="soften" />
-
-        <h2>When will the meeting take place?</h2>
-        Start Date:
-        {{bs-datetimepicker date=startDate}}
-        End Date:
-        {{bs-datetimepicker date=endDate}}
+        <section>
+            <h2>When will the meeting take place?</h2>
+            Start Date:
+            {{bs-datetimepicker date=startDate}}
+            End Date:
+            {{bs-datetimepicker date=endDate}}
+        </section>
 
     {{/if}}
 
+<section>
     <h2>How should items be added to the collection?</h2>
-    <p>
-        
-    </p>
+    <p>Select from one of the following workflows.</p>
     <select class="form-control" onchange={{action 'setWorkflow'}}>
         <option disabled selected> -- Select a submission workflow for the service -- </option>
         {{#each workflows as |workflowChoice|}}
             <option value={{workflowChoice.id}} selected={{eq selectedWorkflow.id workflowChoice.id}}>{{workflowChoice.title}}</option>
         {{/each}}
     </select>
+</section>
 
-    <hr class="soften" />
-
+<section>
     {{#link-to 'index' class="button cancel"}}Discard{{/link-to}}
     <button class="button {{unless title 'disabled'}}" {{action 'addCollection'}}>Create Collection</button>
-
-</div>
+</section>
