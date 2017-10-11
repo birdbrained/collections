@@ -4,6 +4,7 @@ import _ from 'lodash';
 export default Ember.Component.extend({
     store: Ember.inject.service(),
     session: Ember.inject.service(),
+    tagName: "section",
     data: Ember.computed('layout', function() {
         const dataSource = this.get('layout.data');
         return this.get('model.settings').data[dataSource];

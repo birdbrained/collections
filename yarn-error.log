@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/local/Cellar/node/8.4.0/bin/node /usr/local/Cellar/yarn/0.27.5_1/libexec/bin/yarn.js add ember-string-helpers
+  /usr/local/Cellar/node/8.4.0/bin/node /usr/local/Cellar/yarn/0.27.5_1/libexec/bin/yarn.js remove bootstrap --non-interactive
 
 PATH: 
   /Users/josh/.pyenv/plugins/pyenv-virtualenv/shims:/Users/josh/.pyenv/shims:/usr/local/bin:/usr/local/nginx/sbin:/usr/local/sbin:/usr/sbin:/sbin:/usr/bin:/bin:/opt/X11/bin:/Users/josh/go/bin
@@ -26,8 +26,7 @@ npm manifest:
     "scripts": {
       "build": "ember build",
       "start": "ember server",
-      "test": "ember test",
-      "use-ember-osf-develop": "yarn upgrade @centerforopenscience/ember-osf@https://github.com/CenterForOpenScience/ember-osf.git#develop#$(date -u +%FT%TZ)"
+      "test": "ember test"
     },
     "repository": "",
     "engines": {
@@ -36,15 +35,16 @@ npm manifest:
     "author": "",
     "license": "MIT",
     "dependencies": {
-      "@centerforopenscience/ember-osf": "https://github.com/CenterForOpenScience/ember-osf.git#develop#2017-09-29T20:14:40Z",
+      "@centerforopenscience/ember-osf": "https://github.com/CenterForOpenScience/ember-osf.git#develop",
       "broccoli-asset-rev": "^2.4.2",
       "broccoli-debug": "^0.6.3",
       "ember-ajax": "^2.0.1",
+      "ember-bootstrap": "^1.0.0-rc.3",
       "ember-browserify": "^1.2.0",
       "ember-cli": "^2.14.1",
       "ember-cli-app-version": "^1.0.0",
       "ember-cli-babel": "^6.7.1",
-      "ember-cli-bootstrap-sassy": "0.5.3",
+      "ember-cli-bootstrap-datetimepicker": "^0.5.0",
       "ember-cli-dependency-checker": "^1.2.0",
       "ember-cli-eslint": "^4.0.0",
       "ember-cli-htmlbars": "^2.0.3",
@@ -74,10 +74,12 @@ npm manifest:
       "ember-radio-buttons": "^4.0.3",
       "ember-resolver": "^2.0.3",
       "ember-sortable": "1.8.2",
+      "ember-string-helpers": "^1.0.2",
       "ember-toastr": "1.4.1",
       "ember-truncate-text": "^0.0.1",
       "ember-truth-helpers": "1.3.0",
       "ember-welcome-page": "^1.0.1",
+      "eonasdan-bootstrap-datetimepicker-npm": "4.17.42",
       "eslint": "^4.1.1",
       "eslint-config-airbnb-base": "^11.2.0",
       "eslint-config-cos-ember": "^0.5.0",
@@ -90,9 +92,7 @@ npm manifest:
       "regenerator": "^0.8.46"
     },
     "devDependencies": {
-      "ember-cli-bootstrap-datetimepicker": "^0.5.0",
       "ember-simple-auth": "^1.4.0",
-      "eonasdan-bootstrap-datetimepicker-npm": "4.17.42",
       "moment": "^2.18.1",
       "moment-timezone": "^0.5.13"
     }
@@ -106,7 +106,7 @@ Lockfile:
   # yarn lockfile v1
   
   
-  "@centerforopenscience/ember-osf@https://github.com/CenterForOpenScience/ember-osf.git#develop#2017-09-29T20:14:40Z":
+  "@centerforopenscience/ember-osf@https://github.com/CenterForOpenScience/ember-osf.git#develop":
     version "0.10.4"
     resolved "https://github.com/CenterForOpenScience/ember-osf.git#bf962d9f1a7fc4afe4ed00a620045213a05edf3f"
     dependencies:
@@ -230,13 +230,15 @@ Lockfile:
     dependencies:
       ensure-posix-path "^1.0.1"
   
+  amd-name-resolver@1.0.0:
+    version "1.0.0"
+    resolved "https://registry.yarnpkg.com/amd-name-resolver/-/amd-name-resolver-1.0.0.tgz#0e593b28d6fa3326ab1798107edaea961046e8d8"
+    dependencies:
+      ensure-posix-path "^1.0.1"
+  
   amdefine@>=0.0.4:
     version "1.0.1"
     resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
-  
-  ansi-escapes@^1.1.0:
-    version "1.4.0"
-    resolved "https://registry.yarnpkg.com/ansi-escapes/-/ansi-escapes-1.4.0.tgz#d3a8a83b319aa67793662b13e761c7911422306e"
   
   ansi-escapes@^3.0.0:
     version "3.0.0"
@@ -401,6 +403,10 @@ Lockfile:
   ast-types@0.8.15:
     version "0.8.15"
     resolved "https://registry.yarnpkg.com/ast-types/-/ast-types-0.8.15.tgz#8eef0827f04dff0ec8857ba925abe3fea6194e52"
+  
+  ast-types@0.9.12:
+    version "0.9.12"
+    resolved "https://registry.yarnpkg.com/ast-types/-/ast-types-0.9.12.tgz#b136300d67026625ae15326982ca9918e5db73c9"
   
   ast-types@0.9.6:
     version "0.9.6"
@@ -761,6 +767,14 @@ Lockfile:
     version "6.13.0"
     resolved "https://registry.yarnpkg.com/babel-plugin-syntax-async-functions/-/babel-plugin-syntax-async-functions-6.13.0.tgz#cad9cad1191b5ad634bf30ae0872391e0647be95"
   
+  babel-plugin-syntax-class-properties@^6.8.0:
+    version "6.13.0"
+    resolved "https://registry.yarnpkg.com/babel-plugin-syntax-class-properties/-/babel-plugin-syntax-class-properties-6.13.0.tgz#d7eb23b79a317f8543962c505b827c7d6cac27de"
+  
+  babel-plugin-syntax-decorators@^6.1.18:
+    version "6.13.0"
+    resolved "https://registry.yarnpkg.com/babel-plugin-syntax-decorators/-/babel-plugin-syntax-decorators-6.13.0.tgz#312563b4dbde3cc806cee3e416cceeaddd11ac0b"
+  
   babel-plugin-syntax-exponentiation-operator@^6.8.0:
     version "6.13.0"
     resolved "https://registry.yarnpkg.com/babel-plugin-syntax-exponentiation-operator/-/babel-plugin-syntax-exponentiation-operator-6.13.0.tgz#9ee7e8337290da95288201a6a57f4170317830de"
@@ -776,6 +790,23 @@ Lockfile:
       babel-helper-remap-async-to-generator "^6.24.1"
       babel-plugin-syntax-async-functions "^6.8.0"
       babel-runtime "^6.22.0"
+  
+  babel-plugin-transform-class-properties@^6.24.1:
+    version "6.24.1"
+    resolved "https://registry.yarnpkg.com/babel-plugin-transform-class-properties/-/babel-plugin-transform-class-properties-6.24.1.tgz#6a79763ea61d33d36f37b611aa9def81a81b46ac"
+    dependencies:
+      babel-helper-function-name "^6.24.1"
+      babel-plugin-syntax-class-properties "^6.8.0"
+      babel-runtime "^6.22.0"
+      babel-template "^6.24.1"
+  
+  babel-plugin-transform-decorators-legacy@^1.3.4:
+    version "1.3.4"
+    resolved "https://registry.yarnpkg.com/babel-plugin-transform-decorators-legacy/-/babel-plugin-transform-decorators-legacy-1.3.4.tgz#741b58f6c5bce9e6027e0882d9c994f04f366925"
+    dependencies:
+      babel-plugin-syntax-decorators "^6.1.18"
+      babel-runtime "^6.2.0"
+      babel-template "^6.3.0"
   
   babel-plugin-transform-es2015-arrow-functions@^6.22.0:
     version "6.22.0"
@@ -1031,14 +1062,14 @@ Lockfile:
       mkdirp "^0.5.1"
       source-map-support "^0.4.15"
   
-  babel-runtime@^6.18.0, babel-runtime@^6.22.0, babel-runtime@^6.26.0:
+  babel-runtime@^6.18.0, babel-runtime@^6.2.0, babel-runtime@^6.22.0, babel-runtime@^6.26.0:
     version "6.26.0"
     resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
     dependencies:
       core-js "^2.4.0"
       regenerator-runtime "^0.11.0"
   
-  babel-template@^6.24.1, babel-template@^6.26.0:
+  babel-template@^6.24.1, babel-template@^6.26.0, babel-template@^6.3.0:
     version "6.26.0"
     resolved "https://registry.yarnpkg.com/babel-template/-/babel-template-6.26.0.tgz#de03e2d16396b069f46dd9fff8521fb1a0e35e02"
     dependencies:
@@ -1201,7 +1232,7 @@ Lockfile:
     dependencies:
       hoek "4.x.x"
   
-  bootstrap@^3.3:
+  bootstrap@^3.3, bootstrap@^3.3.7:
     version "3.3.7"
     resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-3.3.7.tgz#5a389394549f23330875a3b150656574f8a9eb71"
   
@@ -1817,8 +1848,8 @@ Lockfile:
       xtend "^4.0.0"
   
   browserslist@^2.1.2:
-    version "2.5.0"
-    resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-2.5.0.tgz#0ea00d22813a4dfae5786485225a9c584b3ef37c"
+    version "2.5.1"
+    resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-2.5.1.tgz#68e4bc536bbcc6086d62843a2ffccea8396821c6"
     dependencies:
       caniuse-lite "^1.0.30000744"
       electron-to-chromium "^1.3.24"
@@ -1911,8 +1942,8 @@ Lockfile:
       tmp "0.0.28"
   
   caniuse-lite@^1.0.30000744:
-    version "1.0.30000744"
-    resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000744.tgz#860fa5c83ba34fe619397d607f30bb474821671b"
+    version "1.0.30000745"
+    resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000745.tgz#20d6fede1157a4935133502946fc7e0e6b880da5"
   
   capture-exit@^1.1.0:
     version "1.2.0"
@@ -1958,7 +1989,7 @@ Lockfile:
       strip-ansi "^3.0.0"
       supports-color "^2.0.0"
   
-  chalk@^2.0.0, chalk@^2.1.0:
+  chalk@^2.0.0, chalk@^2.0.1, chalk@^2.1.0:
     version "2.1.0"
     resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.1.0.tgz#ac5becf14fa21b99c6c92ca7a7d7cfd5b17e743e"
     dependencies:
@@ -2002,21 +2033,15 @@ Lockfile:
       commander "2.8.x"
       source-map "0.4.x"
   
-  cli-cursor@^1.0.1, cli-cursor@^1.0.2:
-    version "1.0.2"
-    resolved "https://registry.yarnpkg.com/cli-cursor/-/cli-cursor-1.0.2.tgz#64da3f7d56a54412e59794bd62dc35295e8f2987"
-    dependencies:
-      restore-cursor "^1.0.1"
-  
   cli-cursor@^2.1.0:
     version "2.1.0"
     resolved "https://registry.yarnpkg.com/cli-cursor/-/cli-cursor-2.1.0.tgz#b35dac376479facc3e94747d41d0d0f5238ffcb5"
     dependencies:
       restore-cursor "^2.0.0"
   
-  cli-spinners@^0.1.2:
-    version "0.1.2"
-    resolved "https://registry.yarnpkg.com/cli-spinners/-/cli-spinners-0.1.2.tgz#bb764d88e185fb9e1e6a2a1f19772318f605e31c"
+  cli-spinners@^1.0.0:
+    version "1.1.0"
+    resolved "https://registry.yarnpkg.com/cli-spinners/-/cli-spinners-1.1.0.tgz#f1847b168844d917a671eb9d147e3df497c90d06"
   
   cli-table2@^0.2.0:
     version "0.2.0"
@@ -2174,7 +2199,7 @@ Lockfile:
     version "0.0.1"
     resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
   
-  concat-stream@^1.4.6, concat-stream@^1.4.7, concat-stream@^1.6.0:
+  concat-stream@^1.4.6, concat-stream@^1.6.0:
     version "1.6.0"
     resolved "https://registry.yarnpkg.com/concat-stream/-/concat-stream-1.6.0.tgz#0aac662fd52be78964d5532f694784e70110acf7"
     dependencies:
@@ -2227,13 +2252,13 @@ Lockfile:
     version "1.1.0"
     resolved "https://registry.yarnpkg.com/console-control-strings/-/console-control-strings-1.1.0.tgz#3d7cf4464db6446ea644bf4b39507f9851008e8e"
   
-  console-ui@^1.0.2:
-    version "1.0.3"
-    resolved "https://registry.yarnpkg.com/console-ui/-/console-ui-1.0.3.tgz#31c524461b63422769f9e89c173495d91393721c"
+  console-ui@^2.0.0:
+    version "2.0.0"
+    resolved "https://registry.yarnpkg.com/console-ui/-/console-ui-2.0.0.tgz#159ef7d098a491f84705bb69cd63ecec9a367b14"
     dependencies:
-      chalk "^1.1.3"
-      inquirer "^1.2.3"
-      ora "^0.2.0"
+      chalk "^2.1.0"
+      inquirer "^3.2.1"
+      ora "^1.3.0"
       through "^2.3.8"
   
   consolidate@^0.14.0:
@@ -2286,7 +2311,7 @@ Lockfile:
     version "1.2.7"
     resolved "https://registry.yarnpkg.com/core-js/-/core-js-1.2.7.tgz#652294c14651db28fa93bd2d5ff2983a4f08c636"
   
-  core-js@^2.4.0, core-js@^2.5.0:
+  core-js@^2.4.0, core-js@^2.4.1, core-js@^2.5.0:
     version "2.5.1"
     resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.5.1.tgz#ae6874dc66937789b80754ff5428df66819ca50b"
   
@@ -2425,10 +2450,6 @@ Lockfile:
     version "1.2.0"
     resolved "https://registry.yarnpkg.com/decamelize/-/decamelize-1.2.0.tgz#f6534d15148269b20352e7bee26f501f9a191290"
   
-  deep-freeze@^0.0.1:
-    version "0.0.1"
-    resolved "https://registry.yarnpkg.com/deep-freeze/-/deep-freeze-0.0.1.tgz#3a0b0005de18672819dfd38cd31f91179c893e84"
-  
   deep-is@~0.1.3:
     version "0.1.3"
     resolved "https://registry.yarnpkg.com/deep-is/-/deep-is-0.1.3.tgz#b369d6fb5dbc13eecf524f91b070feedc357cf34"
@@ -2534,8 +2555,8 @@ Lockfile:
       defined "^1.0.0"
   
   diff@^3.1.0, diff@^3.2.0:
-    version "3.3.1"
-    resolved "https://registry.yarnpkg.com/diff/-/diff-3.3.1.tgz#aa8567a6eed03c531fc89d3f711cd0e5259dec75"
+    version "3.4.0"
+    resolved "https://registry.yarnpkg.com/diff/-/diff-3.4.0.tgz#b1d85507daf3964828de54b37d0d73ba67dda56c"
   
   diffie-hellman@^5.0.0:
     version "5.0.2"
@@ -2610,6 +2631,34 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/ember-ajax/-/ember-ajax-2.5.6.tgz#a75f743ccf1b95e979a5cf96013b3dba8fa625e4"
     dependencies:
       ember-cli-babel "^5.1.5"
+  
+  ember-assign-polyfill@^2.0.1:
+    version "2.0.2"
+    resolved "https://registry.yarnpkg.com/ember-assign-polyfill/-/ember-assign-polyfill-2.0.2.tgz#95e37513beaabc4356d56a844c742509b0b7e7f1"
+    dependencies:
+      ember-cli-babel "^6.6.0"
+      ember-cli-version-checker "^1.2.0"
+  
+  ember-bootstrap@^1.0.0-rc.3:
+    version "1.0.0-rc.3"
+    resolved "https://registry.yarnpkg.com/ember-bootstrap/-/ember-bootstrap-1.0.0-rc.3.tgz#4bd864e3ed4674b63981da2581f97001934fa0cd"
+    dependencies:
+      broccoli-debug "^0.6.3"
+      broccoli-funnel "^2.0.0"
+      broccoli-merge-trees "^2.0.0"
+      broccoli-stew "^1.4.0"
+      chalk "^2.1.0"
+      ember-assign-polyfill "^2.0.1"
+      ember-cli-babel "^6.8.2"
+      ember-cli-build-config-editor "0.5.0"
+      ember-cli-htmlbars "^2.0.2"
+      ember-popper "^0.6.4"
+      ember-runtime-enumerable-includes-polyfill "^2.0.0"
+      ember-wormhole "^0.5.2"
+      findup-sync "^1.0.0"
+      fs-extra "^4.0.1"
+      rsvp "^4.0.1"
+      silent-error "^1.0.1"
   
   ember-browserify@^1.2.0:
     version "1.2.0"
@@ -2708,12 +2757,6 @@ Lockfile:
       ember-cli-babel "^6.0.0"
       ember-cli-htmlbars "^1.1.1"
   
-  ember-cli-bootstrap-sassy@0.5.3:
-    version "0.5.3"
-    resolved "https://registry.yarnpkg.com/ember-cli-bootstrap-sassy/-/ember-cli-bootstrap-sassy-0.5.3.tgz#aca28c34f6b68057e94fd90c177b9fad4ce86afd"
-    dependencies:
-      broccoli-funnel "^1.0.1"
-  
   ember-cli-broccoli-sane-watcher@^2.0.4:
     version "2.0.4"
     resolved "https://registry.yarnpkg.com/ember-cli-broccoli-sane-watcher/-/ember-cli-broccoli-sane-watcher-2.0.4.tgz#f43f42f75b7509c212fb926cd9aea86ae19264c6"
@@ -2724,6 +2767,12 @@ Lockfile:
       rsvp "^3.0.18"
       sane "^1.1.1"
   
+  ember-cli-build-config-editor@0.5.0:
+    version "0.5.0"
+    resolved "https://registry.yarnpkg.com/ember-cli-build-config-editor/-/ember-cli-build-config-editor-0.5.0.tgz#e19a06f4da2e3e579b407964b72df9fbf3839f4b"
+    dependencies:
+      recast "^0.12.0"
+  
   ember-cli-dependency-checker@^1.2.0:
     version "1.4.0"
     resolved "https://registry.yarnpkg.com/ember-cli-dependency-checker/-/ember-cli-dependency-checker-1.4.0.tgz#2b13f977e1eea843fc1a21a001be6ca5d4ef1942"
@@ -2733,12 +2782,12 @@ Lockfile:
       semver "^4.1.0"
   
   ember-cli-eslint@^4.0.0:
-    version "4.2.0"
-    resolved "https://registry.yarnpkg.com/ember-cli-eslint/-/ember-cli-eslint-4.2.0.tgz#3ecb7b0e67fdadd1e68eaba05fbaffb03bcd7864"
+    version "4.2.1"
+    resolved "https://registry.yarnpkg.com/ember-cli-eslint/-/ember-cli-eslint-4.2.1.tgz#1718875632b3c10fa0da2f665d294c08f24b8ca3"
     dependencies:
       broccoli-lint-eslint "^4.1.0"
-      ember-cli-version-checker "^2.0.0"
-      rsvp "^3.2.1"
+      ember-cli-version-checker "^2.1.0"
+      rsvp "^4.6.1"
       walk-sync "^0.3.0"
   
   ember-cli-get-component-path-option@^1.0.0:
@@ -2787,7 +2836,7 @@ Lockfile:
       json-stable-stringify "^1.0.0"
       strip-bom "^2.0.0"
   
-  ember-cli-htmlbars@^2.0.3:
+  ember-cli-htmlbars@^2.0.2, ember-cli-htmlbars@^2.0.3:
     version "2.0.3"
     resolved "https://registry.yarnpkg.com/ember-cli-htmlbars/-/ember-cli-htmlbars-2.0.3.tgz#e116e1500dba12f29c94b05b9ec90f52cb8bb042"
     dependencies:
@@ -2838,9 +2887,13 @@ Lockfile:
       rsvp "^3.0.17"
       silent-error "^1.0.0"
   
-  ember-cli-lodash-subset@^1.0.11, ember-cli-lodash-subset@^1.0.7:
+  ember-cli-lodash-subset@^1.0.7:
     version "1.0.12"
     resolved "https://registry.yarnpkg.com/ember-cli-lodash-subset/-/ember-cli-lodash-subset-1.0.12.tgz#af2e77eba5dcb0d77f3308d3a6fd7d3450f6e537"
+  
+  ember-cli-lodash-subset@^2.0.1:
+    version "2.0.1"
+    resolved "https://registry.yarnpkg.com/ember-cli-lodash-subset/-/ember-cli-lodash-subset-2.0.1.tgz#20cb68a790fe0fde2488ddfd8efbb7df6fe766f2"
   
   ember-cli-moment-shim@^3.3.1:
     version "3.5.0"
@@ -2881,6 +2934,17 @@ Lockfile:
       broccoli-funnel "^1.0.1"
       broccoli-merge-trees "^1.1.1"
       broccoli-unwatched-tree "^0.1.1"
+      debug "^2.2.0"
+      lodash "^4.5.1"
+      resolve "^1.1.7"
+  
+  ember-cli-node-assets@^0.2.2:
+    version "0.2.2"
+    resolved "https://registry.yarnpkg.com/ember-cli-node-assets/-/ember-cli-node-assets-0.2.2.tgz#d2d55626e7cc6619f882d7fe55751f9266022708"
+    dependencies:
+      broccoli-funnel "^1.0.1"
+      broccoli-merge-trees "^1.1.1"
+      broccoli-source "^1.1.0"
       debug "^2.2.0"
       lodash "^4.5.1"
       resolve "^1.1.7"
@@ -3005,18 +3069,18 @@ Lockfile:
     dependencies:
       semver "^5.3.0"
   
-  ember-cli-version-checker@^2.0.0:
-    version "2.0.0"
-    resolved "https://registry.yarnpkg.com/ember-cli-version-checker/-/ember-cli-version-checker-2.0.0.tgz#e1f7d8e4cdcd752ac35f1611e4daa8836db4c4c7"
+  ember-cli-version-checker@^2.0.0, ember-cli-version-checker@^2.1.0:
+    version "2.1.0"
+    resolved "https://registry.yarnpkg.com/ember-cli-version-checker/-/ember-cli-version-checker-2.1.0.tgz#fc79a56032f3717cf844ada7cbdec1a06fedb604"
     dependencies:
       resolve "^1.3.3"
       semver "^5.3.0"
   
   ember-cli@^2.14.1:
-    version "2.15.1"
-    resolved "https://registry.yarnpkg.com/ember-cli/-/ember-cli-2.15.1.tgz#773add3cc18e5068f1c5f43a77544efa2712e47b"
+    version "2.16.1"
+    resolved "https://registry.yarnpkg.com/ember-cli/-/ember-cli-2.16.1.tgz#91da40f19b8496f879eea13d745b3924beb23729"
     dependencies:
-      amd-name-resolver "0.0.7"
+      amd-name-resolver "1.0.0"
       babel-plugin-transform-es2015-modules-amd "^6.24.0"
       bower-config "^1.3.0"
       bower-endpoint-parser "0.2.2"
@@ -3026,7 +3090,8 @@ Lockfile:
       broccoli-concat "^3.2.2"
       broccoli-config-loader "^1.0.0"
       broccoli-config-replace "^1.1.2"
-      broccoli-funnel "^1.0.6"
+      broccoli-debug "^0.6.3"
+      broccoli-funnel "^2.0.0"
       broccoli-funnel-reducer "^1.0.0"
       broccoli-merge-trees "^2.0.0"
       broccoli-middleware "^1.0.0"
@@ -3034,31 +3099,30 @@ Lockfile:
       broccoli-stew "^1.2.0"
       calculate-cache-key-for-tree "^1.0.0"
       capture-exit "^1.1.0"
-      chalk "^1.1.3"
+      chalk "^2.0.1"
       clean-base-url "^1.0.0"
       compression "^1.4.4"
       configstore "^3.0.0"
-      console-ui "^1.0.2"
+      console-ui "^2.0.0"
       core-object "^3.1.3"
       dag-map "^2.0.2"
-      deep-freeze "^0.0.1"
       diff "^3.2.0"
       ember-cli-broccoli-sane-watcher "^2.0.4"
       ember-cli-is-package-missing "^1.0.0"
       ember-cli-legacy-blueprints "^0.1.2"
-      ember-cli-lodash-subset "^1.0.11"
+      ember-cli-lodash-subset "^2.0.1"
       ember-cli-normalize-entity-name "^1.0.0"
       ember-cli-preprocess-registry "^3.1.0"
       ember-cli-string-utils "^1.0.0"
       ember-try "^0.2.15"
       ensure-posix-path "^1.0.2"
-      execa "^0.7.0"
+      execa "^0.8.0"
       exists-sync "0.0.4"
       exit "^0.1.2"
       express "^4.12.3"
       filesize "^3.1.3"
       find-up "^2.1.0"
-      fs-extra "^3.0.0"
+      fs-extra "^4.0.0"
       fs-tree-diff "^0.5.2"
       get-caller-file "^1.0.0"
       git-repo-info "^1.4.1"
@@ -3086,7 +3150,7 @@ Lockfile:
       promise-map-series "^0.2.1"
       quick-temp "^0.1.8"
       resolve "^1.3.0"
-      rsvp "^3.3.3"
+      rsvp "^3.6.0"
       sane "^1.6.0"
       semver "^5.1.1"
       silent-error "^1.0.0"
@@ -3116,6 +3180,14 @@ Lockfile:
       ember-cli-htmlbars "^1.0.1"
       layout-bin-packer "^1.2.0"
   
+  ember-compatibility-helpers@^0.1.0:
+    version "0.1.1"
+    resolved "https://registry.yarnpkg.com/ember-compatibility-helpers/-/ember-compatibility-helpers-0.1.1.tgz#70a26c0d28715bbb23eb1be343d7203e492afa68"
+    dependencies:
+      babel-plugin-debug-macros "^0.1.11"
+      ember-cli-version-checker "^2.0.0"
+      semver "^5.4.1"
+  
   ember-cookies@^0.0.13:
     version "0.0.13"
     resolved "https://registry.yarnpkg.com/ember-cookies/-/ember-cookies-0.0.13.tgz#18350df766240793d46744e4ee5c9a55ae6b4e0a"
@@ -3140,8 +3212,8 @@ Lockfile:
       ember-cli-babel "^5.1.6"
   
   ember-data@^2.14.9:
-    version "2.16.1"
-    resolved "https://registry.yarnpkg.com/ember-data/-/ember-data-2.16.1.tgz#4f82fd3f2e516a7a358a202e42e6e73c683cab67"
+    version "2.16.2"
+    resolved "https://registry.yarnpkg.com/ember-data/-/ember-data-2.16.2.tgz#e88c19d2e5f334f57a9300d1d18430f9fb61a234"
     dependencies:
       amd-name-resolver "0.0.7"
       babel-plugin-feature-flags "^0.3.1"
@@ -3175,6 +3247,17 @@ Lockfile:
       semver "^5.1.0"
       silent-error "^1.0.0"
       testem "^1.15.0"
+  
+  ember-decorators@^1.2.2:
+    version "1.3.0"
+    resolved "https://registry.yarnpkg.com/ember-decorators/-/ember-decorators-1.3.0.tgz#d5c9d603fe364e74ca21ae1df1f8941ed9cd1cab"
+    dependencies:
+      babel-plugin-transform-class-properties "^6.24.1"
+      babel-plugin-transform-decorators-legacy "^1.3.4"
+      ember-cli-babel "^6.0.0"
+      ember-cli-version-checker "^2.0.0"
+      ember-compatibility-helpers "^0.1.0"
+      ember-macro-helpers "^0.16.0"
   
   ember-export-application-global@^1.0.5:
     version "1.1.1"
@@ -3292,6 +3375,15 @@ Lockfile:
       ember-cli-test-info "^1.0.0"
       ember-weakmap "^2.0.0"
   
+  ember-macro-helpers@^0.16.0:
+    version "0.16.3"
+    resolved "https://registry.yarnpkg.com/ember-macro-helpers/-/ember-macro-helpers-0.16.3.tgz#3960171c8e1c1af4bc3469e555fc2d4569e96c80"
+    dependencies:
+      ember-cli-babel "^6.6.0"
+      ember-cli-string-utils "^1.1.0"
+      ember-cli-test-info "^1.0.0"
+      ember-weakmap "^2.0.0"
+  
   ember-metrics@^0.12.1:
     version "0.12.1"
     resolved "https://registry.yarnpkg.com/ember-metrics/-/ember-metrics-0.12.1.tgz#8659343bf7b8bda403e70d482ff59cc9714d89f6"
@@ -3321,6 +3413,22 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/ember-new-computed/-/ember-new-computed-1.0.3.tgz#592af8a778e0260ce7e812687c3aedface1622bf"
     dependencies:
       ember-cli-babel "^5.1.5"
+  
+  ember-popper@^0.6.4:
+    version "0.6.4"
+    resolved "https://registry.yarnpkg.com/ember-popper/-/ember-popper-0.6.4.tgz#3b5123a7cfb01b4838f32a233c00160d46ba99e4"
+    dependencies:
+      babel-eslint "^7.2.3"
+      babel-plugin-filter-imports "^0.3.1"
+      babel6-plugin-strip-class-callcheck "^6.0.0"
+      broccoli-funnel "^2.0.0"
+      ember-cli-babel "^6.8.2"
+      ember-cli-htmlbars "^2.0.3"
+      ember-cli-node-assets "^0.2.2"
+      ember-cli-version-checker "^2.0.0"
+      ember-decorators "^1.2.2"
+      fastboot-transform "^0.1.0"
+      popper.js "^1.12.5"
   
   ember-promise-helpers@1.0.3:
     version "1.0.3"
@@ -3407,6 +3515,12 @@ Lockfile:
       ember-cli-htmlbars "^1.0.1"
       ember-new-computed "^1.0.2"
   
+  ember-string-helpers@^1.0.2:
+    version "1.0.2"
+    resolved "https://registry.yarnpkg.com/ember-string-helpers/-/ember-string-helpers-1.0.2.tgz#2fcb958bcf0cdf0649e04dda5b65cae06a0f3d56"
+    dependencies:
+      ember-cli-babel "^5.0.0"
+  
   ember-test-helpers@^0.5.32:
     version "0.5.34"
     resolved "https://registry.yarnpkg.com/ember-test-helpers/-/ember-test-helpers-0.5.34.tgz#c8439108d1cba1d7d838c212208a5c4061471b83"
@@ -3477,6 +3591,13 @@ Lockfile:
       exists-sync "0.0.3"
       lodash "^4.7.0"
       walk-sync "^0.2.6"
+  
+  ember-wormhole@^0.5.2:
+    version "0.5.2"
+    resolved "https://registry.yarnpkg.com/ember-wormhole/-/ember-wormhole-0.5.2.tgz#cc0ceb7db4f8b8da0fd852edc81d75cb1dcd92f1"
+    dependencies:
+      ember-cli-babel "^6.0.0"
+      ember-cli-htmlbars "^1.1.1"
   
   encodeurl@~1.0.1:
     version "1.0.1"
@@ -3558,13 +3679,13 @@ Lockfile:
       xtend "~4.0.0"
   
   es5-ext@^0.10.14, es5-ext@^0.10.9, es5-ext@~0.10.14:
-    version "0.10.30"
-    resolved "https://registry.yarnpkg.com/es5-ext/-/es5-ext-0.10.30.tgz#7141a16836697dbabfaaaeee41495ce29f52c939"
+    version "0.10.31"
+    resolved "https://registry.yarnpkg.com/es5-ext/-/es5-ext-0.10.31.tgz#7bb938c95a7f1b9f728092dc09c41edcc398eefe"
     dependencies:
-      es6-iterator "2"
-      es6-symbol "~3.1"
+      es6-iterator "~2.0.1"
+      es6-symbol "~3.1.1"
   
-  es6-iterator@2, es6-iterator@^2.0.1, es6-iterator@~2.0.1:
+  es6-iterator@^2.0.1, es6-iterator@~2.0.1:
     version "2.0.1"
     resolved "https://registry.yarnpkg.com/es6-iterator/-/es6-iterator-2.0.1.tgz#8e319c9f0453bf575d374940a655920e59ca5512"
     dependencies:
@@ -3593,7 +3714,7 @@ Lockfile:
       es6-symbol "3.1.1"
       event-emitter "~0.3.5"
   
-  es6-symbol@3.1.1, es6-symbol@^3.1, es6-symbol@^3.1.1, es6-symbol@~3.1, es6-symbol@~3.1.1:
+  es6-symbol@3.1.1, es6-symbol@^3.1, es6-symbol@^3.1.1, es6-symbol@~3.1.1:
     version "3.1.1"
     resolved "https://registry.yarnpkg.com/es6-symbol/-/es6-symbol-3.1.1.tgz#bf00ef4fdab6ba1b46ecb7b629b4c7ed5715cc77"
     dependencies:
@@ -3763,7 +3884,7 @@ Lockfile:
     version "3.1.3"
     resolved "https://registry.yarnpkg.com/esprima/-/esprima-3.1.3.tgz#fdca51cee6133895e3c88d535ce49dbff62a4633"
   
-  esprima@^4.0.0:
+  esprima@^4.0.0, esprima@~4.0.0:
     version "4.0.0"
     resolved "https://registry.yarnpkg.com/esprima/-/esprima-4.0.0.tgz#4499eddcd1110e0b218bacf2fa7f7f59f55ca804"
   
@@ -3828,9 +3949,9 @@ Lockfile:
     dependencies:
       merge "^1.1.3"
   
-  execa@^0.7.0:
-    version "0.7.0"
-    resolved "https://registry.yarnpkg.com/execa/-/execa-0.7.0.tgz#944becd34cc41ee32a63a9faf27ad5a65fc59777"
+  execa@^0.8.0:
+    version "0.8.0"
+    resolved "https://registry.yarnpkg.com/execa/-/execa-0.8.0.tgz#d8d76bbc1b55217ed190fd6dd49d3c774ecfc8da"
     dependencies:
       cross-spawn "^5.0.1"
       get-stream "^3.0.0"
@@ -3847,10 +3968,6 @@ Lockfile:
   exists-sync@0.0.4, exists-sync@^0.0.4:
     version "0.0.4"
     resolved "https://registry.yarnpkg.com/exists-sync/-/exists-sync-0.0.4.tgz#9744c2c428cc03b01060db454d4b12f0ef3c8879"
-  
-  exit-hook@^1.0.0:
-    version "1.1.1"
-    resolved "https://registry.yarnpkg.com/exit-hook/-/exit-hook-1.1.1.tgz#f05ca233b48c05d54fff07765df8507e95c02ff8"
   
   exit@^0.1.2:
     version "0.1.2"
@@ -3875,8 +3992,8 @@ Lockfile:
       os-homedir "^1.0.1"
   
   express@^4.10.7, express@^4.12.3:
-    version "4.16.1"
-    resolved "https://registry.yarnpkg.com/express/-/express-4.16.1.tgz#6b33b560183c9b253b7b62144df33a4654ac9ed0"
+    version "4.16.2"
+    resolved "https://registry.yarnpkg.com/express/-/express-4.16.2.tgz#e35c6dfe2d64b7dca0a5cd4f21781be3299e076c"
     dependencies:
       accepts "~1.3.4"
       array-flatten "1.1.1"
@@ -3912,14 +4029,6 @@ Lockfile:
   extend@^3.0.0, extend@~3.0.1:
     version "3.0.1"
     resolved "https://registry.yarnpkg.com/extend/-/extend-3.0.1.tgz#a755ea7bc1adfcc5a31ce7e762dbaadc5e636444"
-  
-  external-editor@^1.1.0:
-    version "1.1.1"
-    resolved "https://registry.yarnpkg.com/external-editor/-/external-editor-1.1.1.tgz#12d7b0db850f7ff7e7081baf4005700060c4600b"
-    dependencies:
-      extend "^3.0.0"
-      spawn-sync "^1.0.15"
-      tmp "^0.0.29"
   
   external-editor@^2.0.4:
     version "2.0.5"
@@ -3971,6 +4080,12 @@ Lockfile:
       source-map-url "^0.3.0"
       sourcemap-validator "^1.0.5"
   
+  fastboot-transform@^0.1.0:
+    version "0.1.2"
+    resolved "https://registry.yarnpkg.com/fastboot-transform/-/fastboot-transform-0.1.2.tgz#f910d666ab93e75604492ea655270d1804bc8de7"
+    dependencies:
+      broccoli-stew "^1.5.0"
+  
   faye-websocket@~0.10.0:
     version "0.10.0"
     resolved "https://registry.yarnpkg.com/faye-websocket/-/faye-websocket-0.10.0.tgz#4e492f8d04dfb6f89003507f6edbf2d501e7c6f4"
@@ -3982,13 +4097,6 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/fb-watchman/-/fb-watchman-2.0.0.tgz#54e9abf7dfa2f26cd9b1636c588c1afc05de5d58"
     dependencies:
       bser "^2.0.0"
-  
-  figures@^1.3.5:
-    version "1.7.0"
-    resolved "https://registry.yarnpkg.com/figures/-/figures-1.7.0.tgz#cbe1e3affcf1cd44b80cadfed28dc793a9701d2e"
-    dependencies:
-      escape-string-regexp "^1.0.5"
-      object-assign "^4.1.0"
   
   figures@^2.0.0:
     version "2.0.0"
@@ -4194,12 +4302,12 @@ Lockfile:
       graceful-fs "^4.1.2"
       jsonfile "^2.1.0"
   
-  fs-extra@^3.0.0:
-    version "3.0.1"
-    resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-3.0.1.tgz#3794f378c58b342ea7dbbb23095109c4b3b62291"
+  fs-extra@^4.0.0, fs-extra@^4.0.1:
+    version "4.0.2"
+    resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-4.0.2.tgz#f91704c53d1b461f893452b0c307d9997647ab6b"
     dependencies:
       graceful-fs "^4.1.2"
-      jsonfile "^3.0.0"
+      jsonfile "^4.0.0"
       universalify "^0.1.0"
   
   fs-readdir-recursive@^0.1.0:
@@ -4672,26 +4780,7 @@ Lockfile:
     dependencies:
       source-map "~0.5.3"
   
-  inquirer@^1.2.3:
-    version "1.2.3"
-    resolved "https://registry.yarnpkg.com/inquirer/-/inquirer-1.2.3.tgz#4dec6f32f37ef7bb0b2ed3f1d1a5c3f545074918"
-    dependencies:
-      ansi-escapes "^1.1.0"
-      chalk "^1.0.0"
-      cli-cursor "^1.0.1"
-      cli-width "^2.0.0"
-      external-editor "^1.1.0"
-      figures "^1.3.5"
-      lodash "^4.3.0"
-      mute-stream "0.0.6"
-      pinkie-promise "^2.0.0"
-      run-async "^2.2.0"
-      rx "^4.1.0"
-      string-width "^1.0.1"
-      strip-ansi "^3.0.0"
-      through "^2.3.6"
-  
-  inquirer@^3.0.6:
+  inquirer@^3.0.6, inquirer@^3.2.1:
     version "3.3.0"
     resolved "https://registry.yarnpkg.com/inquirer/-/inquirer-3.3.0.tgz#9dd2f2ad765dcab1ff0443b491442a20ba227dc9"
     dependencies:
@@ -5031,9 +5120,9 @@ Lockfile:
     optionalDependencies:
       graceful-fs "^4.1.6"
   
-  jsonfile@^3.0.0:
-    version "3.0.1"
-    resolved "https://registry.yarnpkg.com/jsonfile/-/jsonfile-3.0.1.tgz#a5ecc6f65f53f662c4415c7675a0331d0992ec66"
+  jsonfile@^4.0.0:
+    version "4.0.0"
+    resolved "https://registry.yarnpkg.com/jsonfile/-/jsonfile-4.0.0.tgz#8771aae0799b64076b76640fca058f9c10e33ecb"
     optionalDependencies:
       graceful-fs "^4.1.6"
   
@@ -5569,6 +5658,12 @@ Lockfile:
     version "4.17.4"
     resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
   
+  log-symbols@^1.0.2:
+    version "1.0.2"
+    resolved "https://registry.yarnpkg.com/log-symbols/-/log-symbols-1.0.2.tgz#376ff7b58ea3086a0f09facc74617eca501e1a18"
+    dependencies:
+      chalk "^1.0.0"
+  
   lolex@^1.6.0:
     version "1.6.0"
     resolved "https://registry.yarnpkg.com/lolex/-/lolex-1.6.0.tgz#3a9a0283452a47d7439e72731b9e07d7386e49f6"
@@ -5850,8 +5945,8 @@ Lockfile:
       moment ">= 2.9.0"
   
   "moment@>= 2.6.0", "moment@>= 2.9.0", moment@^2.10, moment@^2.18.1:
-    version "2.18.1"
-    resolved "https://registry.yarnpkg.com/moment/-/moment-2.18.1.tgz#c36193dd3ce1c2eed2adb7c802dbbc77a81b1c0f"
+    version "2.19.0"
+    resolved "https://registry.yarnpkg.com/moment/-/moment-2.19.0.tgz#44f675ef6b944942762581b1c179fb679e599d67"
   
   morgan@^1.8.1:
     version "1.9.0"
@@ -5882,10 +5977,6 @@ Lockfile:
   mustache@^2.2.1:
     version "2.3.0"
     resolved "https://registry.yarnpkg.com/mustache/-/mustache-2.3.0.tgz#4028f7778b17708a489930a6e52ac3bca0da41d0"
-  
-  mute-stream@0.0.6:
-    version "0.0.6"
-    resolved "https://registry.yarnpkg.com/mute-stream/-/mute-stream-0.0.6.tgz#48962b19e169fd1dfc240b3f1e7317627bbc47db"
   
   mute-stream@0.0.7:
     version "0.0.7"
@@ -6076,10 +6167,6 @@ Lockfile:
     dependencies:
       wrappy "1"
   
-  onetime@^1.0.0:
-    version "1.1.0"
-    resolved "https://registry.yarnpkg.com/onetime/-/onetime-1.1.0.tgz#a1f7838f8314c516f05ecefcbc4ccfe04b4ed789"
-  
   onetime@^2.0.0:
     version "2.0.1"
     resolved "https://registry.yarnpkg.com/onetime/-/onetime-2.0.1.tgz#067428230fd67443b2794b22bba528b6867962d4"
@@ -6108,14 +6195,14 @@ Lockfile:
     version "0.0.6"
     resolved "https://registry.yarnpkg.com/options/-/options-0.0.6.tgz#ec22d312806bb53e731773e7cdaefcf1c643128f"
   
-  ora@^0.2.0:
-    version "0.2.3"
-    resolved "https://registry.yarnpkg.com/ora/-/ora-0.2.3.tgz#37527d220adcd53c39b73571d754156d5db657a4"
+  ora@^1.3.0:
+    version "1.3.0"
+    resolved "https://registry.yarnpkg.com/ora/-/ora-1.3.0.tgz#80078dd2b92a934af66a3ad72a5b910694ede51a"
     dependencies:
       chalk "^1.1.1"
-      cli-cursor "^1.0.2"
-      cli-spinners "^0.1.2"
-      object-assign "^4.0.1"
+      cli-cursor "^2.1.0"
+      cli-spinners "^1.0.0"
+      log-symbols "^1.0.2"
   
   os-browserify@~0.1.1:
     version "0.1.2"
@@ -6130,10 +6217,6 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/os-locale/-/os-locale-1.4.0.tgz#20f9f17ae29ed345e8bde583b13d2009803c14d9"
     dependencies:
       lcid "^1.0.0"
-  
-  os-shim@^0.1.2:
-    version "0.1.3"
-    resolved "https://registry.yarnpkg.com/os-shim/-/os-shim-0.1.3.tgz#6b62c3791cf7909ea35ed46e17658bb417cb3917"
   
   os-tmpdir@^1.0.0, os-tmpdir@^1.0.1, os-tmpdir@~1.0.1, os-tmpdir@~1.0.2:
     version "1.0.2"
@@ -6336,6 +6419,10 @@ Lockfile:
   pluralize@^7.0.0:
     version "7.0.0"
     resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-7.0.0.tgz#298b89df8b93b0221dbf421ad2b1b1ea23fc6777"
+  
+  popper.js@^1.12.5:
+    version "1.12.5"
+    resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.12.5.tgz#229e4dea01629e1f1a1e26991ffade5024220fa6"
   
   portfinder@^1.0.7:
     version "1.0.13"
@@ -6574,6 +6661,16 @@ Lockfile:
       private "~0.1.5"
       source-map "~0.5.0"
   
+  recast@^0.12.0:
+    version "0.12.7"
+    resolved "https://registry.yarnpkg.com/recast/-/recast-0.12.7.tgz#6ec2ba1ae1d163cd12b5c17c3823458b299f3a0b"
+    dependencies:
+      ast-types "0.9.12"
+      core-js "^2.4.1"
+      esprima "~4.0.0"
+      private "~0.1.5"
+      source-map "~0.6.1"
+  
   redent@^1.0.0:
     version "1.0.0"
     resolved "https://registry.yarnpkg.com/redent/-/redent-1.0.0.tgz#cf916ab1fd5f1f16dfb20822dd6ec7f730c2afde"
@@ -6763,13 +6860,6 @@ Lockfile:
     dependencies:
       path-parse "^1.0.5"
   
-  restore-cursor@^1.0.1:
-    version "1.0.1"
-    resolved "https://registry.yarnpkg.com/restore-cursor/-/restore-cursor-1.0.1.tgz#34661f46886327fed2991479152252df92daa541"
-    dependencies:
-      exit-hook "^1.0.0"
-      onetime "^1.0.0"
-  
   restore-cursor@^2.0.0:
     version "2.0.0"
     resolved "https://registry.yarnpkg.com/restore-cursor/-/restore-cursor-2.0.0.tgz#9f7ee287f82fd326d4fd162923d62129eee0dfaf"
@@ -6806,9 +6896,13 @@ Lockfile:
     dependencies:
       source-map-support "^0.4.0"
   
-  rsvp@^3.0.14, rsvp@^3.0.16, rsvp@^3.0.17, rsvp@^3.0.18, rsvp@^3.0.21, rsvp@^3.0.6, rsvp@^3.1.0, rsvp@^3.2.1, rsvp@^3.3.3, rsvp@^3.5.0:
+  rsvp@^3.0.14, rsvp@^3.0.16, rsvp@^3.0.17, rsvp@^3.0.18, rsvp@^3.0.21, rsvp@^3.0.6, rsvp@^3.1.0, rsvp@^3.2.1, rsvp@^3.3.3, rsvp@^3.5.0, rsvp@^3.6.0:
     version "3.6.2"
     resolved "https://registry.yarnpkg.com/rsvp/-/rsvp-3.6.2.tgz#2e96491599a96cde1b515d5674a8f7a91452926a"
+  
+  rsvp@^4.0.1, rsvp@^4.6.1:
+    version "4.7.0"
+    resolved "https://registry.yarnpkg.com/rsvp/-/rsvp-4.7.0.tgz#dc1b0b1a536f7dec9d2be45e0a12ad4197c9fd96"
   
   rsvp@~3.0.6:
     version "3.0.21"
@@ -6833,10 +6927,6 @@ Lockfile:
   rx-lite@*, rx-lite@^4.0.8:
     version "4.0.8"
     resolved "https://registry.yarnpkg.com/rx-lite/-/rx-lite-4.0.8.tgz#0b1e11af8bc44836f04a6407e92da42467b79444"
-  
-  rx@^4.1.0:
-    version "4.1.0"
-    resolved "https://registry.yarnpkg.com/rx/-/rx-4.1.0.tgz#a5f13ff79ef3b740fe30aa803fb09f98805d4782"
   
   safe-buffer@5.1.1, safe-buffer@^5.0.1, safe-buffer@^5.1.0, safe-buffer@^5.1.1, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
     version "5.1.1"
@@ -6878,7 +6968,7 @@ Lockfile:
       js-base64 "^2.1.8"
       source-map "^0.4.2"
   
-  "semver@2 || 3 || 4 || 5", semver@^5.1.0, semver@^5.1.1, semver@^5.3.0:
+  "semver@2 || 3 || 4 || 5", semver@^5.1.0, semver@^5.1.1, semver@^5.3.0, semver@^5.4.1:
     version "5.4.1"
     resolved "https://registry.yarnpkg.com/semver/-/semver-5.4.1.tgz#e059c09d8571f0540823733433505d3a2f00b18e"
   
@@ -7111,6 +7201,10 @@ Lockfile:
     dependencies:
       amdefine ">=0.0.4"
   
+  source-map@~0.6.1:
+    version "0.6.1"
+    resolved "https://registry.yarnpkg.com/source-map/-/source-map-0.6.1.tgz#74722af32e9614e9c287a8d0bbde48b5e2f1a263"
+  
   sourcemap-validator@^1.0.5:
     version "1.0.6"
     resolved "https://registry.yarnpkg.com/sourcemap-validator/-/sourcemap-validator-1.0.6.tgz#abd2f1ecdae6a3c46c2c96c5f256705b2147c9c0"
@@ -7123,13 +7217,6 @@ Lockfile:
   spawn-args@^0.2.0:
     version "0.2.0"
     resolved "https://registry.yarnpkg.com/spawn-args/-/spawn-args-0.2.0.tgz#fb7d0bd1d70fd4316bd9e3dec389e65f9d6361bb"
-  
-  spawn-sync@^1.0.15:
-    version "1.0.15"
-    resolved "https://registry.yarnpkg.com/spawn-sync/-/spawn-sync-1.0.15.tgz#b00799557eb7fb0c8376c29d44e8a1ea67e57476"
-    dependencies:
-      concat-stream "^1.4.7"
-      os-shim "^0.1.2"
   
   spawnback@~1.0.0:
     version "1.0.0"
@@ -7458,12 +7545,6 @@ Lockfile:
   tmp@0.0.31:
     version "0.0.31"
     resolved "https://registry.yarnpkg.com/tmp/-/tmp-0.0.31.tgz#8f38ab9438e17315e5dbd8b3657e8bfb277ae4a7"
-    dependencies:
-      os-tmpdir "~1.0.1"
-  
-  tmp@^0.0.29:
-    version "0.0.29"
-    resolved "https://registry.yarnpkg.com/tmp/-/tmp-0.0.29.tgz#f25125ff0dd9da3ccb0c2dd371ee1288bb9128c0"
     dependencies:
       os-tmpdir "~1.0.1"
   
@@ -7909,4 +7990,10 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/yeast/-/yeast-0.1.2.tgz#008e06d8094320c372dbc2f8ed76a0ca6c8ac419"
 
 Trace: 
-  Error: ENOENT: no such file or directory, open '/Users/josh/Library/Caches/Yarn/v1/npm-@centerforopenscience/ember-osf-0.10.4-5822e43df432521789b5f265073603c594408623/.yarn-metadata.json'
+  Error: ENOENT: no such file or directory, lstat '/Users/josh/collections/node_modules/ember-export-application-global/node_modules/regenerator/node_modules'
+      at Object.realpathSync (fs.js:1657:15)
+      at Object.<anonymous> (/usr/local/Cellar/yarn/0.27.5_1/libexec/lib/yarn-cli.js:810:39)
+      at Generator.next (<anonymous>)
+      at step (/usr/local/Cellar/yarn/0.27.5_1/libexec/lib/yarn-cli.js:91:30)
+      at /usr/local/Cellar/yarn/0.27.5_1/libexec/lib/yarn-cli.js:102:13
+      at <anonymous>

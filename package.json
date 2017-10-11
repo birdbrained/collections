@@ -10,8 +10,7 @@
   "scripts": {
     "build": "ember build",
     "start": "ember server",
-    "test": "ember test",
-    "use-ember-osf-develop": "yarn upgrade @centerforopenscience/ember-osf@https://github.com/CenterForOpenScience/ember-osf.git#develop#$(date -u +%FT%TZ)"
+    "test": "ember test"
   },
   "repository": "",
   "engines": {
@@ -20,15 +19,14 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@centerforopenscience/ember-osf": "https://github.com/CenterForOpenScience/ember-osf.git#develop#2017-09-29T20:14:40Z",
+    "@centerforopenscience/ember-osf": "https://github.com/CenterForOpenScience/ember-osf.git#develop",
     "broccoli-asset-rev": "^2.4.2",
     "broccoli-debug": "^0.6.3",
     "ember-ajax": "^2.0.1",
-    "ember-browserify": "^1.2.0",
+    "ember-bootstrap": "^1.0.0-rc.3",
     "ember-cli": "^2.14.1",
     "ember-cli-app-version": "^1.0.0",
-    "ember-cli-babel": "^6.7.1",
-    "ember-cli-bootstrap-sassy": "0.5.3",
+    "ember-cli-babel": "^6.8.2",
     "ember-cli-dependency-checker": "^1.2.0",
     "ember-cli-eslint": "^4.0.0",
     "ember-cli-htmlbars": "^2.0.3",
@@ -42,7 +40,6 @@
     "ember-cli-shims": "^1.1.0",
     "ember-cli-sri": "^2.1.0",
     "ember-cli-test-loader": "^1.1.0",
-    "ember-collapsible-panel": "1.0.0",
     "ember-collection": "1.0.0-alpha.7",
     "ember-cp-validations": "2.9.4",
     "ember-data": "^2.14.9",
@@ -75,9 +72,8 @@
     "regenerator": "^0.8.46"
   },
   "devDependencies": {
-    "ember-cli-bootstrap-datetimepicker": "^0.5.0",
+    "bootstrap-sass": "^3.3.7",
     "ember-simple-auth": "^1.4.0",
-    "eonasdan-bootstrap-datetimepicker-npm": "4.17.42",
     "moment": "^2.18.1",
     "moment-timezone": "^0.5.13"
   }

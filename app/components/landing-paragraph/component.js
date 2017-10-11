@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
 
     session: Ember.inject.service(),
-
+    tagName: "section",
     attributeBindings: ['style'],
 
     style: Ember.computed('layout', function() {

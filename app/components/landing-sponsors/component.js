@@ -4,6 +4,7 @@ export default Ember.Component.extend({
 
     attributeBindings: ['style'],
     classNames: ["landing-sponsors"],
+    tagName: "section",
     style: Ember.computed('layout', function() {
         const bg = this.get('layout.background-color') ? this.get('layout.background-color') : this.get('branding.colors.background');
         const txt = this.get('layout.text-color') ? this.get('layout.text-color') : this.get('branding.colors.text');

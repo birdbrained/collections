@@ -10,6 +10,7 @@ export default Ember.Component.extend({
     pageNumber: 1,
     totalPages: 1,
     searchInput: '',
+    tagName: "section",
     theadStyle: Ember.computed('layout', function () {
         const headerColor = this.get('layout.background_color') ? this.get('layout.background_color') : this.get('branding.colors.primary');
         const textColor = this.get('layout.text_color') ? this.get('layout.text_color') : this.get('branding.colors.text');

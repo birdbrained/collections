@@ -6,6 +6,7 @@ export default Ember.Component.extend({
 
     session: Ember.inject.service(),
     store: Ember.inject.service(),
+    tagName: "section",
     filterString: '',
     trackFilter: '',
     roomFilter: '',

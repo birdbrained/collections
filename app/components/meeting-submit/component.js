@@ -72,7 +72,7 @@ export default Ember.Component.extend({
                             caxe.set('collection', this.get('collection'));
                             caxe.set('workflow', wf);
                             caxe.save();
-                            this.get('router').transitionTo('collection.item', this.get('collection'), item);
+                            this.get('router').transitionTo('collections.collection.item', this.get('collection'), item);
                         })
 
                     }, err => console.log(err));

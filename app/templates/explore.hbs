@@ -2,12 +2,8 @@
     <h1 class="f-w-lg">Explore</h1>
 </div>
 
-
-<div class="coll-toolbar row">
-
-
+<section>
     <h2>Showcase</h2>
-
     <div class="cards">
         {{#each collections as |collection|}}
             {{#link-to "collections.collection" collection.id class="card"}}
@@ -20,9 +16,9 @@
             {{/link-to}}
         {{/each}}
     </div>
+</section>
 
-    <hr>
-
+<section>
     <h2>Collections By Type</h2>
 
     <div class="cards">
@@ -34,17 +30,17 @@
         {{/each}}
     </div>
 
-    {{#link-to "index" class="button"}}
-            <span {{action 'clearFilter'}}>More Types</span>
+    {{#link-to "index" class="button more"}}
+        <span {{action 'clearFilter'}}>More Types</span>
     {{/link-to}}
+</section>
 
-    <hr>
-
+<section>
     <h2>Newest collections</h2>
 
     {{#each collections as |collection|}}
 
-        <div class="coll-single">
+        <div class="collection-overview">
 
             {{#link-to
                 "collections.collection"
@@ -72,19 +68,16 @@
         </div>
 
     {{/each}}
+</section>
 
+{{#if showLoadMore}}
     <div class="text-center">
-
-        {{#if showLoadMore}}
-            {{#if loadingMore}}
-                <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw text-muted m-t-md"></i>
-            {{else}}
-                <button class="btn btn-default" {{action 'loadMore'}}> Load more </button>
-            {{/if}}
+        {{#if loadingMore}}
+            <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw text-muted m-t-md"></i>
+        {{else}}
+            <button class="btn btn-default" {{action 'loadMore'}}> Load more </button>
         {{/if}}
-
     </div>
-
-</div>
+{{/if}}
 
 {{outlet}}

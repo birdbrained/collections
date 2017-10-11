@@ -3,7 +3,7 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
 
-    panelActions: Ember.inject.service('panelActions'),
+    //panelActions: Ember.inject.service('panelActions'),
     caxe: Ember.inject.service(),
 
     model() {
@@ -12,7 +12,7 @@ export default Ember.Route.extend({
             caxe: this.get('store').findRecord('case', caxe.get('id'), {
                 reload: true
             }),
-            collection: this.modelFor('collection')
+            collection: this.modelFor('collections.collection')
         });
     },
 

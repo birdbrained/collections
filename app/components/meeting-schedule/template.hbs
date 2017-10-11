@@ -25,9 +25,6 @@
         <h2 class="time-slot-header">{{itemlist.[0].startTimeFormatted}}</h2>
         <table class="time-slot">
             {{#each itemlist as |item|}}
-                {{#if (and (or (contains-substring item.scheduleFilterText filterString)
-                        (contains-substring (await item.createdBy.computedFullName) filterString))
-                              (contains-substring item.location roomFilter))}}
                     <tbody onclick={{action (mut selectedItemId) item.id}}>
                     <tr>
                         <td class="top-row left-cell event-title"><strong>{{item.title}}</strong></td>
@@ -40,7 +37,6 @@
                             at {{item.endTimeFormatted}}</td>
                     </tr>
                     </tbody>
-                {{/if}}
             {{/each}}
         </table>
     {{else}}

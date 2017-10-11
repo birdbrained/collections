@@ -7,7 +7,9 @@ export default Ember.Component.extend({
         const dataSource = this.get('layout.data');
         return this.get('model.settings').data[dataSource];
     }),
-    containerStyle: Ember.computed('branding.colors', function() {
+    classNames: ["hero"],
+    attributeBindings: ["style"],
+    style: Ember.computed('branding.colors', function() {
         return Ember.String.htmlSafe(`background-color: ${this.get('branding.colors.background')}; color: ${this.get('branding.colors.backgroundText')}`);
     }),
     logoStyle: Ember.computed('branding.logo', function() {

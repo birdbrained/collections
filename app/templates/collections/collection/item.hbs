@@ -1,3 +1,120 @@
-<div class="coll-item-page">
-    {{item-detail-page item=model}}
+<div class="hero">
+    <h1 class="p-b-md">{{item.title}}</h1>
 </div>
+
+{{debugger}}
+
+<section>
+<h5 class="view-authors">
+    <ul class="comma-list">
+        {{#if constructedItem.viewContent.authors.visible}}
+            {{#if constructedItem.viewContent.authors.loaded}}
+                {{#each constructedItem.viewContent.authors.value as |author index| ~}}
+                    {{#if author.bibliographic}}
+                        <li><a href={{author.users.profileURL}} {{action 'click' 'link' 'Content - Author' author.users.profileURL}}>{{author.users.givenName}} {{author.users.familyName}}</a></li>
+                    {{/if}}
+                {{~/each}}
+            {{else}}
+                <div class="loader">
+                    <div class="loader-inner ball-pulse">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+            {{/if}}
+        {{/if}}
+    </ul>
+</h5>
+
+<p>Added on: {{moment-format model.datePublished "MMMM DD, YYYY"}} | Last edited: {{moment-format model.dateModified "MMMM DD, YYYY"}} </p>
+
+<div class="col-sm-8">
+            <div>
+                {{file-renderer download=item.fileLink width="99%" height="100%" allowfullscreen=true}}
+            </div>
+            <div class="loader text-center">
+                <div class="loader-inner ball-pulse ball-pulse-dark">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+    {{#if constructedItem.viewContent.wiki.visible}}
+        {{#if constructedItem.viewContent.wiki.loaded}}
+            <div>
+                <pre style='white-space: pre-wrap; border:none; width:100%; text-align:justify; max-height: 300px;'>
+                    {{constructedItem.viewContent.wiki.value}}
+                </pre>
+            </div>
+        {{else}}
+            <div class="loader text-center">
+                <div class="loader-inner ball-pulse ball-pulse-dark">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        {{/if}}
+    {{/if}}
+</div>
+
+<div class="{{if (or constructedItem.viewContent.file.visible constructedItem.viewContent.wiki.visible) 'col-sm-4' 'col-sm-12'}}">
+    <h4 class="p-v-md f-w-md"><strong>Presentation Details</strong></h4>
+    <p>{{item.location}}<br>{{item.startTimeFormatted}} - {{item.endTimeFormatted}}</p>
+    <h4 class="p-v-md f-w-md"><strong>Description</strong></h4>
+    {{#if constructedItem.viewContent.description.visible}}
+        {{#if constructedItem.viewContent.description.loaded}}
+            <p>{{constructedItem.viewContent.description.value}}</p>
+        {{else}}
+            <div class="loader text-center">
+                <div class="loader-inner ball-pulse ball-pulse-dark">
+                </div>
+            </div>
+        {{/if}}
+    {{/if}}
+
+    <h4 class="p-v-md f-w-md"><strong>Status</strong></h4>
+    <p class="coll-item-status {{item.status}}"> {{item.status}} </p>
+
+    {{#if constructedItem.viewContent.tags.visible}}
+        <h4 class="p-v-md f-w-md"><strong>Tags</strong></h4>
+        {{#if constructedItem.viewContent.tags.loaded}}
+            <div>
+                {{#each constructedItem.viewContent.tags.value as |tag|}}
+                    <span class="coll-item-tag">{{tag}}</span>
+                {{/each}}
+            </div>
+        {{else}}
+            <div class="loader text-center">
+                <div class="loader-inner ball-pulse ball-pulse-dark">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        {{/if}}
+    {{/if}}
+
+    {{#if item.settings.collectionType}}
+
+    {{/if}}
+
+    {{#if constructedItem.viewContent.sourceLink.visible}}
+        {{#if constructedItem.viewContent.sourceLink.loaded}}
+            <div class="m-t-md">
+                <a href="{{constructedItem.viewContent.sourceLink.value}}" class="btn btn-default btn-block"> Go to Source</a>
+            </div>
+        {{else}}
+            <div class="loader text-center">
+                <div class="loader-inner ball-pulse ball-pulse-dark">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        {{/if}}
+    {{/if}}
+
+</div>
+</section>

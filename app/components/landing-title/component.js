@@ -9,6 +9,7 @@ export default Ember.Component.extend({
     }),
 
     attributeBindings: ['style'],
+    classNames: ["hero"],
 
     containerStyle: Ember.computed('layout', 'branding', function() {
         // if image is specified for background, use that

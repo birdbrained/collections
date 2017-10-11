@@ -2,18 +2,31 @@ const EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 module.exports = function(defaults) {
     const app = new EmberApp(defaults, {
-        'ember-cli-babel': {
-            includePolyfill: true,
-        },
-        // Add options here
-        sassOptions: {
-            includePaths: [
-            //    'node_modules/@centerforopenscience/ember-osf/addon/styles',
-             //   'bower_components/bootstrap-sass/assets/stylesheets',
-             //   'bower_components/osf-style/sass',
-                'bower_components/hint.css',
-            ],
-        },
+      'ember-cli-babel': {
+          includePolyfill: true,
+      },
+
+      // Add options here
+      //,
+      //'ember-bootstrap': {
+      //  'bootstrapVersion': 3,
+      //  'importBootstrapFont': true,
+      //  'importBootstrapCSS': false
+      //}
+      sassOptions: {
+          includePaths: [
+          //    'node_modules/@centerforopenscience/ember-osf/addon/styles',
+           //   'bower_components/bootstrap-sass/assets/stylesheets',
+           //   'bower_components/osf-style/sass',
+              'bower_components/hint.css',
+          ],
+      },
+
+      'ember-bootstrap': {
+        'bootstrapVersion': 3,
+        'importBootstrapFont': true,
+        'importBootstrapCSS': false
+      }
     });
 
     // Use `app.import` to add additional libraries to the generated

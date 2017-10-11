@@ -163,8 +163,6 @@ function constructArgArr(action) {
 
 export default Ember.Controller.extend({
 
-    panelActions: Ember.inject.service('panelActions'),
-
     editMode: false,
     methodSelected: false,
     addMethod: 'select', // 'select' or 'create'
@@ -399,22 +397,6 @@ export default Ember.Controller.extend({
             this.get('updateState').call(this, this.get('formActions'));
         });
     },
-
-
-    closeSectionSignature: ['sectionName'], // eslint-disable-line ember/order-in-controllers
-    closeSection(sectionName) {
-        this.get('panelActions').close(this.get(`_names.${this.get('_names').indexOf(sectionName)}`));
-        this.get('parameters')[this.get('sections').find(section => section.name === sectionName).param].state = ['closed', 'saved'];
-        this.get('updateState').call(this, this.get('formActions'));
-    },
-
-
-    openSectionSignature: ['sectionName'], // eslint-disable-line ember/order-in-controllers
-    openSection(sectionName) {
-        this.get('panelActions').open(this.get(`_names.${this.get('_names').indexOf(sectionName)}`));
-        this.get('parameters')[this.get('sections').find(section => section.name === sectionName).param].state = ['open', 'editing'];
-    },
-
 
     browserAlertSignature: ['alertString'], // eslint-disable-line ember/order-in-controllers
     browserAlert(alertString) {

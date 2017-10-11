@@ -15,27 +15,27 @@
     </div>
 </div>-->
 
-<div>
-    {{#link-to "create" class="button"}}
-        Create A Collection
-    {{/link-to}}
+<section class="collection-list">
+    <div>
+        {{#link-to "create" class="button"}}
+            Create A Collection
+        {{/link-to}}
 
-    {{#link-to "my-collection" class="button"}}
-        Add an Item to My Collection
-    {{/link-to}}
-</div>
+        {{#link-to "my-collection" class="button"}}
+            Add an Item to My Collection
+        {{/link-to}}
+    </div>
 
-<div class="collection-list">
     {{#each collections as |collection|}}
         <div class="collection-overview">
             <h2>{{collection.title}}</h2>
             <p>{{collection.description}}</p>
-            {{#link-to "collections.collection" collection.id class="button"}}
+            {{#link-to "collections.collection" collection class="button"}}
                 View this collection
             {{/link-to}}
-            {{#link-to "collections.collection.edit" collection.id class="button"}}
+            {{#link-to "collections.collection.edit" collection class="button"}}
                 Edit this collection
             {{/link-to}}
         </div>
     {{/each}}
-</div>
+</section>

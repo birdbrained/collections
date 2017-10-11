@@ -36,6 +36,10 @@ export default Model.extend({
         inverse: 'widgets'
     }),
 
+    elId: Ember.computed(function() {
+        return this.get("widgetType") + this.get("id");
+    }),
+
     caseParameters: Ember.computed('caxe.activeCase.parameters.@each', function() {
         let activeCase = this.get('caxe.activeCase');
         if (activeCase) {
