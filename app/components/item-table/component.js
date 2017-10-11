@@ -25,6 +25,20 @@ export default Ember.Component.extend({
             return _.uniq(eventsList).sort();
         });
     }),
+    nextPageAvailable: Ember.computed('pageNumber', 'totalPages', function () {
+        return this.get('pageNumber') < this.get('totalPages');
+    }),
+    previousPageAvailable: Ember.computed('pageNumber', function() {
+        return this.get('pageNumber') > 1;
+    }),
+    didReceiveAttrs() {
+        const modelId = this.get('model.id');
+        const pageNumber = this.get('pageNumber');
+        Ember.$.get(`${ENV.apiBaseUrl}/api/items/search/?collection=${modelId}&page=${pageNumber}`, (data) => {
+            this.set('searchResults', data);
+            this.set('totalPages', data.meta.pagination.pages);
+        });
+    },
     actions: {
         search() {
             // make a call to the collections endpoint
@@ -39,35 +53,31 @@ export default Ember.Component.extend({
                 this.set('searchResults', data);
             });
         },
-        nextPage() {
-            this.set('pageNumber', this.get('pageNumber') + 1);
+        loadPage(pageNo) {
             const modelId = this.get('model.id');
-            const pageNumber = this.get('pageNumber');
             const input = this.get('searchInput');
 
-            Ember.$.get(`${ENV.apiBaseUrl}/api/items/search/?collection=${modelId}&page=${pageNumber}&text__contains=${input}`, (data) => {
+            Ember.$.get(`${ENV.apiBaseUrl}/api/items/search/?collection=${modelId}&page=${pageNo}&text__contains=${input}`, (data) => {
                 this.set('searchResults', data);
                 this.set('totalPages', data.meta.pagination.pages);
+                this.set('pageNumber', pageNo);
             });
         },
+        nextPage() {
+            if (this.get('nextPageAvailable')) {
+                this.send('loadPage', this.get('pageNumber') + 1);
+            } else {
+                console.log('you are already on the last page');
+            }
+        },
         prevPage() {
-            this.set('pageNumber', this.get('pageNumber') - 1);
-            const modelId = this.get('model.id');
-            const pageNumber = this.get('pageNumber');
-            const input = this.get('searchInput');
+            if (this.get('previousPageAvailable')) {
+                this.send('loadPage', this.get('pageNumber') - 1);
+            }
+            else {
+                console.log('you are already on the first page');
+            }
 
-            Ember.$.get(`${ENV.apiBaseUrl}/api/items/search/?collection=${modelId}&page=${pageNumber}&text__contains=${input}`, (data) => {
-                this.set('searchResults', data);
-                this.set('totalPages', data.meta.pagination.pages);
-            });
         }
-    },
-    didReceiveAttrs() {
-        const modelId = this.get('model.id');
-        const pageNumber = this.get('pageNumber');
-        Ember.$.get(`${ENV.apiBaseUrl}/api/items/search/?collection=${modelId}&page=${pageNumber}`, (data) => {
-            this.set('searchResults', data);
-            this.set('totalPages', data.meta.pagination.pages);
-        });
     }
 });

@@ -42,6 +42,8 @@ export default Ember.Controller.extend({
                 settings: {},
                 collectionType: this.get('selectedType'),
                 description: this.get('description'),
+                location: this.get('location'),
+                address: this.get('address')
             });
             collection.set('workflow', this.get('selectedWorkflow'));
             collection.save().then((record) => {

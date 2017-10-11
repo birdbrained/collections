@@ -17,8 +17,7 @@
                 class="user-gravatar"
                 src="{{session.session.content.authenticated.user.gravatar}}?s=25"
                 alt="User gravatar">
-            {{get session.session.content.authenticated.user "first-name"}}
-            {{get session.session.content.authenticated.user "last-name"}}
+            {{fullName}}
             <span class="caret"></span>
     </button>
 

@@ -28,7 +28,9 @@ export default Ember.Component.extend(AnalyticsMixin, {
     classNameBindings: ['notAuthenticated:sign-in'],
     redirectUrl: null,
     notAuthenticated: Ember.computed.not('session.isAuthenticated'),
-
+    fullName: Ember.computed('session', function() {
+       return this.get('session.session.content.authenticated.user.first-name') + ' ' + this.get('session.session.content.authenticated.user.last-name');
+    }),
 
     /**
      * The URL to use for signup. May be overridden, eg for special campaign pages

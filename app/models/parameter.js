@@ -37,13 +37,6 @@ export default Model.extend({
             !this.disableAutosave &&
             this.save();
         }, 1000)
-        /*if ((() => {
-            let attrs = [];
-            this.eachAttribute(attr => attrs.push(attr));
-            return Object.keys(this, this.changedAttributes())
-                .find(key => attrs.includes(key));
-        })()) {}*/
-    }),
-
+    })
 
 });

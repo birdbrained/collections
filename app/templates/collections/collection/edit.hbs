@@ -18,7 +18,7 @@
                     {{input class="form-control" value=modelCache.tags
                             placeholder="Enter comma separated tags" id="collectionTags"}}
                 </div>
-                {{#if (eq model.settings.collection_type 'Meeting')}}
+                {{#if (eq model.collectionType 'meeting')}}
                     <div class="form-group">
                         <label for="location">Location</label>
                         {{input class="form-control" value=modelCache.location
@@ -70,7 +70,7 @@
                     <span class="coll-item-tag">{{tag}}</span>
                 {{/each}}
             </div>
-            <p>Type: {{model.settings.collection_type}}</p>
+            <p>Type: {{model.collectionType}}</p>
             <p>Created by: {{model.createdBy.firstName}} {{model.createdBy.lastName}}</p>
             <p>Date created: {{model.dateCreated}} </p>
             <p>Date updated : {{model.dateUpdated}}</p>

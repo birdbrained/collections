@@ -13,11 +13,16 @@ $dark-banner: #607D8B;
 @import 'components/meeting-keynote-speakers';
 @import 'components/datetime-picker';
 @import 'components/landing-paragraph';
+<<<<<<< HEAD
 @import 'forms';
 @import 'buttons';
 @import 'logo';
 @import "cards";
 @import "nav";
+=======
+@import 'components/file-grid.scss';
+@import 'osf-style';
+>>>>>>> b338d0b663c0a2262dc34269d3462b141302a1d0
 
 .watermarked {
     padding: 0 !important;
@@ -921,3 +926,7 @@ span.sortable-bars:hover {
 
 /* End of Authors */
 
+.coll-single h3 {
+    margin-top: 6px;
+    padding-bottom: 5px;
+}

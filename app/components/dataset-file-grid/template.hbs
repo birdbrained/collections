@@ -1,10 +1,16 @@
-<style>
-    .file-grid-container {
-        min-height:100px;
-    }
-</style>
-<div class="file-grid-container">
-    {{#each items as |item|}}
-        {{item.name}}
-    {{/each}}
+<div class="file-grid-container container">
+    <h2 class="text-center p-b-xl">Browse files</h2>
+    <div class="row">
+        {{#each (await model.items) as |item|}}
+            <div class=" col-lg-2 col-md-3 col-sm-3 col-xs-6">
+                <div class="panel panel-default item-panel">
+                        {{#link-to 'collection.item' model.id item.id}}<img class="item-thumbnail" src="http://placehold.it/250x150"/>{{/link-to}}
+                    <div class="panel-body">
+                            <span class="clamp">{{#link-to 'collection.item' model.id item.id}}{{item.title}}{{/link-to}}</span>
+                        <a href="https://staging.osf.io/{{await item.createdBy.username}}"><p><small>{{await item.createdBy.firstName}} {{await item.createdBy.lastName}}</small></p></a>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
 </div>

@@ -37,7 +37,6 @@ export default Ember.Component.extend({
 
             item.set('type', 'meeting');
             item.set('title', this.get('parameters.title.value'));
-
             item.set('status', 'none');
             item.set('collection', this.get('collection'));
             item.set('category', this.get('parameters.category.value'));
