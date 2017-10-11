@@ -5,6 +5,7 @@ $light-blue-banner: #e8f0f1;
 $light-grey-banner: #eeeeee;
 $dark-banner: #607D8B;
 
+@import "osf-style";
 @import "base";
 @import 'validated-input';
 @import 'components/subject-picker';
@@ -13,13 +14,11 @@ $dark-banner: #607D8B;
 @import 'components/meeting-keynote-speakers';
 @import 'components/datetime-picker';
 @import 'components/landing-paragraph';
-@import 'components/file-grid.scss';
 @import 'forms';
 @import 'buttons';
 @import 'logo';
 @import "cards";
 @import "nav";
-//@import 'osf-style';
 
 .watermarked {
     padding: 0 !important;
@@ -75,6 +74,7 @@ footer {
     margin: 15px 0;
     box-shadow: 0 2px 5px -2px rgba(0,0,0,0.5);
 }
+
 .tabs {
     display: flex;
     padding: 0 30px !important;
@@ -105,7 +105,8 @@ footer {
 }
 
 #explore-hero.hero {
-    background-color: rgb(100, 121, 132);
+    background-color: #ccc;
+    background-image: url('/img/explore.jpg');
     background-size: cover;
     background-position: 50% 50%;
     background-blend-mode: multiply;
@@ -121,10 +122,6 @@ footer {
     background-color: #125172;
     background-image: url('/img/project_papper.png');
     background-blend-mode: color-burn;
-}
-
-#item-hero.hero {
-    background-color:#9e9886;
 }
 
 .hero > h1 {
@@ -927,7 +924,3 @@ span.sortable-bars:hover {
 
 /* End of Authors */
 
-.coll-single h3 {
-    margin-top: 6px;
-    padding-bottom: 5px;
-}

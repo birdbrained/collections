@@ -3,8 +3,8 @@
 
 
 "@centerforopenscience/ember-osf@https://github.com/CenterForOpenScience/ember-osf.git#develop":
-  version "0.10.4"
-  resolved "https://github.com/CenterForOpenScience/ember-osf.git#bf962d9f1a7fc4afe4ed00a620045213a05edf3f"
+  version "0.11.0"
+  resolved "https://github.com/CenterForOpenScience/ember-osf.git#57b91b6b27d186f74fa33204dbd5f9c4fee9784a"
   dependencies:
     broccoli-funnel "1.2.0"
     broccoli-merge-trees "2.0.0"
@@ -30,6 +30,10 @@
     js-yaml "3.8.4"
     keen-tracking "1.1.3"
     langs "1.0.2"
+
+"@centerforopenscience/osf-style@^1.5.1":
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/@centerforopenscience/osf-style/-/osf-style-1.5.1.tgz#3ea1a0807c02d06d32bf346620a538613880bc59"
 
 abbrev@1:
   version "1.1.1"
@@ -1081,7 +1085,7 @@ boom@5.x.x:
   dependencies:
     hoek "4.x.x"
 
-bootstrap-sass@^3.3.7:
+bootstrap-sass@^3.0.0, bootstrap-sass@^3.3.7:
   version "3.3.7"
   resolved "https://registry.yarnpkg.com/bootstrap-sass/-/bootstrap-sass-3.3.7.tgz#6596c7ab40f6637393323ab0bc80d064fc630498"
 
@@ -1647,8 +1651,8 @@ can-symlink@^1.0.0:
     tmp "0.0.28"
 
 caniuse-lite@^1.0.30000744:
-  version "1.0.30000745"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000745.tgz#20d6fede1157a4935133502946fc7e0e6b880da5"
+  version "1.0.30000746"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30000746.tgz#c64f95a3925cfd30207a308ed76c1ae96ea09ea0"
 
 capture-exit@^1.1.0:
   version "1.2.0"
@@ -2188,8 +2192,8 @@ ee-first@1.1.1:
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
 
 electron-to-chromium@^1.3.24:
-  version "1.3.24"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.24.tgz#9b7b88bb05ceb9fa016a177833cc2dde388f21b6"
+  version "1.3.25"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.25.tgz#453b21009836d0997d86035601ff6cae4791c460"
 
 ember-ajax@^2.0.1:
   version "2.5.6"
@@ -2198,11 +2202,11 @@ ember-ajax@^2.0.1:
     ember-cli-babel "^5.1.5"
 
 ember-assign-polyfill@^2.0.1:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/ember-assign-polyfill/-/ember-assign-polyfill-2.0.2.tgz#95e37513beaabc4356d56a844c742509b0b7e7f1"
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/ember-assign-polyfill/-/ember-assign-polyfill-2.1.0.tgz#0d339284617548d1564c02cf7490ad9c021715fc"
   dependencies:
-    ember-cli-babel "^6.6.0"
-    ember-cli-version-checker "^1.2.0"
+    ember-cli-babel "^6.8.2"
+    ember-cli-version-checker "^2.0.0"
 
 ember-bootstrap@^1.0.0-rc.3:
   version "1.0.0-rc.3"
@@ -2285,6 +2289,15 @@ ember-cli-babel@^6.0.0, ember-cli-babel@^6.0.0-beta.7, ember-cli-babel@^6.1.0, e
     broccoli-source "^1.1.0"
     clone "^2.0.0"
     ember-cli-version-checker "^2.0.0"
+
+ember-cli-bootstrap-sassy@^0.5.6:
+  version "0.5.6"
+  resolved "https://registry.yarnpkg.com/ember-cli-bootstrap-sassy/-/ember-cli-bootstrap-sassy-0.5.6.tgz#d4a557c91acdcac3241f53d7fd14005a714d1217"
+  dependencies:
+    bootstrap-sass "^3.0.0"
+    broccoli-funnel "^1.0.1"
+    ember-cli-babel "^5.1.7"
+    resolve "^1.1.7"
 
 ember-cli-broccoli-sane-watcher@^2.0.4:
   version "2.0.4"
@@ -2606,8 +2619,8 @@ ember-cli-version-checker@^2.0.0, ember-cli-version-checker@^2.1.0:
     semver "^5.3.0"
 
 ember-cli@^2.14.1:
-  version "2.16.1"
-  resolved "https://registry.yarnpkg.com/ember-cli/-/ember-cli-2.16.1.tgz#91da40f19b8496f879eea13d745b3924beb23729"
+  version "2.16.2"
+  resolved "https://registry.yarnpkg.com/ember-cli/-/ember-cli-2.16.2.tgz#53b922073a8e6f34255a6e0dcb1794a91ba3e1b7"
   dependencies:
     amd-name-resolver "1.0.0"
     babel-plugin-transform-es2015-modules-amd "^6.24.0"
@@ -7082,6 +7095,10 @@ yargs@~3.27.0:
     os-locale "^1.4.0"
     window-size "^0.1.2"
     y18n "^3.2.0"
+
+yarn@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/yarn/-/yarn-1.2.0.tgz#c5004499eb6dc7ecdd0f93743f463bbc5998324c"
 
 yeast@0.1.2:
   version "0.1.2"
