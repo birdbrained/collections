@@ -65,7 +65,6 @@ export default Ember.Component.extend({
                     item.set('url', 'http://example.com');
                     item.set('fileLink', JSON.parse(xhr.responseText).data.links.download);
                     item.save().then(item => {
-                        console.log('about to transition');
                         this.get('store').findRecord('workflow', 22).then(wf => {
                             let caxe = this.get('store').createRecord('case');
                             caxe.set('collection', this.get('collection'));
