@@ -13,19 +13,19 @@
 
 {{else}}
 
-    <div class="hero">
-        <h2>{{collection.title}}</h2>
+    <div id="collection-default-hero" class="hero">
+        <h1>{{collection.title}}</h1>
         <p class="p-v-md">{{collection.description}}</p>
-        {{#if session.isAuthenticated}}
-            {{#link-to "collections.collection.add" class="button"}}{{collection.settings.creationworkflowtext}}{{/link-to}}
-        {{/if}}
     </div>
 
     {{#if session.isAuthenticated}}
-        <div>
-            <h4> Customize your landing page</h4>
+        <section>
+            {{#link-to "collections.collection.edit" collection class="button pull-right"}}
+                Edit
+            {{/link-to}}
+            <h2> Customize your landing page</h2>
             <p> You can add details to your landing page by changing settings to add layout layers. Visit Edit page to make changes. </p>
-        </div>
+        </section>
     {{/if}}
 
 {{/if}}

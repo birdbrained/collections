@@ -14,12 +14,13 @@ export default Ember.Component.extend({
             const fileHandle = ev.target.files[0];
             const filenameParts = ev.currentTarget.value.split('\\');
             const filename = filenameParts[filenameParts.length - 1];
+            this.get('parameters.fileData').disableAutosave = true;
 
             reader.onloadend = (ev) => {
 
                 this.set('parameters.fileName.value',  filename);
                 this.set('fileChosen', true);
-                this.set('parameters.fileData.value',  encodeURI(ev.target.result));
+                this.set('parameters.fileData.value',  ev.target.result);
 
             };
 

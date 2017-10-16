@@ -10,12 +10,12 @@ export default Ember.Controller.extend({
         this._super();
         window.addEventListener("scroll", function() {
             let nav = document.getElementById("osf-nav");
-            if (window.pageYOffset > 120) {
+            if (window.pageYOffset > 60) {
                 nav.style.position = "fixed";
                 nav.style.top = "-1px";
             } else {
                 nav.style.position = "absolute";
-                nav.style.top = "120px";
+                nav.style.top = "60px";
             }
         })
     },

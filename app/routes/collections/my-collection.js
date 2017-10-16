@@ -21,15 +21,15 @@ export default Ember.Route.extend({
         this.set("navLinks.links", [
             {
                 label: "My Collection",
-                route: "my-content"
+                route: "collections.my-collection"
             },
             {
                 label: "In Progress",
-                route: "my-content"
+                route: "collections.my-collection"
             },
             {
                 label: "Settings",
-                route: "my-content"
+                route: "collections.my-collection"
             }
         ]);
     },

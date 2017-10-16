@@ -36,5 +36,8 @@ export default Model.extend({
     }),
     cases: hasMany('case', {
         inverse: 'workflow',
+    }),
+    parameterStubs: hasMany('parameter-stub', {
+        inverse: null,
     })
 });

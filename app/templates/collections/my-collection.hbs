@@ -1,5 +1,5 @@
-<div class="hero">
-    <h1>My Content</h1>
+<div class="hero" id="my-collection-hero">
+    <h1>My Collection</h1>
 </div>
 
 <!--<div class="notices">
@@ -15,27 +15,24 @@
     </div>
 </div>-->
 
-<section class="collection-list">
-    <div>
-        {{#link-to "create" class="button"}}
-            Create A Collection
-        {{/link-to}}
+<section class="toolbar">
+    {{#link-to "create" class="button"}}
+        Create A Collection
+    {{/link-to}}
+    {{#link-to "collections.my-collection" class="button"}}
+        Add an Item to My Collection
+    {{/link-to}}
+</section>
 
-        {{#link-to "my-collection" class="button"}}
-            Add an Item to My Collection
-        {{/link-to}}
-    </div>
-
-    {{#each collections as |collection|}}
-        <div class="collection-overview">
-            <h2>{{collection.title}}</h2>
-            <p>{{collection.description}}</p>
-            {{#link-to "collections.collection" collection class="button"}}
+{{#each collections as |collection|}}
+    <section class="collection-list">
+            {{#link-to "collections.collection" collection class="button-action pull-right"}}
                 View this collection
             {{/link-to}}
-            {{#link-to "collections.collection.edit" collection class="button"}}
+            {{#link-to "collections.collection.edit" collection class="button-action pull-right"}}
                 Edit this collection
             {{/link-to}}
-        </div>
-    {{/each}}
-</section>
+            <h2>{{collection.title}}</h2>
+            <p>{{collection.description}}</p>
+    </section>
+{{/each}}

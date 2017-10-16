@@ -78,7 +78,7 @@ export default Ember.Component.extend({
                 }
             };
 
-            xhr.send(decodeURI(this.get('parameters.fileData.value')));
+            xhr.send(this.get('parameters.fileData.value'));
         },
     },
 

@@ -1,45 +1,36 @@
 <h1 class="form-banner">{{caxe.workflow.title}}</h1>
 
-<div class="container">
+{{#if (eq caxe.workflow.submissionFormType 'Website')}}
 
-    {{#if (eq caxe.workflow.submissionFormType 'Website')}}
+    {{add-website model=model transition=(action "transition")}}
 
-        {{add-website model=model transition=(action "transition")}}
+{{else}}
 
-    {{else}}
+    <section class="info">
+        {{caxe.workflow.description}}
+    </section>
 
-        <div class="section" style="background-color:#daf5ff; border-color:#b2dcff">
+    <section style="background-color:#fff5da">
+        Any changes you make here are automatically saved. You can use the reference code <span style="background-color:#ddd; color:#333;">{{caxe.id}}</span> to load this submission again.
+    </section>
 
-            {{caxe.workflow.description}}
+    {{#each caxe.workflow.sortedSections as |section|}}
 
-        </div>
-
-        <div class="section" style="background-color:#fff5da; border-color:#ffdcb2">
-            Any changes you make here are automatically saved. You can use the reference code <span style="background-color:#ddd; color:#333;">{{caxe.id}}</span> to load this submission again.
-        </div>
-
-        {{#each caxe.workflow.sortedSections as |section|}}
-
-            <div class="section">
-                <div class="label">
-                    {{section.label}}
-                </div>
-                <div>
-                    {{section.description}}
-                </div>
-                <div class="content">
-
-                    {{#each section.sortedWidgets as |widget|}}
-                        {{component widget.widgetType
-                            widget=widget
-                            collection=collection
-                            parameters=widget.caseParameters}}
-                    {{/each}}
-                </div>
+        <section>
+            <h2>{{section.label}}</h2>
+            <p>{{section.description}}</p>
+            <div class="content">
+                {{#each section.sortedWidgets as |widget|}}
+                    {{component widget.widgetType
+                        widget=widget
+                        collection=collection
+                        parameters=widget.caseParameters}}
+                {{/each}}
             </div>
 
-        {{/each}}
+        </section>
+{{/each}}
 
-    {{/if}}
+{{/if}}
 
-</div>
+

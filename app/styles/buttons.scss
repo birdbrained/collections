@@ -12,6 +12,11 @@
     box-shadow: 0 1px 2px 0 rgba(0,0,0,0.5);
     font-family: "Open Sans";
     font-size: 1.2rem;
+
+    &:hover {
+        text-decoration: none;
+        
+    }
 }
 
 .button.cancel {
@@ -19,3 +24,19 @@
     border: 1px solid rgb(120, 60, 8);
 }
 
+.button-action {
+    display: inline-block;
+    padding: 6px 15px;
+    border-radius: 10px;
+    background-color: #f1f1f1;
+    border: 1px solid rgba(0,0,0,0.12);
+    margin-right: 10px;
+    color: #23527c;
+    font-weight: 400;
+    &:hover {
+        background-color: #23527c;
+        color: #fff;
+        text-decoration: none;
+        border: 1px solid rgba(0,0,0,0.2);
+    }
+}

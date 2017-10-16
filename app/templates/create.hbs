@@ -54,9 +54,14 @@
             <option value={{workflowChoice.id}} selected={{eq selectedWorkflow.id workflowChoice.id}}>{{workflowChoice.title}}</option>
         {{/each}}
     </select>
+    <p>
+        {{#link-to "create" class="pull-right"}}
+            Learn more about workflows
+        {{/link-to}}
+    </p>
 </section>
 
-<section>
-    {{#link-to 'index' class="button cancel"}}Discard{{/link-to}}
-    <button class="button {{unless title 'disabled'}}" {{action 'addCollection'}}>Create Collection</button>
+<section class="button-section">
+    {{#link-to 'collections.my-collection' class="button cancel"}}Discard{{/link-to}}
+    <button class="button {{unless title 'disabled'}} pull-right" {{action 'addCollection'}}>Create Collection</button>
 </section>

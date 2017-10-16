@@ -1,0 +1,12 @@
+<div class="hero">
+    <h1>Workflows</h1>
+</div>
+{{#each workflows as |workflow|}}
+    <section>
+        {{#link-to "workflows.workflow" workflow.id class="button-action pull-right"}}
+            View Workflow
+        {{/link-to}}
+        <h2>{{workflow.title}}</h2>
+        <p>{{workflow.description}}</p>
+    </section>
+{{/each}}

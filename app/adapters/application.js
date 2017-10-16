@@ -18,6 +18,6 @@ export default JSONAPIAdapter.extend({
     },
     buildURL() {
         const base = this._super(...arguments);
-        return `${base}/`;
+        return `${base}`;
     },
 });

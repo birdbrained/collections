@@ -6,6 +6,7 @@ export default Ember.Controller.extend({
     selectedWorkflow: undefined,
     description: '',
     workflows: undefined,
+    collectionType: undefined,
     // preprints, websites/links, etc. will be added later to the following list:
     typeList: [
         {
@@ -41,13 +42,15 @@ export default Ember.Controller.extend({
 
     actions: {
         addCollection () {
+            console.log("this");
+            debugger;
             const collection = this.store.createRecord('collection', {
                 title: this.get('title'),
                 location: this.get('location'),
                 address: this.get('address'),
                 tags: '',
                 settings: {},
-                collectionType: this.get('chosen'),
+                collectionType: this.get('collectionType'),
                 description: this.get('description'),
                 location: this.get('location'),
                 address: this.get('address')
@@ -55,7 +58,7 @@ export default Ember.Controller.extend({
             collection.set('workflow', this.get('selectedWorkflow'));
             collection.save().then((record) => {
                 this.set('newCollectionTitle', '');
-                this.transitionToRoute('collection', record);
+                this.transitionToRoute('collections.collection', record);
             });
         },
         setWorkflow(ev) {

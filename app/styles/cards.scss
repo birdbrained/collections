@@ -10,19 +10,20 @@
     display: block;
     flex: 0 0 auto;
     //background-color: #263947;
-    //background-image: linear-gradient(to bottom,rgba(60,60,60,.5)0%,rgba(34,34,34,.5)100%);
-    background-color: #e2e2e2;
+    background-image: linear-gradient(to bottom,rgba(0,60,60,.0)60%,rgba(34,34,34,.06)100%);
+    background-color: #fff;
     color: #444;
-    font-weight: 600;
+    font-weight: 100;
     margin: 10px;
     font-size: 2.0rem;
-    padding: 15px;
+    padding: 10px 15px;
     box-sizing: border-box;
     padding-top: 90px;
     position: relative;
-    box-shadow: 0 5px 10px -5px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 6px -5px rgba(0, 0, 0, 0.5);
     overflow: hidden;
-    border-radius: 3px;
+    //border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 1px;
 }
 
 @media (min-width: 600px) {
@@ -67,11 +68,18 @@
     left: 0;
     background-size:100%;
     background-position: 50% 50%;
-    box-shadow: 0 5px 10px -5px rgba(0, 0, 0, 1);
+    box-shadow: 0 -6px 3px 5px rgba(0, 0, 0, 0.5);
+}
+
+.card label {
+    font-weight: 300;
+    color: #666;
+    line-height: 1.0;
 }
 
 .card:hover label {
-    color: #ddd
+    color: #888;
+    font-weight: 300;
 }
 
 .card:hover .card-image {

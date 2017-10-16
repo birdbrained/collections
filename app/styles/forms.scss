@@ -113,3 +113,19 @@ select {
     }
   }
 }
+
+
+.submission-text-field {
+    margin-top: 10px;
+}
+
+.submission-text-field input:focus:invalid {
+    border: 1px solid rgba(230, 30, 30, 1.0);
+    outline-color: rgba(255, 0, 0, 0.5);
+}
+
+.submission-text-field input:valid {
+    border: 1px solid #94b57a;
+}
+
+

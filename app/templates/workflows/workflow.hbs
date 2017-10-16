@@ -1,0 +1,22 @@
+<div class="hero">
+    <h1>{{workflow.title}}</h1>
+</div>
+
+<section class="info">
+    {{workflow.description}}
+</section>
+
+<section>
+    <h2>Workflow Parameters</h2>
+    {{#each stubs as |stub|}}
+        <a class="parameter-stub">Name: {{stub.name}}</a>
+    {{/each}}
+</section>
+
+<section>
+    <h2>Widgets</h2>
+    {{#each widgets as |widget|}}
+        <a class="parameter-stub">Name: {{widget.label}}</a>
+    {{/each}}
+</section>
+

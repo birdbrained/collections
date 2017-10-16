@@ -4,6 +4,7 @@ import Ember from 'ember';
 const {
     Model,
     attr,
+    belongso
 } = DS;
 
 export default Model.extend({
@@ -12,6 +13,10 @@ export default Model.extend({
     lastName: attr('string'),
     fullName: attr('string'),
     gravatar: attr('string'),
+    collection: belongsTo("collection", {
+        async: false,
+        inverse: null
+    }),
     computedFullName: Ember.computed('firstName', 'lastName', function () {
         return `${this.get('firstName')} ${this.get('lastName')}`;
     }),

@@ -1,37 +1,39 @@
-<h1 class="form-banner">{{collection.title}} Submissions</h1>
+<div class="hero">
+    <h1>{{collection.title}} Submissions</h1>
+</div>
 
-<div class="container">
+<section class="info">
+    In progress submissions to the {{collection.title}}. Any of the submissions may be continued by pressing the continue button.
+</section>
 
-        <div class="section" style="background-color:#daf5ff; border-color:#b2dcff">
-            In progress submissions to the {{collection.title}}. Any of the submissions may be continued by pressing the continue button.
+<section class="toolbar">
+    <button class="button pull-right" {{action "newCase" collection}}>
+        Start a new submission
+    </button>
+</section>
+
+{{#each cases as |case|}}
+    <section>
+        <span class="case-id">{{case.id}}</span>
+        <h2>{{case.workflow.title}}</h2>
+        <div class="content">
+            <button class="btn btn-danger" {{action "continueCase" case collection}}>
+                Discard
+            </button>
+            <button class="btn btn-success" {{action "continueCase" case collection}}>
+                Continue
+            </button>
+
         </div>
 
-        <button class="btn btn-success btn-lg" {{action "newCase" collection}}>
-            Start a new submission
-        </button>
+    </section>
+{{else}}
+    <section>
 
-        {{#each cases as |case|}}
+        <div class="label">
+            You have not started any submissions to {{collection.title}}
+        </div>
 
-            <div class="section">
-                <div class="label">
-                    {{case.id}} - {{case.workflow.title}}
-                </div>
-                <div class="content">
-                    <button class="btn btn-success" {{action "continueCase" case collection}}>
-                        Continue
-                    </button>
+    </section>
+{{/each}}
 
-                </div>
-            </div>
-
-        {{else}}
-
-            <div class="section">
-                <div class="label">
-                    You have not started any submissions to {{collection.title}}
-                </div>
-            </div>
-
-        {{/each}}
-
-</div>

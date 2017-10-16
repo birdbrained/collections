@@ -22,33 +22,32 @@
 
 <div class="schedule-table">
     {{#each (await items) as |itemlist|}}
-        <h2 class="time-slot-header">{{itemlist.[0].startTimeFormatted}}</h2>
-        <table class="time-slot">
-            {{#each itemlist as |item|}}
-                    <tbody onclick={{action (mut selectedItemId) item.id}}>
-                    <tr>
-                        <td class="top-row left-cell event-title"><strong>{{item.title}}</strong></td>
-                        <td class="top-row right-cell event-location">{{item.location}}</td>
-                    </tr>
-                    <tr>
-                        <td class="bottom-row left-cell event-presenter">{{await
-                                item.createdBy.computedFullName}}</td>
-                        <td class="bottom-row right-cell event-end-time">Ends
-                            at {{item.endTimeFormatted}}</td>
-                    </tr>
-                    </tbody>
-            {{/each}}
-        </table>
+        <h3 class="time-slot-header">{{itemlist.[0].startTimeFormatted}}</h3>
+        {{#each itemlist as |item|}}
+            <a onclick={{action (mut selectedItemId) item.id}}>
+                <span class="event-title"><strong>
+                    {{item.title}}
+                </strong></span>
+                <span class="event-location">
+                    {{item.location}}
+                </span>
+                <span class="event-presenter">
+                    {{await item.createdBy.computedFullName}}
+                </span>
+                <span class="event-end-time">
+                    Ends at {{item.endTimeFormatted}}
+                </span>
+            </a>
+        {{/each}}
     {{else}}
         No Items Yet.
     {{/each}}
 </div>
 
 <div class="item-detail">
-    <h2>Select an item from the schedule to see more details about it.</h2>
-    <h2>{{get (await selectedItem) 'title'}}<br>
+    <h3>{{get (await selectedItem) 'title'}}<br>
         <small>{{get (await selectedItem) 'createdBy.computedFullName'}}</small>
-    </h2>
+    </h3>
     <p>{{get (await selectedItem) 'description'}}</p>
     <p><a href="#" class="button">Link to author</a> | {{#link-to 'collections.collection.item' model.id selectedItemId class="button"}}Link to presentation{{/link-to}}</p>
 </div>
