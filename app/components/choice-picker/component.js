@@ -11,8 +11,6 @@ export default Ember.Component.extend({
         Ember.run(async () => {
 
             let chosen = this.get('chosen');
-            console.log("chosen")
-            console.log(chosen);
             let chosenParameter = await this.get('store').queryRecord('parameter', {
                 name: chosen
             });
