@@ -29,16 +29,18 @@
         <h2>Submission Status</h2>
         <p class="coll-item-status {{item.status}}"> {{item.status}} </p>
 
-        <h2>Moderator Actions</h2>
-        <button
-            class="btn btn-primary"
-            onclick={{action "continueWorkflow" "approve"}}>
-            Approve
-        </button>
+        <h2>Actions</h2>
+        {{#if approvalCaseId}}
+            {{#link-to
+                "collections.collection.add"
+                approvalCaseId
+                class="btn btn-primary"
+            }}Approve{{/link-to}}
+        {{/if}}
 
         {{#if item.tags}}
-        <h2>Tags</h2>
-        <span class="coll-item-tag">{{item.tags}}</span>
+            <h2>Tags</h2>
+            <span class="coll-item-tag">{{item.tags}}</span>
         {{/if}}
         <hr>
         {{#if item.metadata}}

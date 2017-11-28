@@ -13,11 +13,17 @@ export default Ember.Route.extend({
         let node = item.then((_item) => {
             return this.store.findRecord('node', _item.get('sourceId'));
         });
-
+        let approvalCase = item.then((_item) => {
+            return this.get('store').queryRecord('case', {
+                for_item: _item.id,
+                role: 'approval'
+            });
+        });
         return Ember.RSVP.hash({
             collection,
             item,
-            node
+            node,
+            approvalCase
         });
     },
 
@@ -40,6 +46,8 @@ export default Ember.Route.extend({
         controller.set('collection', data.collection);
         controller.set('item', this.get('item'));
         controller.set('node', data.node);
+        controller.set('approvalCaseId', data.approvalCase.id);
+        debugger;
     }
 
 });
