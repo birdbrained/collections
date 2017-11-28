@@ -47,7 +47,6 @@ export default Ember.Route.extend({
         controller.set('item', this.get('item'));
         controller.set('node', data.node);
         controller.set('approvalCaseId', data.approvalCase.id);
-        debugger;
     }
 
 });
